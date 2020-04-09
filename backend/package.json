@@ -1,14 +1,14 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "RESTful API for an online shop",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Luca Stanger, Florian Drinkler",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1"
+    }
 }
