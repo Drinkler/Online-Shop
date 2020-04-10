@@ -1,16 +1,16 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-require("dotenv/config");
+require("dotenv").config();
 
-// To read req.body
-// Middlewares
+// To read Request body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Import Routes
 const userRoute = require("./routes/user");
 
+// Middlewares
 app.use("/user", userRoute);
 
 // Routes
@@ -23,4 +23,5 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
     console.log("Connected to database.");
 });
 
-app.listen(3000);
+// Start server
+app.listen(process.env.PORT);
