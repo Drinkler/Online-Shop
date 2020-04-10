@@ -10,15 +10,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Import Routes
-const userRoute = require("./routes/user");
+const api = require("./api");
 
 // Middlewares
-app.use("/user", userRoute);
-
-// Routes
-app.get("/", (req, res) => {
-    res.send("Home");
-});
+app.use("/rest/api", api);
 
 // Connect to db
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
