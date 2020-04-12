@@ -3,8 +3,6 @@ const app = express();
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-// TODO: api version
-
 // To read Request body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

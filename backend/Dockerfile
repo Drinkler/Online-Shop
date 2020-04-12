@@ -1,5 +1,5 @@
 # Use the official image as a parent image.
-FROM node:13.12
+FROM node:13.7.0-alpine
 
 # Set the working directory.
 WORKDIR /usr/src/app
