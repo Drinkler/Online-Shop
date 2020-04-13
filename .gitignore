@@ -115,4 +115,4 @@ Thumbs.db
 .settings/
 *.sublime-workspace
 
-mongo-volume
+database/volume
