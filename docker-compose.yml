@@ -9,12 +9,18 @@ services:
     image: online-shop_backend:1.0
     ports:
       - "8080:8080"
-  #   depends_on:
-  #     - database
-  # database:
-  #   container_name: database-mongo
-  #   image: mongo:4.2.5
-  #   restart: always
+    depends_on:
+      - database
+  database:
+    container_name: database-mongo
+    image: mongo:4.2.5
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=online-shop
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=LSuFDaaenPfdVMi4S
+    volumes:
+      - ./mongo-volume:/data/db
   # frontend:
   #   container_name: frontend-angular
   #   build:
