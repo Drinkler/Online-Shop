@@ -1,0 +1,23 @@
+# Docker Engine release 18.06.0+
+version: "3.7"
+
+services:
+  backend:
+    container_name: backend-api
+    build:
+      context: ./backend
+    image: online-shop_backend:1.0
+    ports:
+      - "8080:8080"
+  #   depends_on:
+  #     - database
+  # database:
+  #   container_name: database-mongo
+  #   image: mongo:4.2.5
+  #   restart: always
+  # frontend:
+  #   container_name: frontend-angular
+  #   build:
+  #     context: ./frontend
+  #   image: online-shop_frontend:1.0
+  #   depends_on: backend
