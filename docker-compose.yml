@@ -24,9 +24,13 @@ services:
       - ./database/volume/db:/data/db
     ports:
       - 27017:27017
-  # frontend:
-  #   container_name: frontend-angular
-  #   build:
-  #     context: ./frontend
-  #   image: online-shop_frontend:1.0
-  #   depends_on: backend
+  frontend:
+    container_name: frontend-angular
+    build:
+      context: ./frontend
+    image: online-shop_frontend:1.0
+    depends_on:
+      - backend
+    ports:
+    - "8081:8081"
+
