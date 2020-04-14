@@ -33,4 +33,4 @@ services:
     depends_on:
       - backend
     ports:
-      - "8081:8081"
+      - "8081:80"
