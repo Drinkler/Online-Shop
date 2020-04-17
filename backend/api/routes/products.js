@@ -5,10 +5,24 @@ const Product = require("../models/product");
 
 router.get("/", (req, res, next) => {
     Product.find()
+        .select("-__v")
         .exec()
-        .then((result) => {
-            console.log(result);
-            res.status(200).json(result);
+        .then((docs) => {
+            const response = {
+                count: docs.length,
+                products: docs.map((doc) => {
+                    return {
+                        _id: doc._id,
+                        name: doc.name,
+                        price: doc.price,
+                        request: {
+                            type: "GET",
+                            url: req.protocol + "://" + req.get("host") + req.originalUrl + doc._id,
+                        },
+                    };
+                }),
+            };
+            res.status(200).json(response);
         })
         .catch((err) => {
             console.log(err);
