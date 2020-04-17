@@ -33,9 +33,9 @@ router.get("/", (req, res, next) => {
 router.get("/:productId", (req, res, next) => {
     const id = req.params.productId;
     Product.findById(id)
+        .select("-__v")
         .exec()
         .then((doc) => {
-            console.log(doc);
             res.status(200).json(doc);
         })
         .catch((err) => {
@@ -52,11 +52,18 @@ router.post("/", (req, res, next) => {
     product
         .save()
         .then((result) => {
-            console.log(result);
             res.status(200).json({
-                message: "Product saved.",
-                product: result,
+                message: "Product saved successfully.",
                 ok: 1,
+                createdProduct: {
+                    _id: result._id,
+                    name: result.name,
+                    price: result.price,
+                    request: {
+                        type: "GET",
+                        url: req.protocol + "://" + req.get("host") + req.originalUrl + result._id,
+                    },
+                },
             });
         })
         .catch((err) => {
@@ -71,11 +78,16 @@ router.patch("/:productId", (req, res, next) => {
     for (const operator of req.body) {
         updateOperators[operator.propName] = operator.value;
     }
-    Product.update({ _id: id }, { $set: updateOperators })
+    Product.updateOne({ _id: id }, { $set: updateOperators })
         .exec()
         .then((result) => {
-            console.log(result);
-            res.status(200).json(result);
+            res.status(200).json({
+                message: "Product updated.",
+                request: {
+                    type: "GET",
+                    url: req.protocol + "://" + req.get("host") + req.originalUrl,
+                },
+            });
         })
         .catch((err) => {
             console.log(err);
