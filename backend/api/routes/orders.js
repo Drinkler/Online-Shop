@@ -1,68 +1,47 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 
+const Order = require("../models/Order");
 const Product = require("../models/Product");
 
 router.get("/", (req, res, next) => {
-    Product.find()
+    Order.find()
         .select("-__v")
+        .populate("product", "-__v")
         .exec()
-        .then((docs) => {
-            const response = {
+        .then((docs) =>
+            res.status(200).json({
                 count: docs.length,
-                products: docs.map((doc) => {
+                orders: docs.map((doc) => {
                     return {
                         _id: doc._id,
-                        name: doc.name,
-                        price: doc.price,
+                        product: doc.product,
+                        quantity: doc.quantity,
                         request: {
                             type: "GET",
-                            url: req.protocol + "://" + req.get("host") + req.originalUrl + doc._id,
+                            url: req.protocol + "://" + req.get("host") + req.originalUrl + "/" + doc._id,
                         },
                     };
                 }),
-            };
-            res.status(200).json(response);
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json({ error: err });
-        });
+            })
+        )
+        .catch((err) => res.status(500).json({ error: err }));
 });
 
-router.get("/:productId", (req, res, next) => {
-    const id = req.params.productId;
+//TODO: Add populate
+router.get("/:orderId", (req, res, next) => {
+    const id = req.params.orderId;
     Product.findById(id)
         .select("-__v")
         .exec()
         .then((doc) => {
-            res.status(200).json(doc);
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json({ error: err });
-        });
-});
-
-router.post("/", (req, res, next) => {
-    const product = new Product({
-        name: req.body.name,
-        price: req.body.price,
-    });
-    product
-        .save()
-        .then((result) => {
             res.status(200).json({
-                message: "Product saved successfully.",
-                ok: 1,
-                createdProduct: {
-                    _id: result._id,
-                    name: result.name,
-                    price: result.price,
-                    request: {
-                        type: "GET",
-                        url: req.protocol + "://" + req.get("host") + req.originalUrl + result._id,
-                    },
+                count: docs.length,
+                orders: docs,
+                request: {
+                    type: "GET",
+                    url: req.protocol + "://" + req.get("host") + req.originalUrl + doc._id,
                 },
             });
         })
@@ -72,6 +51,45 @@ router.post("/", (req, res, next) => {
         });
 });
 
+router.post("/", (req, res, next) => {
+    // Check if product exists and create new Order
+    Product.findById(req.body.productId)
+        .then((product) => {
+            if (!product) {
+                return res.status(404).json({
+                    message: "Product not found.",
+                });
+            }
+            const order = new Order({
+                product: req.body.productId,
+                quantity: req.body.quantity,
+            });
+            return order.save();
+        })
+        // If product exists, save it and return results
+        .then((result) => {
+            res.status(200).json({
+                message: "Order stored.",
+                createdOrder: {
+                    _id: result._id,
+                    product: result.product,
+                    quantity: result.quantity,
+                },
+                request: {
+                    type: "GET",
+                    url: req.protocol + "://" + req.get("host") + req.originalUrl + "/" + result._id,
+                },
+            });
+        })
+        // If product doesn't exists, return error
+        .catch((err) =>
+            res.status(500).json({
+                error: err,
+            })
+        );
+});
+
+//TODO: Update order
 router.patch("/:productId", (req, res, next) => {
     const id = req.params.productId;
     const updateOperators = {};
@@ -95,6 +113,7 @@ router.patch("/:productId", (req, res, next) => {
         });
 });
 
+// TODO: Delete order
 router.delete("/:productId", (req, res, next) => {
     const id = req.params.productId;
     Product.remove({ _id: id })
