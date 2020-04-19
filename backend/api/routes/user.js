@@ -47,4 +47,20 @@ router.post("/signup", (req, res, next) => {
         });
 });
 
+router.delete("/:userId", (req, res, next) => {
+    User.deleteOne({ _id: req.params.userId })
+        .exec()
+        .then(() => {
+            //TODO: Can delete multiple users, check if result is given or not?
+            res.status(200).json({
+                message: "User deleted.",
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: err,
+            });
+        });
+});
+
 module.exports = router;

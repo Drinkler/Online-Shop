@@ -127,6 +127,7 @@ router.patch("/:productId", (req, res, next) => {
 
 router.delete("/:productId", (req, res, next) => {
     const id = req.params.productId;
+    //TODO: remove ist deprecated
     Product.remove({ _id: id })
         .exec()
         .then((result) => {
