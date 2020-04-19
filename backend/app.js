@@ -51,9 +51,13 @@ app.use((error, req, res, next) => {
 });
 
 // Connect to db
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-    console.log("Connected to database.");
-});
+mongoose.connect(
+    process.env.DB_CONNECTION,
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+    () => {
+        console.log("Connected to database.");
+    }
+);
 
 // Start server
 app.listen(process.env.PORT);
