@@ -9,6 +9,9 @@ const morgan = require("morgan");
 // To log requests
 app.use(morgan("dev"));
 
+// Make the uploads folder accessible
+app.use("/uploads", express.static("uploads"));
+
 // To read Request body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
