@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -o manifest
+    kompose.cmd: kompose convert --out ./manifest/
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
@@ -17,19 +17,19 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -o manifest
+        kompose.cmd: kompose convert --out ./manifest/
         kompose.version: 1.21.0 (992df58d8)
       creationTimestamp: null
       labels:
         io.kompose.service: backend
     spec:
       containers:
-        - image: online-shop_backend:1.0
-          imagePullPolicy: ""
-          name: backend-api
-          ports:
-            - containerPort: 8080
-          resources: {}
+      - image: drinkler/online-shop_backend:1.1
+        imagePullPolicy: ""
+        name: backend-api
+        ports:
+        - containerPort: 8080
+        resources: {}
       restartPolicy: Always
       serviceAccountName: ""
       volumes: null
