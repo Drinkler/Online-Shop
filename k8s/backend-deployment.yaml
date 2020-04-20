@@ -24,7 +24,7 @@ spec:
         io.kompose.service: backend
     spec:
       containers:
-      - image: drinkler/online-shop_backend:1.1
+      - image: drinkler/microservices-backend:latest
         imagePullPolicy: ""
         name: backend-api
         ports:

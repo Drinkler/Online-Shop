@@ -24,7 +24,7 @@ spec:
         io.kompose.service: frontend
     spec:
       containers:
-      - image: drinkler/online-shop_frontend:1.1
+      - image: drinkler/microservices-frontend:latest
         imagePullPolicy: ""
         name: frontend-angular
         ports:
