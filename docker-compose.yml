@@ -9,7 +9,7 @@ services:
     container_name: backend-api
     build:
       context: ./backend
-    image: drinkler/online-shop_backend:1.1
+    image: drinkler/microservices-backend:latest
     ports:
       - "8080:8080"
     depends_on:
@@ -33,7 +33,7 @@ services:
     container_name: frontend-angular
     build:
       context: ./frontend
-    image: drinkler/online-shop_frontend:1.1
+    image: drinkler/microservices-frontend:latest
     depends_on:
       - backend
     ports:
