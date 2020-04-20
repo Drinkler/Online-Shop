@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert --out ./manifest/
+    kompose.cmd: kompose convert --out ./k8s/
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert --out ./manifest/
+        kompose.cmd: kompose convert --out ./k8s/
         kompose.version: 1.21.0 (992df58d8)
       creationTimestamp: null
       labels:
