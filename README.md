@@ -1,5 +1,5 @@
 # Online-Shop
-
+[![GitHub](https://img.shields.io/github/license/drinkler/online-shop)](https://github.com/Drinkler/Online-Shop/blob/master/LICENSE)
 # Docker
 
 ## Frontend
