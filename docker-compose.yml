@@ -11,7 +11,7 @@ services:
       context: ./backend
     image: drinkler/microservices-backend:latest
     ports:
-      - "8080:8080"
+      - ${HOST_PORT_BACKEND}:${CONTAINER_PORT_BACKEND}
     depends_on:
       - database
     restart: always
@@ -19,15 +19,13 @@ services:
   database:
     container_name: database-mongo
     image: mongo:4.2.5
+    env_file:
+      - ./database/database.env
     restart: always
-    environment:
-      MONGO_INITDB_DATABASE: online-shop
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: LSuFDaaenPfdVMi4S
     volumes:
       - mongodata:/data/db
     ports:
-      - 27017:27017
+      - ${HOST_PORT_DATABASE}:${CONTAINER_PORT_DATABASE}
 
   frontend:
     container_name: frontend-angular
@@ -37,5 +35,5 @@ services:
     depends_on:
       - backend
     ports:
-      - "8081:80"
+      - ${HOST_PORT_FRONTEND}:${CONTAINER_PORT_FRONTEND}
     restart: always
