@@ -1,0 +1,93 @@
+%%**************************************************************
+%% Vorlage fuer Bachelorarbeiten (o.ä.) der DHBW
+%%
+%% Autor: Tobias Dreher, Yves Fischer
+%% Datum: 06.07.2011
+%%
+%% Autor: Michael Gruben
+%% Datum: 15.05.2013
+%%
+%% Autor: Markus Barthel
+%% Datum: 22.08.2014
+%%**************************************************************
+
+\input{ads/header}
+
+\makeglossaries
+\input{ads/glossary}
+
+\begin{document}
+
+	% Deckblatt
+	\begin{spacing}{1}
+		\input{ads/deckblatt}
+	\end{spacing}
+	\newpage
+
+	\pagenumbering{Roman}
+
+	\pagestyle{plain}		% nur Seitenzahlen im Fuß
+	
+	\RedeclareSectionCommand[beforeskip=\kapitelabstand         ]{chapter} % stellt Abstand vor Kapitelüberschriften ein
+
+	% Inhaltsverzeichnis
+	\begin{spacing}{1.1}
+		\begingroup
+		
+			% auskommentieren für Seitenzahlen unter Inhaltsverzeichnis
+			\renewcommand*{\chapterpagestyle}{empty}
+			\pagestyle{empty}
+			
+			
+			\setcounter{tocdepth}{2}
+			%für die Anzeige von Unterkapiteln im Inhaltsverzeichnis
+			%\setcounter{tocdepth}{2}
+			
+			\tableofcontents
+			\clearpage
+		\endgroup
+	\end{spacing}
+	\newpage
+
+	% Abkürzungsverzeichnis
+	\cleardoublepage
+	\input{ads/acronyms}
+
+	% Abbildungsverzeichnis
+	\cleardoublepage
+	\listoffigures
+
+	%Tabellenverzeichnis
+	\cleardoublepage
+	\listoftables
+
+	% Quellcodeverzeichnis
+	\cleardoublepage
+	\lstlistoflistings
+	\cleardoublepage
+
+	\pagenumbering{arabic}
+	
+	\pagestyle{headings}		% Kolumnentitel im Kopf, Seitenzahlen im Fuß
+
+
+	\include{content/01kapitel}
+	
+	\include{content/02kapitel}
+
+	\clearpage
+
+	% Literaturverzeichnis
+	\cleardoublepage
+	\printbibliography
+
+	% Glossar
+	\printglossary[style=altlist,title=\langglossar]
+	
+	% sonstiger Anhang
+	\clearpage
+	\appendix
+	\input{ads/appendix}
+	
+\end{document}
+≥
