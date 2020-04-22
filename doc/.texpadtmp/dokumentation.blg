@@ -1,0 +1,9 @@
+[0] Config.pm:304> INFO - This is Biber 2.12
+[0] Config.pm:307> INFO - Logfile is '/Users/lucastanger/Documents/Code/scotch/public/Planning-Poker/doc/.texpadtmp/dokumentation.blg'
+[66] biber-darwin:315> INFO - === Wed Apr 22, 2020, 10:53:17
+[94] Biber.pm:371> INFO - Reading '/Users/lucastanger/Documents/Code/scotch/public/Planning-Poker/doc/.texpadtmp/dokumentation.bcf'
+[260] Biber.pm:889> INFO - Found 0 citekeys in bib section 0
+[277] Utils.pm:193> WARN - The file '/Users/lucastanger/Documents/Code/scotch/public/Planning-Poker/doc/.texpadtmp/dokumentation.bcf' does not contain any citations!
+[289] bbl.pm:636> INFO - Writing '/Users/lucastanger/Documents/Code/scotch/public/Planning-Poker/doc/.texpadtmp/dokumentation.bbl' with encoding 'UTF-8'
+[289] bbl.pm:739> INFO - Output to /Users/lucastanger/Documents/Code/scotch/public/Planning-Poker/doc/.texpadtmp/dokumentation.bbl
+[289] Biber.pm:110> INFO - WARNINGS: 1
