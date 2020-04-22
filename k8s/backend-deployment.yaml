@@ -24,20 +24,12 @@ spec:
         io.kompose.service: backend
     spec:
       containers:
-        - image: drinkler/microservices-backend:latest
-          imagePullPolicy: ""
-          name: backend-api
-          ports:
-            - containerPort: 8080
-          env:
-            - name: DB_CONNECTION
-              value: "mongodb+srv://drinkler:Tf9OUDhSmQhnVxIh@onlineshop-dobyn.mongodb.net/test?retryWrites=true&w=majority"
-            - name: PORT
-              value: "8080"
-            - name: JWT_KEY
-              value: "5AE34D147B8ADA82FB2FAA85DEC52"
-              # TODO: Set environmental variables
-          resources: {}
+      - image: drinkler/microservices-backend:latest
+        imagePullPolicy: ""
+        name: backend-api
+        ports:
+        - containerPort: 8080
+        resources: {}
       restartPolicy: Always
       serviceAccountName: ""
       volumes: null

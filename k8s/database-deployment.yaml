@@ -27,16 +27,25 @@ spec:
       containers:
       - env:
         - name: MONGO_INITDB_DATABASE
-          value: online-shop
+          valueFrom:
+            configMapKeyRef:
+              key: MONGO_INITDB_DATABASE
+              name: database-database-env
         - name: MONGO_INITDB_ROOT_PASSWORD
-          value: LSuFDaaenPfdVMi4S
+          valueFrom:
+            configMapKeyRef:
+              key: MONGO_INITDB_ROOT_PASSWORD
+              name: database-database-env
         - name: MONGO_INITDB_ROOT_USERNAME
-          value: root
+          valueFrom:
+            configMapKeyRef:
+              key: MONGO_INITDB_ROOT_USERNAME
+              name: database-database-env
         image: mongo:4.2.5
         imagePullPolicy: ""
         name: database-mongo
         ports:
-        - containerPort: 27017
+        - containerPort: 27107
         resources: {}
         volumeMounts:
         - mountPath: /data/db

@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  MONGO_INITDB_DATABASE: online-shop
+  MONGO_INITDB_ROOT_PASSWORD: LSuFDaaenPfdVMi4S
+  MONGO_INITDB_ROOT_USERNAME: root
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: database-database-database-env
+  name: database-database-env
