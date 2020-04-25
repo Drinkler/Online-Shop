@@ -17,16 +17,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Handling CORS
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    if (req.method === "OPTIONS") {
-        // Set allowed HTTP Methods
-        res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-        return res.status(204);
-    }
-    next();
-});
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//     if (req.method === "OPTIONS") {
+//         // Set allowed HTTP Methods
+//         res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+//         return res.status(204);
+//     }
+//     next();
+// });
 
 // Import Routes
 const api = require("./api");
@@ -51,13 +51,15 @@ app.use((error, req, res, next) => {
 });
 
 // Connect to db
-mongoose.connect(
-    process.env.DB_CONNECTION,
-    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
-    () => {
-        console.log("Connected to database.");
-    }
-);
+mongoose
+    .connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+    .then(console.log("Connected to database."))
+    .catch((err) => Console.log("Couldn't connect to database.", err));
+
+// Listen for errors after initial connection was established
+mongoose.connection.on("error", (err) => {
+    console.log("Error during runtime.", err);
+});
 
 // Start server
 app.listen(process.env.PORT);
