@@ -25,7 +25,7 @@ services:
     volumes:
       - mongodata:/data/db
     ports:
-      - 27107:27107
+      - 8888:27017
 
   frontend:
     container_name: frontend-angular
