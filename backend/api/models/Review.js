@@ -4,6 +4,7 @@ const reviewSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        require: true,
     },
     created: {
         type: Date,
@@ -12,12 +13,12 @@ const reviewSchema = mongoose.Schema({
     title: {
         type: String,
         require: true,
-        max: 50,
+        maxlength: 50,
     },
     message: {
         type: String,
         require: true,
-        max: 300,
+        maxlength: 300,
     },
     rating: {
         type: Number,
