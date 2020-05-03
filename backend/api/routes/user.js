@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // Middlewares
-const { signUpValidation } = require("../middleware/validation");
+const { loginValidation, signUpValidation } = require("../middleware/validation");
 
 // Controllers
 const UserController = require("../controllers/user");
@@ -13,7 +13,7 @@ const User = require("../models/User");
 // Methods
 router.post("/signup", signUpValidation, UserController.signUpUser);
 
-router.post("/login", UserController.loginUser);
+router.post("/login", loginValidation, UserController.loginUser);
 
 router.delete("/:userId", UserController.deleteUser);
 
