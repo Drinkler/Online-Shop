@@ -57,6 +57,7 @@ options = {
         servers: [
             {
                 url: "http://localhost:8080/rest/api",
+                description: "Local server",
             },
         ],
     },
@@ -91,10 +92,7 @@ app.use((error, req, res, next) => {
 // Connect to db
 mongoose
     .connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-    .then(() => {
-        server.start();
-        console.log("Connected to database.");
-    })
+    .then(console.log("Connected to database."))
     .catch((err) => console.log("Couldn't connect to database.", err));
 
 // Listen for errors after initial connection was established
