@@ -65,12 +65,11 @@ exports.signUpUser = async (req, res, next) => {
     if (emailExists) return res.status(409).json({ message: "E-Mail already exists." });
 
     // Hash password
-    // TODO look up how to catch error
     try {
-        const salt = await bcrypt.genSalt();
-        var hashedPassword = await bcrypt.hash(password, saalt);
+        const salt = await bcrypt.genSalt(10);
+        var hashedPassword = await bcrypt.hash(password, salt);
     } catch (error) {
-        return res.status(500).json({ error: error });
+        return res.status(500).json({ error: "Ups, something went wrong." + error });
     }
 
     // Create a new user
@@ -91,8 +90,8 @@ exports.signUpUser = async (req, res, next) => {
             createdUser: {
                 _id: savedUser._id,
                 // TODO: Lock up how to do virtuals (fullName)
-                name: savedUser.name.first + " " + savedUser.name.last,
                 email: savedUser.email,
+                name: savedUser.name.first + " " + savedUser.name.last,
             },
         });
     } catch (err) {
