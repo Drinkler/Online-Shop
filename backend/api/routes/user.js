@@ -15,6 +15,8 @@ router.post("/signup", signUpValidation, UserController.signUpUser);
 
 router.post("/login", loginValidation, UserController.loginUser);
 
+router.get("/:userId", UserController.getUser);
+
 router.delete("/:userId", UserController.deleteUser);
 
 router.patch("/:userId", UserController.updateUser);
