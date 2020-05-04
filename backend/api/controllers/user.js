@@ -181,16 +181,48 @@ exports.getUser = async (req, res, next) => {
     // Get user by userId
     try {
         var user = await User.findOne({ _id: userId }).exec();
+        console.log(user);
         if (!user) return res.status(400).json({ message: "No User found." });
     } catch (err) {
-        return res.status(500).json({ error: err });
+        return res.status(500).json({ error: "No User found or Internal Error." });
     }
 
     // Return user data
     return res.status(200).json({
         _id: user._id,
         email: user.email,
-        name: user.name.first + " " + user.name.last,
+        name: {
+            first: user.name.first,
+            last: user.name.last,
+        },
+    });
+};
+
+exports.getAllUser = async (req, res, next) => {
+    // Get all users
+    try {
+        var users = await User.find().select("-__v").exec();
+    } catch (err) {
+        return res.status(500).json({ error: err });
+    }
+
+    // Return all user data
+    return res.status(200).json({
+        count: users.length,
+        users: users.map((user) => {
+            return {
+                _id: user._id,
+                name: {
+                    first: user.name.first,
+                    last: user.name.last,
+                },
+                email: user.email,
+                request: {
+                    type: "GET",
+                    url: req.protocol + "://" + req.get("host") + req.originalUrl + user._id,
+                },
+            };
+        }),
     });
 };
 
