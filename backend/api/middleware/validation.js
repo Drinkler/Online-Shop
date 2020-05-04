@@ -27,8 +27,12 @@ const signUpValidation = (req, res, next) => {
 };
 
 const updateUserValidation = (req, res, next) => {
-    const updateUserSchema = Joi.object({});
-    // TODO : HIER MORGEN WEITER MACEHN MIT PATCH USER
+    const updateUserSchema = Joi.object({
+        email: Joi.string().min(5).max(100).email(),
+        name: Joi.string().alphanum().min(1).max(50),
+        surname: Joi.string().alphanum().min(1).max(50),
+    });
+
     const { error } = updateUserSchema.validate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
 
@@ -38,4 +42,5 @@ const updateUserValidation = (req, res, next) => {
 module.exports = {
     loginValidation: loginValidation,
     signUpValidation: signUpValidation,
+    updateUserValidation: updateUserValidation,
 };

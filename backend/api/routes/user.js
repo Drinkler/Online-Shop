@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // Middlewares
-const { loginValidation, signUpValidation } = require("../middleware/validation");
+const { loginValidation, signUpValidation, updateUserValidation } = require("../middleware/validation");
 
 // Controllers
 const UserController = require("../controllers/user");
@@ -19,6 +19,6 @@ router.get("/:userId", UserController.getUser);
 
 router.delete("/:userId", UserController.deleteUser);
 
-router.patch("/:userId", UserController.updateUser);
+router.patch("/:userId", UserController.updateUser); // TODO ADD updateUserValidation
 
 module.exports = router;

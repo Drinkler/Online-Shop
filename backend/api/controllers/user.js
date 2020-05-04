@@ -116,22 +116,59 @@ exports.updateUser = async (req, res, next) => {
     // TODO: Check if user is authorized to update users information
     const userId = req.params.userId;
 
-    // Get parameters which will be updated
-    const keys = {};
-    Object.assign(keys, req.body);
+    const parameters = {};
+    const allowedKeys = ["email", "name"];
+    const allowedSubKeys = ["first", "last"];
 
-    console.log(keys); // FIXME set only last or first name without deleting the other
-
+    // Get old user information
     try {
-        // TODO : HIER MORGEN WEITER MACEHN MIT PATCH USER
-        const result = await User.updateOne({ _id: userId }, { $set: keys }).exec();
+        var userOld = await User.findOne({ _id: userId }).exec();
+        if (!userOld) return res.status(400).json({ message: "User not found." });
+    } catch (err) {
+        return res.status(500).json({ error: err });
+    }
+
+    // Get parameters which will be updated
+    Object.assign(parameters, req.body);
+
+    // Get keys
+    const keys = Object.keys(parameters);
+
+    // Remove keys which are not valid
+    keys.forEach((key) => {
+        if (!allowedKeys.includes(key)) delete parameters[key];
+    });
+
+    // Check subKeys of "name" if "name" is given
+    if ("name" in parameters) {
+        const subKeys = Object.keys(parameters.name);
+
+        // Remove subKeys which are not valid
+        subKeys.forEach((subKey) => {
+            if (!allowedSubKeys.includes(subKey)) delete parameters["name"][subKey];
+        });
+
+        // If first name isn't given, replace with old one
+        if (!("first" in parameters.name)) {
+            parameters["name"]["first"] = userOld.name.first;
+        }
+
+        // If last name isn't given, replace with old one
+        if (!("last" in parameters.name)) {
+            parameters["name"]["last"] = userOld.name.last;
+        }
+    }
+
+    // Update user information
+    try {
+        const result = await User.updateOne({ _id: userId }, { $set: parameters }).exec();
         if (result.n != 0 && result.nModified != 0) {
             return res.status(200).json({
                 message: "User successfully updated.",
                 ok: result.ok,
             });
         }
-    } catch (error) {
+    } catch (err) {
         return res.status(500).json({ error: err });
     }
 
@@ -159,4 +196,3 @@ exports.getUser = async (req, res, next) => {
 
 // TODO: Add admin column in database
 // TODO: Admin can set a user to admin
-// TODO: Check if required is there and unique is unique
