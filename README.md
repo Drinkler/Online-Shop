@@ -47,7 +47,7 @@ and replace `{Connection String}` and `{Port}`.
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/drinkler/microservices-backend)](https://hub.docker.com/repository/docker/drinkler/microservices-backend)
 ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/drinkler/microservices-backend/latest)
 
-## Build local version
+#### Build local version
 
 ```bash
 docker-compose up -d --build backend
