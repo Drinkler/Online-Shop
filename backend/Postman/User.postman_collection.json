@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "160068cb-6730-4536-8af5-fdf0bf85c0d5",
+		"name": "User",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/users/",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/users/5eaf368383cedb92ec54966e",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users",
+						"5eaf368383cedb92ec54966e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"flo.drinkdler@gmsefsdsefdseffail.com\",\n\t\"name\": \"Florian\",\n\t\"surname\": \"Drinkler\",\n\t\"password\": \"tester123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Endpoint}}/users/signup",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"test@tester.net\",\n\t\"password\": \"tester123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Endpoint}}/users/login",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"test@tester.net\",\n\t\"test\": \"tesrtersdsdfsdet\",\n\t\"name\": {\n\t\t\"last\": \"hierherwsdfe\"\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Endpoint}}/users/5eb00b2794f30a233c3eb350",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users",
+						"5eb00b2794f30a233c3eb350"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/users/5eb00b2794f30a233c3eb350",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users",
+						"5eb00b2794f30a233c3eb350"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
