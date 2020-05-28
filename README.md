@@ -7,15 +7,15 @@
 
 ## Table of Content
 
--   [Online-Shop](#online-shop)
-    -   [Frontend](#frontend)
-    -   [Backend](#backend)
-        -   [Deploy](#deploy)
-        -   [Create .env file](#create-env-file)
-        -   [Docker](#docker)
-            -   [Build local version](#build-local-version)
-    -   [Database](#database)
-        -   [Deploy](#deploy-1)
+-   [Table of Content](#table-of-content)
+-   [Frontend](#frontend)
+-   [Backend](#backend)
+    -   [Deploy](#deploy)
+    -   [Create .env file](#create-env-file)
+    -   [Docker](#docker)
+        -   [Build local version](#build-local-version)
+-   [Database](#database)
+    -   [Deploy](#deploy-1)
 
 ## Frontend
 
