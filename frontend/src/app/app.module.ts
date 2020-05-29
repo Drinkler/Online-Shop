@@ -4,6 +4,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UiModule } from './ui/ui.module';
+import { LoginComponent } from "./ui/login/login.component";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { UiModule } from './ui/ui.module';
     MDBBootstrapModule.forRoot(),
     UiModule
   ],
+  entryComponents: [LoginComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
