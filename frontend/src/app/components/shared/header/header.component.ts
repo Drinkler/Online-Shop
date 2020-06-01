@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from "../login/login.component";
-import { ShoppingcartComponent } from "../shoppingcart/shoppingcart.component";
 import { MDBModalRef, MDBModalService } from "angular-bootstrap-md";
 
 
@@ -11,14 +9,14 @@ import { MDBModalRef, MDBModalService } from "angular-bootstrap-md";
 })
 export class HeaderComponent implements OnInit {
 
-  modalLogin: MDBModalRef;
-  modalCart: MDBModalRef;
+  modalLogin: MDBModalRef
 
   constructor(private modalService: MDBModalService) { }
 
   ngOnInit(): void {
   }
 
+  /*
   openLoginModal() {
     this.modalLogin = this.modalService.show(LoginComponent, {
       backdrop: true,
@@ -44,4 +42,5 @@ export class HeaderComponent implements OnInit {
       animated: true
     });
   }
+   */
 }

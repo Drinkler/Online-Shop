@@ -1,6 +1,6 @@
 <!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark aqua-gradient lighten-1">
-  <a class="navbar-brand" href="#">Navbar</a>
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark blue-gradient lighten-1">
+  <a class="navbar-brand" href="#">Online-Shop</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
           aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -13,16 +13,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link" href="#">Collection</a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
       <li>
-        <button mdbBtn size="sm" (click)="openCartModal()"><i class="fas fa-shopping-cart pl-1"></i></button>
+        <button mdbBtn size="sm"><i class="fas fa-shopping-cart pl-1"></i></button>
       </li>
       <li *ngIf="false" class="nav-item avatar">
         <a class="nav-link p-0" href="#">
@@ -31,10 +28,11 @@
         </a>
       </li>
       <li *ngIf="true" class="nav-item">
-        <button mdbBtn size="sm" color="primary" (click)="openLoginModal()">Login</button>
       </li>
     </ul>
 
   </div>
 </nav>
 <!--/.Navbar -->
+<app-header></app-header>
+
