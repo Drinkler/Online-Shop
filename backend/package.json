@@ -14,13 +14,13 @@
         "bcrypt": "^4.0.1",
         "express": "^4.17.1",
         "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.9.7",
+        "mongoose": "^5.9.16",
         "multer": "^1.4.2",
         "swagger-jsdoc": "^4.0.0",
         "swagger-ui-express": "^4.1.4"
     },
     "devDependencies": {
-        "nodemon": "^2.0.3",
+        "nodemon": "^2.0.4",
         "dotenv": "^8.2.0",
         "morgan": "^1.10.0"
     }
