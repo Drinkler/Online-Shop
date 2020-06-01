@@ -4,18 +4,20 @@
 ![GitHub issues](https://img.shields.io/github/issues/drinkler/online-shop)
 [![Build Status](https://travis-ci.com/Drinkler/Online-Shop.svg?branch=master)](https://travis-ci.com/Drinkler/Online-Shop)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/70fc6e8580b84f6fb0f4671b40d0f867)](https://www.codacy.com/manual/Drinkler/Online-Shop?utm_source=github.com&utm_medium=referral&utm_content=Drinkler/Online-Shop&utm_campaign=Badge_Grade)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 ## Table of Content
 
--   [Table of Content](#table-of-content)
--   [Frontend](#frontend)
--   [Backend](#backend)
-    -   [Deploy](#deploy)
-    -   [Create .env file](#create-env-file)
-    -   [Docker](#docker)
-        -   [Build local version](#build-local-version)
--   [Database](#database)
-    -   [Deploy](#deploy-1)
+- [Online-Shop](#online-shop)
+  - [Table of Content](#table-of-content)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+    - [Deploy](#deploy)
+    - [Create .env file](#create-env-file)
+    - [Docker](#docker)
+      - [Build local version](#build-local-version)
+  - [Database](#database)
+    - [Deploy](#deploy-1)
 
 ## Frontend
 
