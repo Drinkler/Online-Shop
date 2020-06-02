@@ -7,7 +7,7 @@
         "start": "node app.js",
         "dev": "nodemon app.js"
     },
-    "author": "Luca Stanger, Florian Drinkler",
+    "author": "Florian Drinkler, Luca Stanger",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
