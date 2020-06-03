@@ -1,10 +1,10 @@
 <div class="card mb-4 shadow-sm">
-  <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="https://ih1.redbubble.net/image.449121551.2876/st,small,507x507-pad,600x600,f8f8f8.u3.jpg"/>
+  <img class="bd-placeholder-img card-img-top" width="100%" height="225" [src]="productItem.imageUrl" />
   <div class="card-body">
     <p class="card-text">
-      <strong>{{42 | currency:'EUR'}}</strong>
+      <strong>{{productItem.price | currency:'EUR'}}</strong>
     </p>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <p class="card-text">{{productItem.description}}</p>
     <div class="d-flex justify-content-between align-items-center">
       <div class="btn-group btn-group-sm" role="group" aria-label="Cart Buttons">
         <button type="button" class="btn btn-primary btn-sm">Add to cart</button>
