@@ -89,15 +89,45 @@ app.use((error, req, res, next) => {
     });
 });
 
-// Connect to db
-mongoose
-    .connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-    .then(console.log("Connected to database."))
-    .catch((err) => console.log("Couldn't connect to database.", err));
+var options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+    socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+};
 
-// Listen for errors after initial connection was established
-mongoose.connection.on("error", (err) => {
-    console.log("Error during runtime.", err);
+mongoose.connect(process.env.DB_CONNECTION, options).then(
+    () => {
+        console.log("Connected to database.");
+    },
+    (err) => {
+        console.log("Couldn't connect to database.");
+    }
+);
+
+mongoose.connection.on("connecting", function () {
+    console.log("connecting to MongoDB...");
+});
+
+mongoose.connection.on("error", function (error) {
+    console.log("Error in MongoDb connection");
+    mongoose.connect(process.env.DB_CONNECTION, options).then(
+        () => {
+            console.log("Connected to database.");
+        },
+        (err) => {
+            console.log("Couldn't connect to database.");
+        }
+    );
+});
+
+mongoose.connection.on("reconnected", function () {
+    console.log("MongoDB reconnected!");
+});
+
+mongoose.connection.on("disconnected", function () {
+    console.log("MongoDB disconnected!");
 });
 
 // Start server
