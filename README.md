@@ -5,6 +5,9 @@
 [![Build Status](https://travis-ci.com/Drinkler/Online-Shop.svg?branch=master)](https://travis-ci.com/Drinkler/Online-Shop)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/70fc6e8580b84f6fb0f4671b40d0f867)](https://www.codacy.com/manual/Drinkler/Online-Shop?utm_source=github.com&utm_medium=referral&utm_content=Drinkler/Online-Shop&utm_campaign=Badge_Grade)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+<a href="https://gitmoji.carloscuesta.me">
+  <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
+</a>
 
 ## Table of Content
 
