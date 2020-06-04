@@ -7,7 +7,7 @@
     <p class="card-text">{{productItem.description}}</p>
     <div class="d-flex justify-content-between align-items-center">
       <div class="btn-group btn-group-sm" role="group" aria-label="Cart Buttons">
-        <button type="button" class="btn btn-primary btn-sm">Add to cart</button>
+        <button (click)="handleAddToCart()" class="btn btn-primary btn-sm" type="button">Add to cart</button>
         <button type="button" class="btn btn-outline-primary btn-sm">Show details</button>
       </div>
     </div>
