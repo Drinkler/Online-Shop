@@ -106,6 +106,7 @@ exports.deleteUser = async (req, res, next) => {
         return res.status(500).json({ error: err });
     }
 
+    // Return no user
     return res.status(409).json({
         message: "No User was found to delete.",
         ok: 0,
@@ -226,5 +227,7 @@ exports.getAllUser = async (req, res, next) => {
     });
 };
 
+// TODO: Update password if user updates it
+// TODO: Show createdate and updatedate
 // TODO: Add admin column in database
 // TODO: Admin can set a user to admin
