@@ -13,12 +13,11 @@
   - [Table of Content](#table-of-content)
   - [Frontend](#frontend)
   - [Backend](#backend)
-    - [Deploy](#deploy)
-    - [Create .env file](#create-env-file)
-    - [Docker](#docker)
-      - [Build local version](#build-local-version)
+    - [:rocket: Deploy](#-deploy)
+    - [:see_no_evil: .env file](#-env-file)
+    - [:whale: Docker](#-docker)
   - [Database](#database)
-    - [Deploy](#deploy-1)
+    - [Deploy](#deploy)
 
 ## Frontend
 
@@ -27,7 +26,9 @@
 
 ## Backend
 
-### Deploy
+### :rocket: Deploy
+
+Use following commands to create a local Node.js backend server. The default port of the server is 3000. To configure the database connection and the port of the server, [create a .env file](#env-file).
 
 ```bash
 cd backend
@@ -35,44 +36,43 @@ npm install
 npm start
 ```
 
-Default port is 3000.
+### :see_no_evil: .env file
 
-### Create .env file
+The .env file includes the database connection string, the Node.js server port and the [JSON Web Token](https://jwt.io/).  
+To create a .env file for the backend, use following commands:
 
 ```bash
 cd backend
+# Bash
+echo DB_CONNECTION="{Connection String}"$'\n'PORT={Port}$'\n'JWT_KEY="{jwt token}" > .env
+# PowerShell
+echo DB_CONNECTION="{Connection String}" >> .env  & echo PORT={Port} >> .env & echo JWT_KEY="{jwt token}" >> .env
 ```
 
-Bash
+After that, open the .env file and replace `{Connection String}`, `{Port}` and `{jwt token}` accordingly.
 
-```bash
-echo DB_CONNECTION="{Connection String}"$'\n'PORT={Port} > .env
-```
 
-Windows PowerShell
-
-```bash
-echo DB_CONNECTION="{Connection String}" >> .env  & echo PORT={Port} >> .env
-```
-
-and replace `{Connection String}` and `{Port}`.
-
-### Docker
+### :whale: Docker
 
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/drinkler/microservices-backend)](https://hub.docker.com/repository/docker/drinkler/microservices-backend)
 ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/drinkler/microservices-backend/latest)
 
-#### Build local version
+The backend image can be found [here](https://hub.docker.com/repository/docker/drinkler/microservices-backend).
+
+The docker version uses the same .env file as the normal version, expect the server port now is 8080.  
+Use following command to create a backend image und execute it:
 
 ```bash
 docker-compose up -d --build backend
 ```
 
-After use:
+To stop and delete the docker container run following command:
 
 ```bash
 docker-compose down
 ```
+
+You can also create the image with the [backend Dockerfile](https://github.com/Drinkler/Online-Shop/blob/master/backend/Dockerfile).
 
 ## Database
 
