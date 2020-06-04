@@ -10,6 +10,8 @@ services:
     build:
       context: ./backend
     image: drinkler/microservices-backend:latest
+    environment:
+      - DB_CONNECTION=mongodb://root:LSuFDaaenPfdVMi4S@database:27017/online-shop?authSource=admin
     ports:
       - 8080:8080
     depends_on:
