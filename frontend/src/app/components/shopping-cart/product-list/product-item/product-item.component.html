@@ -4,7 +4,7 @@
     <p class="card-text">
       <strong>{{productItem.price | currency:'EUR'}}</strong>
     </p>
-    <p class="card-text">{{productItem.description}}</p>
+    <p class="card-text">{{productItem.description | slice: 0:80}}...</p>
     <div class="d-flex justify-content-between align-items-center">
       <div class="btn-group btn-group-sm" role="group" aria-label="Cart Buttons">
         <button (click)="handleAddToCart()" class="btn btn-primary btn-sm" type="button">Add to cart</button>
