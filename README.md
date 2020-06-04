@@ -28,7 +28,7 @@
 
 ### :rocket: Deploy
 
-Use following commands to create a local Node.js backend server. The default port of the server is 3000. To configure the database connection and the port of the server, [create a .env file](#env-file).
+Use following commands to create a local Node.js backend server. The default port of the server is 3000. To configure the database connection and the port of the server, [create a .env file](#see_no_evil-env-file).
 
 ```bash
 cd backend
