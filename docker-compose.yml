@@ -24,8 +24,8 @@ services:
     restart: always
     volumes:
       - mongodata:/data/db
-    expose:
-      - "27017"
+    ports:
+      - 8888:27017
 
   frontend:
     container_name: frontend-angular
