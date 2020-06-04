@@ -19,16 +19,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Handling CORS
-// app.use((req, res, next) => {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-//     if (req.method === "OPTIONS") {
-//         // Set allowed HTTP Methods
-//         res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-//         return res.status(204);
-//     }
-//     next();
-// });
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    if (req.method === "OPTIONS") {
+        // Set allowed HTTP Methods
+        res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+        return res.status(204);
+    }
+    next();
+});
 
 // Import Routes
 const api = require("./api");
@@ -97,6 +97,7 @@ var options = {
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
 };
 
+// Handling MongoDB connection
 mongoose.connect(process.env.DB_CONNECTION, options).then(
     () => {
         console.log("Connected to database.");
