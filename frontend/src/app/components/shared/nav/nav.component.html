@@ -1,37 +1,19 @@
 <!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark blue-gradient lighten-1">
-  <a class="navbar-brand" href="#">Online-Shop</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
-          aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light blue-gradient">
+  <a [routerLink]="['/shop']" class="navbar-brand">Online-Shop</a>
+  <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+          data-target="#navbarNavAltMarkup" data-toggle="collapse" type="button">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Collection</a>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li>
-        <button mdbBtn size="sm"><i class="fas fa-shopping-cart pl-1"></i></button>
-      </li>
-      <li *ngIf="false" class="nav-item avatar">
-        <a class="nav-link p-0" href="#">
-          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
-               alt="avatar image" height="35">
-        </a>
-      </li>
-      <li *ngIf="true" class="nav-item">
-      </li>
-    </ul>
-
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Shop <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+    </div>
   </div>
+  <a [routerLink]="['/register']" class="btn btn-primary">Sign Up</a>
+  <a [routerLink]="['/login']" class="ml-2 btn btn-secondary">Login</a>
 </nav>
 <!--/.Navbar -->
 <app-header></app-header>
