@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert --out ./k8s/
+    kompose.cmd: kompose convert -o k8s
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert --out ./k8s/
+        kompose.cmd: kompose convert -o k8s
         kompose.version: 1.21.0 (992df58d8)
       creationTimestamp: null
       labels:
@@ -45,7 +45,7 @@ spec:
         imagePullPolicy: ""
         name: database-mongo
         ports:
-        - containerPort: 27107
+        - containerPort: 27017
         resources: {}
         volumeMounts:
         - mountPath: /data/db
