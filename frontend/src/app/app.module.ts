@@ -16,6 +16,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {PageNotFoundComponent} from './components/shared/page-not-found/page-not-found.component';
+import {AlertComponent} from './components/shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {PageNotFoundComponent} from './components/shared/page-not-found/page-not
     ProductItemComponent,
     LoginComponent,
     RegisterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
