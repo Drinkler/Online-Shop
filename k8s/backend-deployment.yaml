@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert --out ./k8s/
+    kompose.cmd: kompose convert -o k8s
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
@@ -17,14 +17,17 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert --out ./k8s/
+        kompose.cmd: kompose convert -o k8s
         kompose.version: 1.21.0 (992df58d8)
       creationTimestamp: null
       labels:
         io.kompose.service: backend
     spec:
       containers:
-      - image: drinkler/microservices-backend:latest
+      - env:
+        - name: DB_CONNECTION
+          value: mongodb://root:LSuFDaaenPfdVMi4S@database:27017/online-shop?authSource=admin
+        image: drinkler/microservices-backend:latest
         imagePullPolicy: ""
         name: backend-api
         ports:
