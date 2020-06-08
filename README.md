@@ -24,6 +24,16 @@
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/drinkler/microservices-frontend)](https://hub.docker.com/repository/docker/drinkler/microservices-frontend)
 ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/drinkler/microservices-frontend/latest)
 
+### :rocket: Deploy
+
+Use following commands to create a local frontend instance.
+
+```$ npm install```
+
+After installing all dependencies you can run it locally using
+
+```$ ng serve```
+
 ## Backend
 
 ### :rocket: Deploy
