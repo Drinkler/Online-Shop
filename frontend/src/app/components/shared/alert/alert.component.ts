@@ -1,9 +1,8 @@
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import {Router, NavigationStart} from '@angular/router';
 import {Subscription} from 'rxjs';
-
-import {Alert, AlertType} from '@app/_models';
-import {AlertService} from '@app/_services';
+import {Alert, AlertType} from 'src/app/models/alert';
+import {AlertService} from 'src/app/services/alert.service';
 
 @Component({selector: 'alert', templateUrl: 'alert.component.html'})
 export class AlertComponent implements OnInit, OnDestroy {
@@ -56,7 +55,9 @@ export class AlertComponent implements OnInit, OnDestroy {
 
   removeAlert(alert: Alert) {
     // check if already removed to prevent error on auto close
-    if (!this.alerts.includes(alert)) return;
+    if (!this.alerts.includes(alert)) {
+      return;
+    }
 
     if (this.fade) {
       // fade out alert
@@ -73,7 +74,9 @@ export class AlertComponent implements OnInit, OnDestroy {
   }
 
   cssClass(alert: Alert) {
-    if (!alert) return;
+    if (!alert) {
+      return;
+    }
 
     const classes = ['alert', 'alert-dismissable', 'mt-4', 'container'];
 
@@ -82,7 +85,7 @@ export class AlertComponent implements OnInit, OnDestroy {
       [AlertType.Error]: 'alert alert-danger',
       [AlertType.Info]: 'alert alert-info',
       [AlertType.Warning]: 'alert alert-warning'
-    }
+    };
 
     classes.push(alertTypeClass[alert.type]);
 

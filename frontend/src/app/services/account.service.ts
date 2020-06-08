@@ -4,8 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
-import {environment} from '@environments/environment';
-import {User} from '@app/_models';
+import {environment} from 'src/environments/environment';
+import {User} from 'src/app/models/user';
 
 @Injectable({providedIn: 'root'})
 export class AccountService {
@@ -13,8 +13,8 @@ export class AccountService {
   private userSubject: BehaviorSubject<User>;
 
   constructor(
-    private router: Router,
-    private http: HttpClient
+      private router: Router,
+      private http: HttpClient
   ) {
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
