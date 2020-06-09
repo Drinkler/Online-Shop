@@ -3,18 +3,21 @@
     <strong>Filters</strong>
   </div>
   <div class="card-body">
-    <form>
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
       <div class="form-group">
         <label for="from">From</label>
-        <input type="number" id="from" class="form-control">
+        <input class="form-control" formControlName="fromValue" id="from" type="number">
       </div>
 
       <div class="form-group">
         <label for="to">To</label>
-        <input type="number" id="to" class="form-control">
+        <input class="form-control" formControlName="toValue" id="to" type="number">
       </div>
 
-      <button class="btn btn-primary btn-block btn-sm">Filter by Price</button>
+      <button [disabled]="loading" class="btn btn-primary btn-block btn-sm">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Filter by Price
+      </button>
     </form>
   </div>
 </div>
