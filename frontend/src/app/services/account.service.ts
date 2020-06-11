@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {User} from 'src/app/models/user';
 import {environment} from 'src/environments/environment';
-import {loginUrl, registerUrl} from 'src/app/config/api';
 
 
 @Injectable({providedIn: 'root'})
@@ -26,22 +25,13 @@ export class AccountService {
   }
 
   login(username, password) {
-    const headers = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        'Accept-Encoding': 'gzip, deflate, br',
-        Connection: 'keep-alive'
-      })
-    };
-    const resp = this.http.post<any>('/rest/api/users/login', {email: username, password: password}, headers)
+    return this.http.post<any>('/rest/api/users/login', {email: username, password: password})
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);
         return user;
       }));
-    return resp;
   }
 
   logout() {
@@ -52,16 +42,7 @@ export class AccountService {
   }
 
   register(user: User) {
-    // const headers = {
-    //   headers: new HttpHeaders({
-    //     'Cache-Control': 'no-cache',
-    //     'Content-Type': 'application/json',
-    //     'Accept': '*/*',
-    //     'Accept-Encoding': 'gzip, deflate, br',
-    //   })
-    // };
-    const resp = this.http.post('/rest/api/users/signup', user);
-    return resp;
+    return this.http.post('/rest/api/users/signup', user);
   }
 
   getAll() {
