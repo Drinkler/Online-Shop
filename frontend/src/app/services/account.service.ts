@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {User} from 'src/app/models/user';
 import {environment} from 'src/environments/environment';
+import {loginUrl, registerUrl, userUrl} from "../config/api";
 
 
 @Injectable({providedIn: 'root'})
@@ -25,7 +26,7 @@ export class AccountService {
   }
 
   login(username, password) {
-    return this.http.post<any>('/rest/api/users/login', {email: username, password: password})
+    return this.http.post<any>(loginUrl, {email: username, password: password})
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user));
@@ -42,19 +43,19 @@ export class AccountService {
   }
 
   register(user: User) {
-    return this.http.post('/rest/api/users/signup', user);
+    return this.http.post(registerUrl, user);
   }
 
   getAll() {
-    return this.http.get<User[]>(`${environment.apiUrl}/users`);
+    return this.http.get<User[]>(userUrl);
   }
 
   getById(id: string) {
-    return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+    return this.http.get<User>(`${userUrl}/${id}`);
   }
 
   update(id, params) {
-    return this.http.put(`${environment.apiUrl}/users/${id}`, params)
+    return this.http.put(`${userUrl}/${id}`, params)
       .pipe(map(x => {
         // update stored user if the logged in user updated their own record
         if (id == this.userValue.id) {
@@ -70,7 +71,7 @@ export class AccountService {
   }
 
   delete(id: string) {
-    return this.http.delete(`${environment.apiUrl}/users/${id}`)
+    return this.http.delete(`${userUrl}/${id}`)
       .pipe(map(x => {
         // auto logout if the logged in user deleted their own record
         if (id == this.userValue.id) {
