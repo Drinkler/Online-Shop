@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-filters',
@@ -6,10 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit {
+  form: FormGroup;
+  loading = false;
+  submitted = false;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private formBuilder: FormBuilder) {
   }
 
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.form.controls;
+  }
+
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      fromValue: ['', Validators.required],
+      toValue: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    this.loading = true;
+  }
 }
