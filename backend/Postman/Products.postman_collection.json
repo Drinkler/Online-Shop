@@ -65,23 +65,23 @@
 					"formdata": [
 						{
 							"key": "name",
-							"value": "testfile",
+							"value": "",
 							"type": "text"
 						},
 						{
 							"key": "price",
-							"value": "3",
+							"value": "",
 							"type": "text"
 						},
 						{
 							"key": "description",
-							"value": "testfile with a des",
+							"value": "",
 							"type": "text"
 						},
 						{
 							"key": "productImage",
 							"type": "file",
-							"src": "/C:/Users/flodr/Downloads/travis-ci-aadbd0e2e0de4815.jpeg"
+							"src": []
 						}
 					],
 					"options": {
