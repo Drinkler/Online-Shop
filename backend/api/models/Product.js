@@ -39,10 +39,10 @@ const productSchema = mongoose.Schema(
             require: true,
             maxlength: 300,
         },
-        // productImage: {
-        //     type: String,
-        //     require: true,
-        // },
+        productImage: {
+            type: String,
+            require: true,
+        },
     },
     {
         timestamps: true,

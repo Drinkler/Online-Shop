@@ -12,6 +12,7 @@ const ProductsController = require("../controllers/products");
  *   description: Managing Products
  */
 
+// Where and how to store product Images
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "./uploads/");
@@ -21,15 +22,17 @@ const storage = multer.diskStorage({
     },
 });
 
+// Filter image by type
 const fileFilter = (req, file, cb) => {
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
         cb(null, true);
     } else {
-        // cb (new Error("message"), false)
-        cb(null, false);
+        // Reject the file
+        cb(new Error("Image upload failed."), false);
     }
 };
 
+// Set upload configurations
 const upload = multer({
     storage: storage,
     limits: {
@@ -39,7 +42,7 @@ const upload = multer({
 });
 
 // TODO : Check Auth
-// TODO : Upload Images
+// TODO : Add image code to middleware
 
 /**
  * @swagger
@@ -91,7 +94,7 @@ router.get("/:productId", ProductsController.getProduct);
  *    tags: [Products]
  *
  */
-router.post("/", ProductsController.saveProduct);
+router.post("/", upload.single("productImage"), ProductsController.saveProduct);
 
 /**
  * @swagger

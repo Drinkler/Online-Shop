@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 require("dotenv").config();
 const morgan = require("morgan");
+const mkdirp = require("mkdirp");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
@@ -13,6 +14,9 @@ app.use(morgan("dev"));
 
 // Make the uploads folder accessible
 app.use("/uploads", express.static("uploads"));
+
+// Create uploads folder
+mkdirp.sync("./uploads");
 
 // To read Request body
 app.use(express.urlencoded({ extended: true }));
