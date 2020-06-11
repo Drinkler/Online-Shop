@@ -54,12 +54,36 @@
 		},
 		{
 			"name": "Save product",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"name\": \"8 Produkt\",\n\t\"price\": 4.324666666666666666,\n\t\"description\": \"Beschreibung des 8 Produktes\"\n}",
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "testfile",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "testfile with a des",
+							"type": "text"
+						},
+						{
+							"key": "productImage",
+							"type": "file",
+							"src": "/C:/Users/flodr/Downloads/travis-ci-aadbd0e2e0de4815.jpeg"
+						}
+					],
 					"options": {
 						"raw": {
 							"language": "json"
