@@ -1,20 +1,21 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-
-import {environment} from 'src/environments/environment';
 import {User} from 'src/app/models/user';
+import {environment} from 'src/environments/environment';
+import {loginUrl, registerUrl} from 'src/app/config/api';
+
 
 @Injectable({providedIn: 'root'})
 export class AccountService {
-  public user: Observable<User>;
   private userSubject: BehaviorSubject<User>;
+  public user: Observable<User>;
 
   constructor(
-      private router: Router,
-      private http: HttpClient
+    private router: Router,
+    private http: HttpClient
   ) {
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
@@ -25,13 +26,22 @@ export class AccountService {
   }
 
   login(username, password) {
-    return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, {username, password})
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Accept: '*/*',
+        'Accept-Encoding': 'gzip, deflate, br',
+        Connection: 'keep-alive'
+      })
+    };
+    const resp = this.http.post<any>('/rest/api/users/login', {email: username, password: password}, headers)
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);
         return user;
       }));
+    return resp;
   }
 
   logout() {
@@ -42,7 +52,16 @@ export class AccountService {
   }
 
   register(user: User) {
-    return this.http.post(`${environment.apiUrl}/users/register`, user);
+    // const headers = {
+    //   headers: new HttpHeaders({
+    //     'Cache-Control': 'no-cache',
+    //     'Content-Type': 'application/json',
+    //     'Accept': '*/*',
+    //     'Accept-Encoding': 'gzip, deflate, br',
+    //   })
+    // };
+    const resp = this.http.post('/rest/api/users/signup', user);
+    return resp;
   }
 
   getAll() {

@@ -17,7 +17,6 @@ import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {PageNotFoundComponent} from './components/shared/page-not-found/page-not-found.component';
 import {AlertComponent} from './components/shared/alert/alert.component';
-import {AddEditComponent} from './components/add-edit/add-edit.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {JwtInterceptor} from 'src/app/components/shared/jwt.interceptor';
 import {ErrorInterceptor} from 'src/app/components/shared/error.interceptor';
@@ -37,8 +36,7 @@ import {ErrorInterceptor} from 'src/app/components/shared/error.interceptor';
     LoginComponent,
     RegisterComponent,
     PageNotFoundComponent,
-    AlertComponent,
-    AddEditComponent
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -49,8 +47,8 @@ import {ErrorInterceptor} from 'src/app/components/shared/error.interceptor';
   ],
   entryComponents: [],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    // {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    // {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

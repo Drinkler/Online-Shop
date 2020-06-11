@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {AccountService} from 'src/app/services/account.service';
+import {User} from 'src/app/models/user';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +10,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  user: User;
   title = 'Online-Shop';
 
-  constructor() {
+  constructor(
+    private router: Router,
+    private accountService: AccountService
+  ) {
+    this.accountService.user.subscribe(x => this.user = x);
+  }
+
+  logout() {
+    this.accountService.logout();
   }
 
 

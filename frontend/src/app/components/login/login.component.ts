@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {first} from 'rxjs/operators';
-
-import {AccountService} from 'src/app/services/account.service';
 import {AlertService} from 'src/app/services/alert.service';
+import {AccountService} from 'src/app/services/account.service';
+import {first} from 'rxjs/operators';
 
 @Component({templateUrl: 'login.component.html'})
 export class LoginComponent implements OnInit {
@@ -17,8 +16,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private accountService: AccountService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private accountService: AccountService
   ) {
   }
 
@@ -29,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
 
@@ -38,6 +37,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+
+    // this.accountService.logout();
     this.submitted = true;
 
     // reset alerts on submit
@@ -49,13 +50,16 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.accountService.login(this.f.username.value, this.f.password.value)
+
+    this.accountService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        data => {
+        (data) => {
+          console.log('Subscribe Login');
           this.router.navigate([this.returnUrl]);
         },
         error => {
+          console.log('Error Login');
           this.alertService.error(error);
           this.loading = false;
         });

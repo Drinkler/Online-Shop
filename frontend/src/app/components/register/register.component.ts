@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {first} from 'rxjs/operators';
 
 import {AccountService} from 'src/app/services/account.service';
 import {AlertService} from 'src/app/services/alert.service';
+import {first} from 'rxjs/operators';
 
 @Component({templateUrl: 'register.component.html'})
 export class RegisterComponent implements OnInit {
@@ -28,9 +28,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      username: ['', Validators.required],
+      surname: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         data => {
           this.alertService.success('Registration successful', {keepAfterRouteChange: true});
-          this.router.navigate(['../login'], {relativeTo: this.route});
+          this.router.navigate(['../shop'], {relativeTo: this.route});
         },
         error => {
           this.alertService.error(error);
