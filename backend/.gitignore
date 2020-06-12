@@ -116,4 +116,4 @@ dist
 .pnp.*
 
 # product images
-uploads/
+productImages/

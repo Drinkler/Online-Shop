@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-const checkAuth = require("../middleware/check-auth");
 
+// Middlewares
+const checkAuth = require("../middleware/check-auth");
+const upload = require("../middleware/upload-image");
+
+// Controllers
 const ProductsController = require("../controllers/products");
 
 /**
@@ -12,37 +15,7 @@ const ProductsController = require("../controllers/products");
  *   description: Managing Products
  */
 
-// Where and how to store product Images
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "./uploads/");
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + file.originalname);
-    },
-});
-
-// Filter image by type
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-        cb(null, true);
-    } else {
-        // Reject the file
-        cb(new Error("Image upload failed."), false);
-    }
-};
-
-// Set upload configurations
-const upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 1024 * 1024 * 2, // 2 MB
-    },
-    fileFilter: fileFilter,
-});
-
 // TODO : Check Auth
-// TODO : Add image code to middleware
 
 /**
  * @swagger

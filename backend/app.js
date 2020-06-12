@@ -12,11 +12,11 @@ const swaggerUi = require("swagger-ui-express");
 // To log requests
 app.use(morgan("dev"));
 
-// Make the uploads folder accessible
-app.use("/uploads", express.static("uploads"));
+// Make the productImages folder accessible
+app.use("/productImages", express.static("productImages"));
 
-// Create uploads folder
-mkdirp.sync("./uploads");
+// Create folder for product images
+mkdirp.sync("./productImages");
 
 // To read Request body
 app.use(express.urlencoded({ extended: true }));

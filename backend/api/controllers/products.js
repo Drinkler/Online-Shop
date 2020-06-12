@@ -7,12 +7,14 @@ exports.saveProduct = async (req, res, next) => {
     const description = req.body.description;
     const image = req.file;
 
+    const productImagePath = req.protocol + "://" + req.get("host") + "/" + image.path.replace("\\", "/");
+
     // Create a new Product
     const product = new Product({
         name: name,
         price: price,
         description: description,
-        productImage: req.protocol + "://" + req.get("host") + "/" + image.path,
+        productImage: productImagePath,
     });
 
     // Save product
@@ -25,7 +27,7 @@ exports.saveProduct = async (req, res, next) => {
                 name: savedProduct.name,
                 price: savedProduct.price,
                 description: savedProduct.description,
-                productImage: req.protocol + "://" + req.get("host") + "/" + image.path,
+                productImage: productImagePath,
             },
         });
     } catch (err) {

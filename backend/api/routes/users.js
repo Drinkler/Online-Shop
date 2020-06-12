@@ -7,9 +7,6 @@ const { loginValidation, signUpValidation, updateUserValidation } = require("../
 // Controllers
 const UserController = require("../controllers/user");
 
-// Models
-const User = require("../models/User");
-
 // Methods
 router.post("/signup", signUpValidation, UserController.signUpUser);
 
