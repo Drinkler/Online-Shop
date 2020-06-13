@@ -61,28 +61,6 @@ exports.getAllOrders = async (req, res, next) => {
     });
 };
 
-exports.deleteOrder = async (req, res, next) => {
-    const orderId = req.params.orderId;
-
-    // Delete order by orderId
-    try {
-        const result = await Order.deleteOne({ _id: orderId }).exec();
-        if (result.n != 0 && result.deletedCount != 0) {
-            return res.status(200).json({
-                message: "Order successfully deleted.",
-                ok: result.ok,
-            });
-        }
-    } catch (err) {
-        return res.status(500).json({ message: "Order not found or Internal Error." });
-    }
-
-    // Return no order
-    return res.status(409).json({
-        message: "No Order was found to delete.",
-    });
-};
-
 exports.addProduct = async (req, res, next) => {
     const orderId = req.params.orderId;
     const productId = req.params.productId;
@@ -103,6 +81,28 @@ exports.addProduct = async (req, res, next) => {
     }
 
     return res.status(400).json({ error: "Product not found, or couldn't update order." });
+};
+
+exports.deleteOrder = async (req, res, next) => {
+    const orderId = req.params.orderId;
+
+    // Delete order by orderId
+    try {
+        const result = await Order.deleteOne({ _id: orderId }).exec();
+        if (result.n != 0 && result.deletedCount != 0) {
+            return res.status(200).json({
+                message: "Order successfully deleted.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Order not found or Internal Error." });
+    }
+
+    // Return no order
+    return res.status(409).json({
+        message: "No Order was found to delete.",
+    });
 };
 
 exports.removeProduct = async (req, res, next) => {

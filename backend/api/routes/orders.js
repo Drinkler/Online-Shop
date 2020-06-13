@@ -14,11 +14,11 @@ router.get("/:orderId", OrdersController.getOrder);
 // Get all orders including products and users
 router.get("/", OrdersController.getAllOrders);
 
-// Delete order
-router.delete("/:orderId", OrdersController.deleteOrder);
-
 // Add products to order
 router.patch("/:orderId/products/:productId", OrdersController.addProduct);
+
+// Delete order
+router.delete("/:orderId", OrdersController.deleteOrder);
 
 // Remove product from order
 router.delete("/:orderId/products/:productId", OrdersController.removeProduct);
