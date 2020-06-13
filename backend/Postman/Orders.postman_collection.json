@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "fa194e04-b6e5-404d-aed1-e0d5ffda5107",
+		"name": "Orders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/orders/:userId",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"orders",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/orders/:orderId",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"orders",
+						":orderId"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/orders",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add product",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/orders/:orderId/products/:productId",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"orders",
+						":orderId",
+						"products",
+						":productId"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": "5ee4c7d56690821c047560c1"
+						},
+						{
+							"key": "productId",
+							"value": "5ea45836f106df6694060a5b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete order",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/orders/:orderId",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"orders",
+						":orderId"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/orders/:orderId/products/:productId",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"orders",
+						":orderId",
+						"products",
+						":productId"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": ""
+						},
+						{
+							"key": "productId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove all products",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/orders/:orderId/products",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"orders",
+						":orderId",
+						"products"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
