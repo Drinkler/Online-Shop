@@ -20,6 +20,7 @@ import {AlertComponent} from './components/shared/alert/alert.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {JwtInterceptor} from 'src/app/components/shared/jwt.interceptor';
 import {ErrorInterceptor} from 'src/app/components/shared/error.interceptor';
+import {ProductDetailComponent} from "./components/product-detail/product-detail.component";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {ErrorInterceptor} from 'src/app/components/shared/error.interceptor';
     LoginComponent,
     RegisterComponent,
     PageNotFoundComponent,
-    AlertComponent
+    AlertComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
