@@ -4,6 +4,7 @@ import {ShoppingCartComponent} from './components/shopping-cart/shopping-cart.co
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {PageNotFoundComponent} from './components/shared/page-not-found/page-not-found.component';
+import {AuthGuard} from "./components/shared/auth.guard";
 
 const routes: Routes = [
   {path: '', redirectTo: '/shop', pathMatch: 'full'},

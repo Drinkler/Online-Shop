@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MDBModalRef, MDBModalService } from "angular-bootstrap-md";
+import {Component, OnInit} from '@angular/core';
+import {AccountService} from "../../../services/account.service";
 
 
 @Component({
@@ -8,39 +8,19 @@ import { MDBModalRef, MDBModalService } from "angular-bootstrap-md";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  isLoggedIn: boolean;
 
-  modalLogin: MDBModalRef
-
-  constructor(private modalService: MDBModalService) { }
-
-  ngOnInit(): void {
+  constructor(private accountService: AccountService) {
   }
 
-  /*
-  openLoginModal() {
-    this.modalLogin = this.modalService.show(LoginComponent, {
-      backdrop: true,
-      keyboard: true,
-      focus: true,
-      show: false,
-      ignoreBackdropClick: false,
-      class: 'modal-lg',
-      containerClass: 'top',
-      animated: true
-    });
+  ngOnInit() {
+    this.accountService.user.subscribe((user) => {
+      this.isLoggedIn = !!user;
+    })
   }
 
-  openCartModal() {
-    this.modalCart = this.modalService.show(ShoppingcartComponent, {
-      backdrop: true,
-      keyboard: true,
-      focus: true,
-      show: false,
-      ignoreBackdropClick: false,
-      class: 'modal-full-height modal-right',
-      containerClass: 'right',
-      animated: true
-    });
+  logout(): void {
+    this.accountService.logout();
   }
-   */
+
 }

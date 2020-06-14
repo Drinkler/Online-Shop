@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {User} from 'src/app/models/user';
-import {environment} from 'src/environments/environment';
 import {loginUrl, registerUrl, userUrl} from "../config/api";
 
 
@@ -39,7 +38,7 @@ export class AccountService {
     // remove user from local storage and set current user to null
     localStorage.removeItem('user');
     this.userSubject.next(null);
-    this.router.navigate(['/account/login']);
+    this.router.navigate(['/login']);
   }
 
   register(user: User) {
