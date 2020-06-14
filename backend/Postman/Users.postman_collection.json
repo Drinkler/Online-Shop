@@ -6,49 +6,13 @@
 	},
 	"item": [
 		{
-			"name": "Get all users",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{Endpoint}}/users/",
-					"host": [
-						"{{Endpoint}}"
-					],
-					"path": [
-						"users",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get user",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{Endpoint}}/users/5eaf368383cedb92ec54966e",
-					"host": [
-						"{{Endpoint}}"
-					],
-					"path": [
-						"users",
-						"5eaf368383cedb92ec54966e"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Signup user",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"flo.drinkdler@gmsefsdsefdseffail.com\",\n\t\"name\": \"Florian\",\n\t\"surname\": \"Drinkler\",\n\t\"password\": \"tester123\"\n}",
+					"raw": "{\n\t\"email\": \"\",\n\t\"name\": \"\",\n\t\"surname\": \"\",\n\t\"password\": \"\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -71,11 +35,14 @@
 		{
 			"name": "Login user",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"test@tester.net\",\n\t\"password\": \"tester123\"\n}",
+					"raw": "{\n\t\"email\": \"\",\n\t\"password\": \"\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,13 +63,64 @@
 			"response": []
 		},
 		{
+			"name": "Get user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/users/:userId",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/users/",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Update user",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"test@tester.net\",\n\t\"test\": \"tesrtersdsdfsdet\",\n\t\"name\": {\n\t\t\"last\": \"hierherwsdfe\"\n\t}\n}",
+					"raw": "{\n\t\"email\": \"\",\n\t\"name\": {\n\t\t\"first\": \"\",\n\t\t\"last\": \"\"\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -110,31 +128,63 @@
 					}
 				},
 				"url": {
-					"raw": "{{Endpoint}}/users/5eb00b2794f30a233c3eb350",
+					"raw": "{{Endpoint}}/users/:userId",
 					"host": [
 						"{{Endpoint}}"
 					],
 					"path": [
 						"users",
-						"5eb00b2794f30a233c3eb350"
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": ""
+						}
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete User",
+			"name": "Delete user",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{Endpoint}}/users/5eb00b2794f30a233c3eb350",
+					"raw": "{{Endpoint}}/users/:userId",
 					"host": [
 						"{{Endpoint}}"
 					],
 					"path": [
 						"users",
-						"5eb00b2794f30a233c3eb350"
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all users",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/users",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users"
 					]
 				}
 			},

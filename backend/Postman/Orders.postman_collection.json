@@ -71,7 +71,7 @@
 			"response": []
 		},
 		{
-			"name": "Add product",
+			"name": "Add product to order",
 			"request": {
 				"method": "PATCH",
 				"header": [],
@@ -89,11 +89,11 @@
 					"variable": [
 						{
 							"key": "orderId",
-							"value": "5ee4c7d56690821c047560c1"
+							"value": ""
 						},
 						{
 							"key": "productId",
-							"value": "5ea45836f106df6694060a5b"
+							"value": ""
 						}
 					]
 				}
@@ -125,7 +125,24 @@
 			"response": []
 		},
 		{
-			"name": "Remove product",
+			"name": "Delete all orders",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/orders",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove product from order",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -155,7 +172,7 @@
 			"response": []
 		},
 		{
-			"name": "Remove all products",
+			"name": "Remove all products from order",
 			"request": {
 				"method": "DELETE",
 				"header": [],

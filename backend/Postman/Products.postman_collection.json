@@ -6,54 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Get all products",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{Endpoint}}/products",
-					"host": [
-						"{{Endpoint}}"
-					],
-					"path": [
-						"products"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get a product",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{Endpoint}}/products/5ea454fd840c98961cfdba8",
-					"host": [
-						"{{Endpoint}}"
-					],
-					"path": [
-						"products",
-						"5ea454fd840c98961cfdba8"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Save product",
+			"name": "Create product",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
 			},
@@ -104,13 +57,16 @@
 			"response": []
 		},
 		{
-			"name": "Update a product",
+			"name": "Get product",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "PATCH",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[\n\t{\"propName\":\"name\", \"value\": \"testeresrersser\"},\n\t{\"propName\":\"price\", \"value\": 234},\n\t{\"propName\":\"description\", \"value\":\"Gib es nicht\"}\n]",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -118,21 +74,119 @@
 					}
 				},
 				"url": {
-					"raw": "{{Endpoint}}/products/5ea454fd840c98961cfdba87",
+					"raw": "{{Endpoint}}/products/:id",
 					"host": [
 						"{{Endpoint}}"
 					],
 					"path": [
 						"products",
-						"5ea454fd840c98961cfdba87"
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete a product",
+			"name": "Get all products",
 			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/products",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update product",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"\",\n\t\"price\": 0,\n\t\"description\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Endpoint}}/products/:id",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"products",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add review to product",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Endpoint}}/products/:productId/reviews/:reviewId",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"products",
+						":productId",
+						"reviews",
+						":reviewId"
+					],
+					"variable": [
+						{
+							"key": "productId",
+							"value": ""
+						},
+						{
+							"key": "reviewId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete product",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "DELETE",
 				"header": [],
 				"body": {
@@ -145,13 +199,91 @@
 					}
 				},
 				"url": {
-					"raw": "{{Endpoint}}/products/5ea480dd821ef0a674d0f0fe",
+					"raw": "{{Endpoint}}/products/:id",
 					"host": [
 						"{{Endpoint}}"
 					],
 					"path": [
 						"products",
-						"5ea480dd821ef0a674d0f0fe"
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all products",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/products",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove review from product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/products/:productId/reviews/:reviewId",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"products",
+						":productId",
+						"reviews",
+						":reviewId"
+					],
+					"variable": [
+						{
+							"key": "productId",
+							"value": ""
+						},
+						{
+							"key": "reviewId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove all reviews from product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/products/:productId/reviews",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"products",
+						":productId",
+						"reviews"
+					],
+					"variable": [
+						{
+							"key": "productId",
+							"value": ""
+						}
 					]
 				}
 			},
