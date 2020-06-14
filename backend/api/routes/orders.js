@@ -4,7 +4,8 @@ const router = express.Router();
 // Controllers
 const OrdersController = require("../controllers/orders");
 
-// Create order
+// Methods
+// Create order for user
 // TODO: get userId from token
 router.post("/:userId", OrdersController.createOrder);
 
@@ -19,6 +20,9 @@ router.patch("/:orderId/products/:productId", OrdersController.addProduct);
 
 // Delete order
 router.delete("/:orderId", OrdersController.deleteOrder);
+
+// Delete all orders
+router.delete("/", OrdersController.deleteAllOrders);
 
 // Remove product from order
 router.delete("/:orderId/products/:productId", OrdersController.removeProduct);

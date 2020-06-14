@@ -1,6 +1,8 @@
 // Models
 const Product = require("../models/Product");
+const Review = require("../models/Review");
 
+// Methods
 exports.saveProduct = async (req, res, next) => {
     const name = req.body.name;
     const price = req.body.price;
@@ -38,7 +40,17 @@ exports.saveProduct = async (req, res, next) => {
 exports.getAllProducts = async (req, res, next) => {
     // Get all products
     try {
-        var products = await Product.find().select("-__v").exec();
+        var products = await Product.find()
+            .populate({
+                path: "reviews",
+                select: "-__v",
+                populate: {
+                    path: "user",
+                    select: "-__v -password -admin",
+                },
+            })
+            .select("-__v")
+            .exec();
     } catch (err) {
         return res.status(500).json({ error: err });
     }
@@ -55,7 +67,18 @@ exports.getProduct = async (req, res, next) => {
 
     // Get product by productId
     try {
-        var product = await Product.findOne({ _id: productId }).select("-__v").exec();
+        var product = await Product.findOne({ _id: productId })
+            .populate({
+                path: "reviews",
+                select: "-__v",
+                populate: {
+                    path: "user",
+                    select: "-__v -password -admin",
+                },
+            })
+            .select("-__v")
+            .exec();
+        if (!product) throw new Error();
     } catch (err) {
         return res.status(500).json({ error: "No Product found or Internal Error." });
     }
@@ -118,4 +141,91 @@ exports.updateProduct = async (req, res, next) => {
     }
 
     return res.status(400).json({ error: "Product not found, or couldn't update product." });
+};
+
+exports.deleteAllProducts = async (req, res, next) => {
+    // Delete all products
+    try {
+        const result = await Product.deleteMany({}).exec();
+        if (result.n != 0 && result.deletedCount != 0) {
+            return res.status(200).json({
+                message: "Products successfully deleted.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Error" });
+    }
+
+    // Return no product
+    return res.status(409).json({
+        message: "No Products were found to delete.",
+        ok: 0,
+    });
+};
+
+exports.addReview = async (req, res, next) => {
+    const productId = req.params.productId;
+    const reviewId = req.params.reviewId;
+
+    // TODO: Only one review per user
+
+    // Add review to product
+    try {
+        const result = await Product.updateOne({ _id: productId }, { $push: { reviews: reviewId } }).exec();
+        if (result.n != 0 && result.nModified != 0) {
+            return res.status(200).json({
+                message: "Review added to Product successfully.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Review or Product not found or Internal Error" });
+    }
+
+    return res.status(400).json({ error: "Review not found, or couldn't update product." });
+};
+
+exports.removeReview = async (req, res, next) => {
+    const productId = req.params.productId;
+    const reviewId = req.params.reviewId;
+
+    // Remove review from product
+    try {
+        const result = await Product.updateOne({ _id: productId }, { $pull: { reviews: reviewId } }).exec();
+        if (result.n != 0 && result.deletedCount != 0) {
+            return res.status(200).json({
+                message: "Review successfully removed from product.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Review or Product not found or Internal Error" });
+    }
+
+    // Return no product or review
+    return res.status(409).json({
+        message: "No Review or order was found to modify.",
+    });
+};
+
+exports.removeAllReviews = async (req, res, next) => {
+    const productId = req.params.productId;
+
+    try {
+        const result = await Product.updateOne({ _id: productId }, { $set: { reviews: [] } }).exec();
+        if (result.n != 0 && result.deletedCount != 0) {
+            return res.status(200).json({
+                message: "Reviews successfully removed from product.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Review or Product not found or Internal Error" });
+    }
+
+    // Return no product or reviews
+    return res.status(409).json({
+        message: "No Review or order was found to modify.",
+    });
 };

@@ -5,41 +5,7 @@ const bcrypt = require("bcrypt");
 // Models
 const User = require("../models/User");
 
-exports.loginUser = async (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
-
-    // Get user by email
-    try {
-        var user = await User.findOne({ email: email }).exec();
-        if (!user) return res.status(400).json({ message: "Email not found." });
-    } catch (err) {
-        return res.status(500).json({ error: err });
-    }
-
-    // Check password
-    if (!(await bcrypt.compare(password, user.password))) {
-        return res.status(400).json({ error: "Password doesn't match." });
-    }
-
-    // Create jwt token
-    const token = jwt.sign(
-        {
-            userId: user._id,
-            email: user.email,
-        },
-        process.env.JWT_KEY,
-        {
-            expiresIn: "30 days",
-        }
-    );
-
-    return res.status(200).json({
-        message: "Successfully signed in.",
-        token: token,
-    });
-};
-
+// Methods
 exports.signUpUser = async (req, res, next) => {
     const email = req.body.email;
     const name = req.body.name;
@@ -89,32 +55,92 @@ exports.signUpUser = async (req, res, next) => {
     }
 };
 
-exports.deleteUser = async (req, res, next) => {
-    // TODO: Check if user is authorized to delete the user
-    const userId = req.params.userId;
+exports.loginUser = async (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
 
-    // Delete user by userId
+    // Get user by email
     try {
-        const result = await User.deleteOne({ _id: userId }).exec();
-        if (result.n != 0 && result.deletedCount != 0) {
-            return res.status(200).json({
-                message: "User successfully deleted.",
-                ok: result.ok,
-            });
-        }
+        var user = await User.findOne({ email: email }).exec();
+        if (!user) return res.status(400).json({ message: "Email not found." });
     } catch (err) {
         return res.status(500).json({ error: err });
     }
 
-    // Return no user
-    return res.status(409).json({
-        message: "No User was found to delete.",
-        ok: 0,
+    // Check password
+    if (!(await bcrypt.compare(password, user.password))) {
+        return res.status(400).json({ error: "Password doesn't match." });
+    }
+
+    // Create jwt token
+    const token = jwt.sign(
+        {
+            userId: user._id,
+            email: user.email,
+        },
+        process.env.JWT_KEY,
+        {
+            expiresIn: "30 days",
+        }
+    );
+
+    return res.status(200).json({
+        message: "Successfully signed in.",
+        token: token,
+    });
+};
+
+exports.getUser = async (req, res, next) => {
+    const userId = req.params.userId;
+
+    // Get user by userId
+    try {
+        var user = await User.findOne({ _id: userId }).exec();
+        if (!user) throw new Error();
+    } catch (err) {
+        return res.status(500).json({ error: "No User found or Internal Error." });
+    }
+
+    // Return user data
+    return res.status(200).json({
+        _id: user._id,
+        email: user.email,
+        name: {
+            first: user.name.first,
+            last: user.name.last,
+        },
+    });
+};
+
+exports.getAllUser = async (req, res, next) => {
+    // Get all users
+    try {
+        var users = await User.find().select("-__v").exec();
+    } catch (err) {
+        return res.status(500).json({ error: err });
+    }
+
+    // Return all user data
+    return res.status(200).json({
+        count: users.length,
+        users: users.map((user) => {
+            return {
+                _id: user._id,
+                name: {
+                    first: user.name.first,
+                    last: user.name.last,
+                },
+                email: user.email,
+                request: {
+                    type: "GET",
+                    url: req.protocol + "://" + req.get("host") + req.originalUrl + user._id,
+                },
+            };
+        }),
     });
 };
 
 exports.updateUser = async (req, res, next) => {
-    // TODO: Check if user is authorized to update users information
     const userId = req.params.userId;
 
     const parameters = {};
@@ -176,56 +202,51 @@ exports.updateUser = async (req, res, next) => {
     return res.status(400).json({ error: "User not found, or couldn't update user." });
 };
 
-exports.getUser = async (req, res, next) => {
+exports.deleteUser = async (req, res, next) => {
     const userId = req.params.userId;
 
-    // Get user by userId
+    // Delete user by userId
     try {
-        var user = await User.findOne({ _id: userId }).exec();
-        console.log(user);
-        if (!user) return res.status(400).json({ message: "No User found." });
-    } catch (err) {
-        return res.status(500).json({ error: "No User found or Internal Error." });
-    }
-
-    // Return user data
-    return res.status(200).json({
-        _id: user._id,
-        email: user.email,
-        name: {
-            first: user.name.first,
-            last: user.name.last,
-        },
-    });
-};
-
-exports.getAllUser = async (req, res, next) => {
-    // Get all users
-    try {
-        var users = await User.find().select("-__v").exec();
+        const result = await User.deleteOne({ _id: userId }).exec();
+        if (result.n != 0 && result.deletedCount != 0) {
+            return res.status(200).json({
+                message: "User successfully deleted.",
+                ok: result.ok,
+            });
+        }
     } catch (err) {
         return res.status(500).json({ error: err });
     }
 
-    // Return all user data
-    return res.status(200).json({
-        count: users.length,
-        users: users.map((user) => {
-            return {
-                _id: user._id,
-                name: {
-                    first: user.name.first,
-                    last: user.name.last,
-                },
-                email: user.email,
-                request: {
-                    type: "GET",
-                    url: req.protocol + "://" + req.get("host") + req.originalUrl + user._id,
-                },
-            };
-        }),
+    // Return no user
+    return res.status(409).json({
+        message: "No User was found to delete.",
+        ok: 0,
     });
 };
+
+exports.deleteAllUsers = async (req, res, next) => {
+    // Delete all users
+    try {
+        const result = await User.deleteMany({}).exec();
+        if (result.n != 0 && result.deletedCount != 0) {
+            return res.status(200).json({
+                message: "Users successfully deleted.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Error." });
+    }
+
+    // Return no user
+    return res.status(409).json({
+        message: "No Users were found to delete.",
+        ok: 0,
+    });
+};
+
+// TODO : user set admin /rest/api/users/admin oder so
 
 // TODO: Update password if user updates it
 // TODO: Show createdate and updatedate

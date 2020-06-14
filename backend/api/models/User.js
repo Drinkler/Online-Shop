@@ -30,6 +30,11 @@ const userSchema = mongoose.Schema(
             minlength: 8,
             maxlength: 72,
         },
+        admin: {
+            type: Boolean,
+            required: true,
+            default: false,
+        },
     },
     {
         timestamps: true,

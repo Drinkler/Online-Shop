@@ -1,6 +1,7 @@
 // Models
 const Order = require("../models/Order");
 
+// Methods
 exports.createOrder = async (req, res, next) => {
     const userId = req.params.userId;
 
@@ -102,6 +103,26 @@ exports.deleteOrder = async (req, res, next) => {
     // Return no order
     return res.status(409).json({
         message: "No Order was found to delete.",
+    });
+};
+
+exports.deleteAllOrders = async (req, res, next) => {
+    // Delete all orders
+    try {
+        const result = await Order.deleteMany({}).exec();
+        if (result.n != 0 && result.deletedCount != 0) {
+            return res.status(200).json({
+                message: "Orders successfully deleted.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Error." });
+    }
+
+    // Return no orders
+    return res.status(409).json({
+        message: "No Orders were found to delete.",
     });
 };
 

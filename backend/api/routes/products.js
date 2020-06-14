@@ -32,6 +32,7 @@ const ProductsController = require("../controllers/products");
  *        schema:
  *         $ref: '#/components/schemas/Product'
  */
+// Get all products
 router.get("/", ProductsController.getAllProducts);
 
 /**
@@ -90,5 +91,17 @@ router.patch("/:productId", ProductsController.updateProduct);
  *
  */
 router.delete("/:productId", ProductsController.deleteProduct);
+
+// Delete all products
+router.delete("/", ProductsController.deleteAllProducts);
+
+// Add review to product
+router.patch("/:productId/reviews/:reviewId", ProductsController.addReview);
+
+// Remove review from product
+router.delete("/:productId/reviews/:reviewId", ProductsController.removeReview);
+
+// Remove all reviews from product
+router.delete("/:productId/reviews", ProductsController.removeAllReviews);
 
 module.exports = router;

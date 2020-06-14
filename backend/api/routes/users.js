@@ -2,22 +2,32 @@ const express = require("express");
 const router = express.Router();
 
 // Middlewares
-const { loginValidation, signUpValidation, updateUserValidation } = require("../middleware/validation");
+const { loginValidation, signUpValidation } = require("../middleware/validation");
+const { checkAuth, checkAdmin } = require("../middleware/check-auth");
 
 // Controllers
 const UserController = require("../controllers/user");
 
 // Methods
+// Sign up user with email, name, surname and password
 router.post("/signup", signUpValidation, UserController.signUpUser);
 
+// Login user with email and password
 router.post("/login", loginValidation, UserController.loginUser);
 
-router.get("/:userId", UserController.getUser);
+// Get user by userId
+router.get("/:userId", /*checkAuth,*/ UserController.getUser);
 
-router.get("/", UserController.getAllUser);
+// Get all users
+router.get("/", /*checkAdmin,*/ UserController.getAllUser);
 
-router.delete("/:userId", UserController.deleteUser);
+// Update users information by userId
+router.patch("/:userId", /*checkAuth,*/ UserController.updateUser); // TODO ADD updateUserValidation
 
-router.patch("/:userId", UserController.updateUser); // TODO ADD updateUserValidation
+// Delete a user by userId
+router.delete("/:userId", /*checkAuth,*/ UserController.deleteUser);
+
+// Delete all users
+router.delete("/", UserController.deleteAllUsers);
 
 module.exports = router;
