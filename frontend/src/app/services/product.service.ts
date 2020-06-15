@@ -12,11 +12,25 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  getProducts(): Observable<Product[]> {
+  public getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(productsUrl);
   }
 
   public getProduct(id): Observable<Product> {
     return this.http.get<Product>(`${productsUrl}/${id}`);
   }
+
+  public saveProduct(product: Product) {
+    return this.http.post(`${productsUrl}`, product);
+  }
+
+  public updateProduct(productId) {
+    // TODO: Add body
+    return this.http.patch(`${productsUrl}/${productId}`, {});
+  }
+
+  public deleteProduct(productId) {
+    return this.http.delete(`${productsUrl}/${productId}`);
+  }
 }
+
