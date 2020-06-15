@@ -53,6 +53,7 @@ export class AccountService {
     return this.http.get<User>(`${userUrl}/${id}`);
   }
 
+  // TODO: Change to patch
   update(id, params) {
     return this.http.put(`${userUrl}/${id}`, params)
       .pipe(map(x => {
@@ -78,5 +79,9 @@ export class AccountService {
         }
         return x;
       }));
+  }
+
+  deleteAllUsers() {
+    return this.http.delete(`${userUrl}`);
   }
 }
