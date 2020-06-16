@@ -61,7 +61,7 @@ exports.loginUser = async (req, res, next) => {
 
     // Get user by email
     try {
-        var user = await User.findOne({ email: email }).exec();
+        var user = await User.findOne({ email: email }).select("-__v").exec();
         if (!user) return res.status(400).json({ message: "Email not found." });
     } catch (err) {
         return res.status(500).json({ error: err });
@@ -86,6 +86,16 @@ exports.loginUser = async (req, res, next) => {
 
     return res.status(200).json({
         message: "Successfully signed in.",
+        user: {
+            _id: user._id,
+            email: user.email,
+            name: {
+                first: user.name.first,
+                last: user.name.last,
+            },
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+        },
         token: token,
     });
 };
