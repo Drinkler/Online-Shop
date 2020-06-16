@@ -12,7 +12,7 @@
         </div>
         <div class="card-body">
           <p>{{product.description}}</p>
-          <button gradient="aqua" mdbBtn mdbWavesEffect rounded="true" type="button">
+          <button (click)="addToOrder()" gradient="aqua" mdbBtn mdbWavesEffect rounded="true" type="button">
             <mdb-icon class="mr-1" fas icon="cart-plus"></mdb-icon>
             Add to Cart
           </button>
