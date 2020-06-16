@@ -2,10 +2,10 @@ require("dotenv").config({ path: "../../" });
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-// Models
+//* --- Models ---
 const User = require("../models/User");
 
-// Methods
+//* --- Methods ---
 exports.signUpUser = async (req, res, next) => {
     const email = req.body.email;
     const name = req.body.name;
@@ -105,27 +105,21 @@ exports.getUser = async (req, res, next) => {
 
     // Get user by userId
     try {
-        var user = await User.findOne({ _id: userId }).exec();
+        var user = await User.findOne({ _id: userId }).populate("order", "-__v").select("-__v -admin -password").exec();
         if (!user) throw new Error();
     } catch (err) {
         return res.status(500).json({ error: "No User found or Internal Error." });
     }
 
     // Return user data
-    return res.status(200).json({
-        _id: user._id,
-        email: user.email,
-        name: {
-            first: user.name.first,
-            last: user.name.last,
-        },
-    });
+    return res.status(200).json(user);
 };
 
 exports.getAllUser = async (req, res, next) => {
     // Get all users
     try {
-        var users = await User.find().select("-__v").exec();
+        //TODO: add populate of products in here
+        var users = await User.find().populate("order", "-__v").select("-__v -admin -password").exec();
     } catch (err) {
         return res.status(500).json({ error: err });
     }
@@ -133,20 +127,7 @@ exports.getAllUser = async (req, res, next) => {
     // Return all user data
     return res.status(200).json({
         count: users.length,
-        users: users.map((user) => {
-            return {
-                _id: user._id,
-                name: {
-                    first: user.name.first,
-                    last: user.name.last,
-                },
-                email: user.email,
-                request: {
-                    type: "GET",
-                    url: req.protocol + "://" + req.get("host") + req.originalUrl + user._id,
-                },
-            };
-        }),
+        users: users,
     });
 };
 
@@ -212,6 +193,26 @@ exports.updateUser = async (req, res, next) => {
     return res.status(400).json({ error: "User not found, or couldn't update user." });
 };
 
+exports.addOrder = async (req, res, next) => {
+    const userId = req.params.userId;
+    const orderId = req.params.orderId;
+
+    // Add order to user
+    try {
+        const result = await User.updateOne({ _id: userId }, { order: orderId }).exec();
+        if (result.n != 0 && result.nModified != 0) {
+            return res.status(200).json({
+                message: "Order added to User successfully.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Order or User not found or Internal Error" });
+    }
+
+    return res.status(400).json({ error: "Order not found, or couldn't update user." });
+};
+
 exports.deleteUser = async (req, res, next) => {
     const userId = req.params.userId;
 
@@ -254,6 +255,25 @@ exports.deleteAllUsers = async (req, res, next) => {
         message: "No Users were found to delete.",
         ok: 0,
     });
+};
+
+exports.removeOrder = async (req, res, next) => {
+    const userId = req.params.userId;
+
+    // Remove order from user
+    try {
+        const result = await User.updateOne({ _id: userId }, { order: undefined }).exec();
+        if (result.n != 0 && result.nModified != 0) {
+            return res.status(200).json({
+                message: "Order removed from User successfully.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Order or User not found or Internal Error" });
+    }
+
+    return res.status(400).json({ error: "Order not found, or couldn't update user." });
 };
 
 // TODO : user set admin /rest/api/users/admin oder so

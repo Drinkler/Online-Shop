@@ -30,6 +30,10 @@ const userSchema = mongoose.Schema(
             minlength: 8,
             maxlength: 72,
         },
+        order: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Order",
+        },
         admin: {
             type: Boolean,
             required: true,

@@ -1,14 +1,10 @@
-// Models
+//* --- Models ---
 const Order = require("../models/Order");
 
-// Methods
+//* --- Methods ---
 exports.createOrder = async (req, res, next) => {
-    const userId = req.params.userId;
-
     // Create a new order
-    const order = new Order({
-        user: userId,
-    });
+    const order = new Order();
 
     // Save order
     try {
@@ -17,11 +13,10 @@ exports.createOrder = async (req, res, next) => {
             message: "Order successfully created.",
             createdOrder: {
                 _id: savedOrder._id,
-                userId: savedOrder.user,
             },
         });
     } catch (err) {
-        return res.status(500).json({ error: err });
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
@@ -30,11 +25,7 @@ exports.getOrder = async (req, res, next) => {
 
     // Get order
     try {
-        var order = await Order.findOne({ _id: orderId })
-            .populate("user", "-__v -admin -password")
-            .populate("products", "-__v")
-            .select("-__v")
-            .exec();
+        var order = await Order.findOne({ _id: orderId }).populate("products", "-__v").select("-__v").exec();
         if (!order) throw new Error();
     } catch (err) {
         return res.status(500).json({ error: "No Order found or Internal Error." });
@@ -46,11 +37,7 @@ exports.getOrder = async (req, res, next) => {
 exports.getAllOrders = async (req, res, next) => {
     // Get all products
     try {
-        var orders = await Order.find()
-            .populate("user", "-__v -admin -password")
-            .populate("products", "-__v")
-            .select("-__v")
-            .exec();
+        var orders = await Order.find().populate("products", "-__v").select("-__v").exec();
     } catch (err) {
         return res.status(500).json({ error: err });
     }

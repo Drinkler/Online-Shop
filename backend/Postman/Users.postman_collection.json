@@ -147,6 +147,36 @@
 			"response": []
 		},
 		{
+			"name": "Add order to user",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/users/:userId/order/:orderId",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"order",
+						":orderId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": ""
+						},
+						{
+							"key": "orderId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete user",
 			"request": {
 				"auth": {
@@ -185,6 +215,31 @@
 					],
 					"path": [
 						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove order from user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/users/:userId/order",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"order"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": ""
+						}
 					]
 				}
 			},

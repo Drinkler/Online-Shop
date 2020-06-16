@@ -1,18 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-// Controllers
+//* --- Controllers ---
 const OrdersController = require("../controllers/orders");
 
-// Methods
-// Create order for user
-// TODO: get userId from token
-router.post("/:userId", OrdersController.createOrder);
+//* --- Methods ---
+// Create order
+router.post("/", OrdersController.createOrder);
 
-// Get order including products and user
+// Get order including products
 router.get("/:orderId", OrdersController.getOrder);
 
-// Get all orders including products and users
+// Get all orders including products
 router.get("/", OrdersController.getAllOrders);
 
 // Add products to order
