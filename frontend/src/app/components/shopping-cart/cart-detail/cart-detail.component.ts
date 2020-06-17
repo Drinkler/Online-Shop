@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderService} from "../../../services/order.service";
-import {Product} from "../../../models/product";
+import {OrderService} from 'src/app/services/order.service';
+import {Product} from 'src/app/models/product';
+import {AlertService} from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-cart-detail',
@@ -9,12 +10,45 @@ import {Product} from "../../../models/product";
 })
 export class CartDetailComponent implements OnInit {
 
-  orderContent: Product[];
+  orderContent;
 
-  constructor(private order: OrderService) {
+  subtotal: number;
+
+  constructor(
+    private order: OrderService,
+    private alert: AlertService
+  ) {
+    this.orderContent = new Array(0);
+    this.subtotal = 0;
   }
 
   ngOnInit(): void {
+    this.updateOrderContent();
   }
 
+  updateOrderContent() {
+    this.order.getOrder().subscribe((order) => {
+      this.orderContent = order['products'];
+      this.updateSubtotal();
+    });
+  }
+
+  updateAmount(source: any) {
+    console.log(document.getElementById(`qty-${source._id}`));
+  }
+
+  removeProductFromOrder(product: Product) {
+    this.order.removeProduct(product._id).subscribe((data) => {
+        this.updateOrderContent();
+      }, error => {
+        this.alert.error(error);
+      }
+    );
+  }
+
+  updateSubtotal() {
+    this.orderContent.forEach(product => {
+      this.subtotal += product.price;
+    });
+  }
 }
