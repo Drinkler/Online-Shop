@@ -118,7 +118,17 @@ exports.getUser = async (req, res, next) => {
 
     // Get user by userId
     try {
-        var user = await User.findOne({ _id: userId }).populate("order", "-__v").select("-__v -admin -password").exec();
+        var user = await User.findOne({ _id: userId })
+            .populate({
+                path: "order",
+                select: "-__v",
+                populate: {
+                    path: "product",
+                    select: "-__v",
+                },
+            })
+            .select("-__v -admin -password")
+            .exec();
         if (!user) throw new Error();
     } catch (err) {
         return res.status(500).json({ error: "No User found or Internal Error." });
@@ -132,7 +142,17 @@ exports.getAllUser = async (req, res, next) => {
     // Get all users
     try {
         //TODO: add populate of products in here
-        var users = await User.find().populate("order", "-__v").select("-__v -admin -password").exec();
+        var users = await User.find()
+            .populate({
+                path: "order",
+                select: "-__v",
+                populate: {
+                    path: "products",
+                    select: "-__v",
+                },
+            })
+            .select("-__v -admin -password")
+            .exec();
     } catch (err) {
         return res.status(500).json({ error: err });
     }
