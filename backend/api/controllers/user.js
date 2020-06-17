@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 
 //* --- Models ---
 const User = require("../models/User");
+const Order = require("../models/Order");
 
 //* --- Methods ---
 exports.signUpUser = async (req, res, next) => {
@@ -28,7 +29,16 @@ exports.signUpUser = async (req, res, next) => {
         return res.status(500).json({ error: "Ups, something went wrong." });
     }
 
-    // Create a new user
+    // Create new Order
+    const order = new Order();
+
+    try {
+        var savedOrder = await order.save();
+    } catch (err) {
+        return res.status(500).json({ message: "Couldn't create order" });
+    }
+
+    // Create a new user with created order
     const user = new User({
         name: {
             first: name,
@@ -36,6 +46,7 @@ exports.signUpUser = async (req, res, next) => {
         },
         email: email,
         password: hashedPassword,
+        order: savedOrder._id,
     });
 
     // Save user
@@ -48,6 +59,7 @@ exports.signUpUser = async (req, res, next) => {
                 // TODO: Lock up how to do virtuals (fullName)
                 email: savedUser.email,
                 name: savedUser.name.first + " " + savedUser.name.last,
+                orderId: savedUser.order,
             },
         });
     } catch (err) {
@@ -96,6 +108,7 @@ exports.loginUser = async (req, res, next) => {
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,
         },
+        orderId: user.order,
         token: token,
     });
 };
