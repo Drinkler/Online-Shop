@@ -53,8 +53,6 @@ exports.addProduct = async (req, res, next) => {
     const orderId = req.params.orderId;
     const productId = req.params.productId;
 
-    // TODO: Add amount if same product is added
-
     // Add product to order
     try {
         const result = await Order.updateOne({ _id: orderId }, { $push: { products: productId } }).exec();
