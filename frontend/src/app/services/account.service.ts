@@ -28,7 +28,9 @@ export class AccountService {
     return this.http.post<any>(loginUrl, {email: username, password: password})
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('userId', user['user']['_id']);
         localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('orderId', user['orderId']);
         this.userSubject.next(user);
         return user;
       }));

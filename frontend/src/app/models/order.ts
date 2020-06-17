@@ -1,5 +1,5 @@
-import {Product} from "./product";
-import {User} from "./user";
+import {Product} from './product';
+import {User} from './user';
 
 export class Order {
   products: Product[];
