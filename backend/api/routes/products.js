@@ -68,7 +68,7 @@ router.get("/:productId", ProductsController.getProduct);
  *    tags: [Products]
  *
  */
-router.post("/", upload.single("productImage"), ProductsController.saveProduct);
+router.post("/", upload.single("productImage"), ProductsController.createProduct);
 
 /**
  * @swagger

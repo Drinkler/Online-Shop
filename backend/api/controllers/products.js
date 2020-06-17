@@ -3,7 +3,7 @@ const Product = require("../models/Product");
 const Review = require("../models/Review");
 
 // Methods
-exports.saveProduct = async (req, res, next) => {
+exports.createProduct = async (req, res, next) => {
     const name = req.body.name;
     const price = req.body.price;
     const description = req.body.description;
