@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Product} from "../../models/product";
-import {OrderService} from "../../services/order.service";
-import {AlertService} from "../../services/alert.service";
+import {Product} from '../../models/product';
+import {OrderService} from '../../services/order.service';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -23,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToOrder() {
-    console.log("addToOrder");
+    console.log('addToOrder');
     this.order.addProduct(this.product._id).subscribe(data => {
       this.alertService.success(data['message']);
     }, error => this.alertService.error(error));

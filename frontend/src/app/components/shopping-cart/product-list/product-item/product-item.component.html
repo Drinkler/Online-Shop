@@ -1,6 +1,8 @@
 <div class="card mb-4 shadow-sm">
-  <img [src]="productItem.productImage" alt="productImage" class="bd-placeholder-img card-img-top" height="225"
-       width="100%"/>
+  <div class="img-hover-zoom">
+    <img [src]="productItem.productImage" alt="productImage" class="bd-placeholder-img card-img-top" height="225"
+         width="100%"/>
+  </div>
   <div class="card-body">
     <h4 class="card-title">{{productItem.name}}</h4>
     <p class="card-text">
