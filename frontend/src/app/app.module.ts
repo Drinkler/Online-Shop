@@ -21,6 +21,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {JwtInterceptor} from 'src/app/components/shared/jwt.interceptor';
 import {ErrorInterceptor} from 'src/app/components/shared/error.interceptor';
 import {ProductDetailComponent} from "./components/product-detail/product-detail.component";
+import {CartDetailComponent} from './components/shopping-cart/cart-detail/cart-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {ProductDetailComponent} from "./components/product-detail/product-detail
     RegisterComponent,
     PageNotFoundComponent,
     AlertComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartDetailComponent
   ],
   imports: [
     BrowserModule,

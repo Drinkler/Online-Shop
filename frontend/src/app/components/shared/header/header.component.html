@@ -1,10 +1,8 @@
-<div *ngIf=!isLoggedIn>
-  <a [routerLink]="['/register']" class="btn btn-primary">Sign Up</a>
-  <a [routerLink]="['/login']" class="ml-2 btn btn-secondary">Login</a>
-</div>
+<div>
+  <button [routerLink]="['/cart']" class="btn"><i class="fas fa-shopping-cart"></i></button>
+  <button *ngIf=!isLoggedIn [routerLink]="['/login']" class="btn"><i class="fas fa-user"></i></button>
 
-<div *ngIf=isLoggedIn>
-  <div class="btn-group mx-4" mdbDropdown>
+  <div *ngIf=isLoggedIn class="btn-group mx-4" mdbDropdown>
     <mdb-icon classInside="dropdown-toggle" fas icon="user" mdbDropdownToggle></mdb-icon>
     <div class="dropdown-menu dropdown-menu-right">
       <a class="dropdown-item">Account</a>

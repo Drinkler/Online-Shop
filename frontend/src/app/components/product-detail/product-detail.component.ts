@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../../models/product";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ProductService} from "../../services/product.service";
+import {OrderService} from "../../services/order.service";
+import {AlertService} from "../../services/alert.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -12,10 +12,20 @@ export class ProductDetailComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor() {
+  constructor(
+    private order: OrderService,
+    private alertService: AlertService
+  ) {
   }
 
   ngOnInit(): void {
     this.product = history.state.data;
+  }
+
+  addToOrder() {
+    console.log("addToOrder");
+    this.order.addProduct(this.product._id).subscribe(data => {
+      this.alertService.success(data['message']);
+    }, error => this.alertService.error(error));
   }
 }
