@@ -1,7 +1,8 @@
-const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "../../" });
+const jwt = require("jsonwebtoken");
 
-// Models
+//* --- Models ---
+const Review = require("../models/Review");
 const User = require("../models/User");
 
 function checkToken(req, res, next) {
@@ -20,19 +21,26 @@ function checkToken(req, res, next) {
     return req.userData;
 }
 
-const checkAuth = (req, res, next) => {
+const checkAuth = async (req, res, next) => {
     const userId = req.params.userId;
 
     const reqUser = checkToken(req, res, next);
 
+    // check if admin
+    try {
+        var user = await User.findOne({ _id: reqUser.userId }).exec();
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+
     // Check if user is authorized
-    if (reqUser.userId != userId) {
+    if (user.admin || reqUser.userId == userId) {
+        next();
+    } else {
         return res.status(401).json({
             message: "User not authorized.",
         });
     }
-
-    next();
 };
 
 const checkAdmin = async (req, res, next) => {
@@ -41,20 +49,70 @@ const checkAdmin = async (req, res, next) => {
     try {
         var user = await User.findOne({ _id: reqUser.userId }).exec();
     } catch (err) {
-        return res.status(500).json({ error: err });
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 
     // Check if user is admin
-    if (user.admin !== null && !user.admin) {
+    if (user.admin) {
+        next();
+    } else {
         return res.status(401).json({
             message: "User not authorized.",
         });
     }
+};
 
-    next();
+const checkReview = async (req, res, next) => {
+    const reviewId = req.params.reviewId;
+
+    const reqUser = checkToken(req, res, next);
+
+    try {
+        var review = await Review.findOne({ _id: reviewId }).populate("user").exec();
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+
+    // check if admin
+    try {
+        var user = await User.findOne({ _id: reqUser.userId }).exec();
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+
+    if (user.admin || reqUser.userId == review.user.userId) {
+        next();
+    } else {
+        return res.status(401).json({
+            message: "User not authorized.",
+        });
+    }
+};
+
+const checkOrder = async (req, res, next) => {
+    const orderId = req.params.orderId;
+
+    const reqUser = checkToken(req, res, next);
+
+    // check if admin
+    try {
+        var user = await User.findOne({ _id: reqUser.userId }).exec();
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+
+    if (user.admin || user.order == orderId) {
+        next();
+    } else {
+        return res.status(401).json({
+            message: "User not authorized.",
+        });
+    }
 };
 
 module.exports = {
     checkAdmin: checkAdmin,
     checkAuth: checkAuth,
+    checkReview: checkReview,
+    checkOrder: checkOrder,
 };

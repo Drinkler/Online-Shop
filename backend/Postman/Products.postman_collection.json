@@ -11,6 +11,16 @@
 				"disabledSystemHeaders": {}
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -112,6 +122,16 @@
 		{
 			"name": "Update product",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PATCH",
 				"header": [],
 				"body": {
@@ -145,6 +165,16 @@
 		{
 			"name": "Add review to product",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PATCH",
 				"header": [],
 				"body": {
@@ -185,7 +215,14 @@
 			"name": "Delete product",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
 				},
 				"method": "DELETE",
 				"header": [],
@@ -199,17 +236,17 @@
 					}
 				},
 				"url": {
-					"raw": "{{Endpoint}}/products/:id",
+					"raw": "{{Endpoint}}/products/:productId",
 					"host": [
 						"{{Endpoint}}"
 					],
 					"path": [
 						"products",
-						":id"
+						":productId"
 					],
 					"variable": [
 						{
-							"key": "id",
+							"key": "productId",
 							"value": ""
 						}
 					]
@@ -220,6 +257,16 @@
 		{
 			"name": "Delete all products",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -237,6 +284,16 @@
 		{
 			"name": "Remove review from product",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -267,6 +324,16 @@
 		{
 			"name": "Remove all reviews from product",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {

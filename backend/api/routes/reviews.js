@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
+//* --- Middlewares ---
+const { checkAuth, checkAdmin, checkReview } = require("../middleware/check-auth");
+
 //* --- Controllers ---
 const ReviewController = require("../controllers/reviews");
 
 //* --- Routes ---
 // Create review
-// TODO: get userId by token
-// TODO: add review validation
-// TODO: remove reference if review is deleted
-router.post("/:userId", ReviewController.createReview);
+// TODO : Remove reference when review is deleted
+router.post("/:userId", checkAuth, ReviewController.createReview); // TODO: add review validation
 
 // Get review
 router.get("/:reviewId", ReviewController.getReview);
@@ -18,12 +19,12 @@ router.get("/:reviewId", ReviewController.getReview);
 router.get("/", ReviewController.getAllReviews);
 
 // Update review
-router.patch("/:reviewId", ReviewController.updateReview);
+router.patch("/:reviewId", checkReview, ReviewController.updateReview);
 
 // Delete review
-router.delete("/:reviewId", ReviewController.deleteReview);
+router.delete("/:reviewId", checkReview, ReviewController.deleteReview);
 
 // Delete all reviews
-router.delete("/", ReviewController.deleteAllReviews);
+router.delete("/", checkAdmin, ReviewController.deleteAllReviews);
 
 module.exports = router;

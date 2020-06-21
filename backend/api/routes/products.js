@@ -1,107 +1,39 @@
 const express = require("express");
 const router = express.Router();
 
-// Middlewares
-const checkAuth = require("../middleware/check-auth");
+//* --- Middlewares ----
+const { checkReview, checkAdmin } = require("../middleware/check-auth");
 const upload = require("../middleware/upload-image");
 
-// Controllers
+//* --- Controllers ---
 const ProductsController = require("../controllers/products");
 
-/**
- * @swagger
- * tags:
- *   name: Products
- *   description: Managing Products
- */
+//* --- Methods ---
+// Create product
+router.post("/", checkAdmin, upload.single("productImage"), ProductsController.createProduct); //TODO: Product validation
 
-// TODO : Check Auth
+// Get product
+router.get("/:productId", ProductsController.getProduct);
 
-/**
- * @swagger
- * path:
- *  /products/:
- *   get:
- *    summary:
- *    tags: [Products]
- *    responses:
- *     "200":
- *      description: All Products
- *      content:
- *       application/json:
- *        schema:
- *         $ref: '#/components/schemas/Product'
- */
 // Get all products
 router.get("/", ProductsController.getAllProducts);
 
-/**
- * @swagger
- * path:
- *  /products/{productId}:
- *   get:
- *    summary: Get a product by id
- *    tags: [Products]
- *    parameters:
- *     - in: path
- *       name: productId
- *       schema:
- *        type: String
- *       required: true
- *       description: Id of a product
- *    responses:
- *     "200":
- *      description: One Product
- *      content:
- *       application/json:
- *        schema:
- *         $ref: '#/components/schemas/Product'
- */
-router.get("/:productId", ProductsController.getProduct);
-
-/**
- * @swagger
- * path:
- *  /products/:productId:
- *   post:
- *    summary:
- *    tags: [Products]
- *
- */
-router.post("/", upload.single("productImage"), ProductsController.createProduct);
-
-/**
- * @swagger
- * path:
- *  /products/:
- *   patch:
- *    summary:
- *    tags: [Products]
- *
- */
-router.patch("/:productId", ProductsController.updateProduct);
-
-/**
- * @swagger
- * path:
- *  /products/:productId:
- *   delete:
- *    summary:
- *    tags: [Products]
- *
- */
-router.delete("/:productId", ProductsController.deleteProduct);
-
-// Delete all products
-router.delete("/", ProductsController.deleteAllProducts);
+// Update product
+router.patch("/:productId", checkAdmin, ProductsController.updateProduct);
 
 // Add review to product
-router.patch("/:productId/reviews/:reviewId", ProductsController.addReview);
+router.patch("/:productId/reviews/:reviewId", checkReview, ProductsController.addReview);
+
+// Delete product
+router.delete("/:productId", checkAdmin, ProductsController.deleteProduct);
+
+// Delete all products
+router.delete("/", checkAdmin, ProductsController.deleteAllProducts);
 
 // Remove review from product
-router.delete("/:productId/reviews/:reviewId", ProductsController.removeReview);
+router.delete("/:productId/reviews/:reviewId", checkReview, ProductsController.removeReview);
 
 // Remove all reviews from product
-router.delete("/:productId/reviews", ProductsController.removeAllReviews);
+router.delete("/:productId/reviews", checkAdmin, ProductsController.removeAllReviews);
 
 module.exports = router;

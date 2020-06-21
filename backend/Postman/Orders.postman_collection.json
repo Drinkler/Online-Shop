@@ -11,19 +11,13 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{Endpoint}}/orders/:userId",
+					"raw": "{{Endpoint}}/orders/",
 					"host": [
 						"{{Endpoint}}"
 					],
 					"path": [
 						"orders",
-						":userId"
-					],
-					"variable": [
-						{
-							"key": "userId",
-							"value": ""
-						}
+						""
 					]
 				}
 			},
@@ -32,6 +26,16 @@
 		{
 			"name": "Get order",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -56,6 +60,16 @@
 		{
 			"name": "Get all orders",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -73,6 +87,16 @@
 		{
 			"name": "Add product to order",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PATCH",
 				"header": [],
 				"url": {
@@ -103,6 +127,16 @@
 		{
 			"name": "Delete order",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -127,6 +161,16 @@
 		{
 			"name": "Delete all orders",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -144,6 +188,16 @@
 		{
 			"name": "Remove product from order",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -174,6 +228,16 @@
 		{
 			"name": "Remove all products from order",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {

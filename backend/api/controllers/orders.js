@@ -2,6 +2,7 @@
 const Order = require("../models/Order");
 
 //* --- Methods ---
+// Create order
 exports.createOrder = async (req, res, next) => {
     // Create a new order
     const order = new Order();
@@ -20,6 +21,7 @@ exports.createOrder = async (req, res, next) => {
     }
 };
 
+// Get order
 exports.getOrder = async (req, res, next) => {
     const orderId = req.params.orderId;
 
@@ -34,6 +36,7 @@ exports.getOrder = async (req, res, next) => {
     return res.status(200).json(order);
 };
 
+// Get all orders
 exports.getAllOrders = async (req, res, next) => {
     // Get all products
     try {
@@ -49,6 +52,7 @@ exports.getAllOrders = async (req, res, next) => {
     });
 };
 
+// Add products to order
 exports.addProduct = async (req, res, next) => {
     const orderId = req.params.orderId;
     const productId = req.params.productId;
@@ -69,6 +73,7 @@ exports.addProduct = async (req, res, next) => {
     return res.status(400).json({ error: "Product not found, or couldn't update order." });
 };
 
+// Delete order
 exports.deleteOrder = async (req, res, next) => {
     const orderId = req.params.orderId;
 
@@ -91,6 +96,7 @@ exports.deleteOrder = async (req, res, next) => {
     });
 };
 
+// Delete all orders
 exports.deleteAllOrders = async (req, res, next) => {
     // Delete all orders
     try {
@@ -111,6 +117,7 @@ exports.deleteAllOrders = async (req, res, next) => {
     });
 };
 
+// Remove product from order
 exports.removeProduct = async (req, res, next) => {
     const orderId = req.params.orderId;
     const productId = req.params.productId;
@@ -134,6 +141,7 @@ exports.removeProduct = async (req, res, next) => {
     });
 };
 
+// Remove all products from order
 exports.removeAllProducts = async (req, res, next) => {
     const orderId = req.params.orderId;
 

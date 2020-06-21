@@ -66,7 +66,14 @@
 			"name": "Get user",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -93,7 +100,14 @@
 			"name": "Get all users",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -114,13 +128,20 @@
 			"name": "Update user",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
 				},
 				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"\",\n\t\"name\": {\n\t\t\"first\": \"\",\n\t\t\"last\": \"\"\n\t}\n}",
+					"raw": "{\n\t\"email\": \"\",\n\t\"name\": {\n\t\t\"first\": \"\",\n\t\t\"last\": \"\"\n\t},\n\t\"admin\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -149,6 +170,16 @@
 		{
 			"name": "Add order to user",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PATCH",
 				"header": [],
 				"url": {
@@ -180,7 +211,14 @@
 			"name": "Delete user",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
 				},
 				"method": "DELETE",
 				"header": [],
@@ -206,6 +244,16 @@
 		{
 			"name": "Delete all users",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -223,6 +271,16 @@
 		{
 			"name": "Remove order from user",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {

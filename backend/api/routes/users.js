@@ -9,31 +9,31 @@ const { checkAuth, checkAdmin } = require("../middleware/check-auth");
 const UserController = require("../controllers/user");
 
 //* --- Methods ---
-// Sign up user with email, name, surname and password
+// Signup user
 router.post("/signup", signUpValidation, UserController.signUpUser);
 
-// Login user with email and password
+// Login user
 router.post("/login", loginValidation, UserController.loginUser);
 
-// Get user by userId
-router.get("/:userId", /*checkAuth,*/ UserController.getUser);
+// Get user
+router.get("/:userId", checkAuth, UserController.getUser);
 
 // Get all users
-router.get("/", /*checkAdmin,*/ UserController.getAllUser);
+router.get("/", checkAdmin, UserController.getAllUser);
 
-// Update users information by userId
-router.patch("/:userId", /*checkAuth,*/ UserController.updateUser); // TODO ADD updateUserValidation
+// Update user
+router.patch("/:userId", checkAuth, UserController.updateUser); // TODO ADD updateUserValidation
 
 // Add order to user
-router.patch("/:userId/order/:orderId", UserController.addOrder);
+router.patch("/:userId/order/:orderId", checkAuth, UserController.addOrder);
 
-// Delete a user by userId
-router.delete("/:userId", /*checkAuth,*/ UserController.deleteUser);
+// Delete user
+router.delete("/:userId", checkAuth, UserController.deleteUser);
 
 // Delete all users
-router.delete("/", UserController.deleteAllUsers);
+router.delete("/", checkAdmin, UserController.deleteAllUsers);
 
 // Remove order from user
-router.delete("/:userId/order", UserController.removeOrder);
+router.delete("/:userId/order", checkAuth, UserController.removeOrder);
 
 module.exports = router;

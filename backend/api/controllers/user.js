@@ -141,7 +141,6 @@ exports.getUser = async (req, res, next) => {
 exports.getAllUser = async (req, res, next) => {
     // Get all users
     try {
-        //TODO: add populate of products in here
         var users = await User.find()
             .populate({
                 path: "order",
@@ -168,7 +167,7 @@ exports.updateUser = async (req, res, next) => {
     const userId = req.params.userId;
 
     const parameters = {};
-    const allowedKeys = ["email", "name"];
+    const allowedKeys = ["email", "name", "admin"];
     const allowedSubKeys = ["first", "last"];
 
     // Get old user information
@@ -309,9 +308,4 @@ exports.removeOrder = async (req, res, next) => {
     return res.status(400).json({ error: "Order not found, or couldn't update user." });
 };
 
-// TODO : user set admin /rest/api/users/admin oder so
-
 // TODO: Update password if user updates it
-// TODO: Show createdate and updatedate
-// TODO: Add admin column in database
-// TODO: Admin can set a user to admin

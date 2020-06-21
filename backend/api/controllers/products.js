@@ -1,8 +1,8 @@
-// Models
+//* --- Models ---
 const Product = require("../models/Product");
-const Review = require("../models/Review");
 
-// Methods
+//* --- Methods ---
+// Create product
 exports.createProduct = async (req, res, next) => {
     const name = req.body.name;
     const price = req.body.price;
@@ -37,31 +37,7 @@ exports.createProduct = async (req, res, next) => {
     }
 };
 
-exports.getAllProducts = async (req, res, next) => {
-    // Get all products
-    try {
-        var products = await Product.find()
-            .populate({
-                path: "reviews",
-                select: "-__v",
-                populate: {
-                    path: "user",
-                    select: "-__v -password -admin",
-                },
-            })
-            .select("-__v")
-            .exec();
-    } catch (err) {
-        return res.status(500).json({ error: err });
-    }
-
-    // Return all products
-    return res.status(200).json({
-        amount: products.length,
-        products: products,
-    });
-};
-
+// Get product
 exports.getProduct = async (req, res, next) => {
     const productId = req.params.productId;
 
@@ -87,29 +63,33 @@ exports.getProduct = async (req, res, next) => {
     return res.status(200).json(product);
 };
 
-exports.deleteProduct = async (req, res, next) => {
-    const productId = req.params.productId;
-
-    // Delete product by productId
+// Get all products
+exports.getAllProducts = async (req, res, next) => {
+    // Get all products
     try {
-        const result = await Product.deleteOne({ _id: productId }).exec();
-        if (result.n != 0 && result.deletedCount != 0) {
-            return res.status(200).json({
-                message: "Product successfully deleted.",
-                ok: result.ok,
-            });
-        }
+        var products = await Product.find()
+            .populate({
+                path: "reviews",
+                select: "-__v",
+                populate: {
+                    path: "user",
+                    select: "-__v -password -admin",
+                },
+            })
+            .select("-__v")
+            .exec();
     } catch (err) {
         return res.status(500).json({ error: err });
     }
 
-    // Return no product
-    return res.status(409).json({
-        message: "No Product was found to delete.",
-        ok: 0,
+    // Return all products
+    return res.status(200).json({
+        amount: products.length,
+        products: products,
     });
 };
 
+// Update product
 exports.updateProduct = async (req, res, next) => {
     const productId = req.params.productId;
 
@@ -143,27 +123,7 @@ exports.updateProduct = async (req, res, next) => {
     return res.status(400).json({ error: "Product not found, or couldn't update product." });
 };
 
-exports.deleteAllProducts = async (req, res, next) => {
-    // Delete all products
-    try {
-        const result = await Product.deleteMany({}).exec();
-        if (result.n != 0 && result.deletedCount != 0) {
-            return res.status(200).json({
-                message: "Products successfully deleted.",
-                ok: result.ok,
-            });
-        }
-    } catch (err) {
-        return res.status(500).json({ message: "Internal Error" });
-    }
-
-    // Return no product
-    return res.status(409).json({
-        message: "No Products were found to delete.",
-        ok: 0,
-    });
-};
-
+// Add review to product
 exports.addReview = async (req, res, next) => {
     const productId = req.params.productId;
     const reviewId = req.params.reviewId;
@@ -186,6 +146,53 @@ exports.addReview = async (req, res, next) => {
     return res.status(400).json({ error: "Review not found, or couldn't update product." });
 };
 
+// Delete product
+exports.deleteProduct = async (req, res, next) => {
+    const productId = req.params.productId;
+
+    // Delete product by productId
+    try {
+        const result = await Product.deleteOne({ _id: productId }).exec();
+        if (result.n != 0 && result.deletedCount != 0) {
+            return res.status(200).json({
+                message: "Product successfully deleted.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ error: err });
+    }
+
+    // Return no product
+    return res.status(409).json({
+        message: "No Product was found to delete.",
+        ok: 0,
+    });
+};
+
+// Delete all products
+exports.deleteAllProducts = async (req, res, next) => {
+    // Delete all products
+    try {
+        const result = await Product.deleteMany({}).exec();
+        if (result.n != 0 && result.deletedCount != 0) {
+            return res.status(200).json({
+                message: "Products successfully deleted.",
+                ok: result.ok,
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Error" });
+    }
+
+    // Return no product
+    return res.status(409).json({
+        message: "No Products were found to delete.",
+        ok: 0,
+    });
+};
+
+// Remove review from product
 exports.removeReview = async (req, res, next) => {
     const productId = req.params.productId;
     const reviewId = req.params.reviewId;
@@ -209,6 +216,7 @@ exports.removeReview = async (req, res, next) => {
     });
 };
 
+// Remove all reviews from product
 exports.removeAllReviews = async (req, res, next) => {
     const productId = req.params.productId;
 
