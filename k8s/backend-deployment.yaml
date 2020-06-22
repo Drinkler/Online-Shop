@@ -29,7 +29,7 @@ spec:
           value: mongodb://root:LSuFDaaenPfdVMi4S@database:27017/online-shop?authSource=admin
         image: drinkler/microservices-backend:latest
         imagePullPolicy: ""
-        name: backend-api
+        name: backend
         ports:
         - containerPort: 8080
         resources: {}
