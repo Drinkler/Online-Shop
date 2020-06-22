@@ -43,6 +43,12 @@ export class AccountService {
     this.router.navigate(['/login']);
   }
 
+  updateToAdmin(id) {
+    return this.http.patch(`${userUrl}/$id`, {
+      'admin': true
+    });
+  }
+
   register(user: User) {
     return this.http.post(registerUrl, user);
   }
