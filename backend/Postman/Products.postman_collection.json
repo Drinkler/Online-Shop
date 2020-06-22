@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Create product",
+			"name": "Create product (Admin)",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
 			},
@@ -67,7 +67,7 @@
 			"response": []
 		},
 		{
-			"name": "Get product",
+			"name": "Get product (All)",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -103,7 +103,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all products",
+			"name": "Get all products (All)",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -120,7 +120,7 @@
 			"response": []
 		},
 		{
-			"name": "Update product",
+			"name": "Update product (Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -163,7 +163,7 @@
 			"response": []
 		},
 		{
-			"name": "Add review to product",
+			"name": "Add review to product (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -212,7 +212,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete product",
+			"name": "Delete product (Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -255,7 +255,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete all products",
+			"name": "Delete all products (Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -282,7 +282,7 @@
 			"response": []
 		},
 		{
-			"name": "Remove review from product",
+			"name": "Remove review from product (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -322,7 +322,7 @@
 			"response": []
 		},
 		{
-			"name": "Remove all reviews from product",
+			"name": "Remove all reviews from product (Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",

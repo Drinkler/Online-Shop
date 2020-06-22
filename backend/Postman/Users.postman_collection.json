@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Signup user",
+			"name": "Signup user (All)",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -33,7 +33,7 @@
 			"response": []
 		},
 		{
-			"name": "Login user",
+			"name": "Login user (All)",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -63,7 +63,7 @@
 			"response": []
 		},
 		{
-			"name": "Get user",
+			"name": "Get user (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -97,7 +97,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all users",
+			"name": "Get all users (Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -125,7 +125,7 @@
 			"response": []
 		},
 		{
-			"name": "Update user",
+			"name": "Update user (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -168,7 +168,7 @@
 			"response": []
 		},
 		{
-			"name": "Add order to user",
+			"name": "Add order to user (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -208,7 +208,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete user",
+			"name": "Delete user (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -242,7 +242,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete all users",
+			"name": "Delete all users (Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -269,7 +269,7 @@
 			"response": []
 		},
 		{
-			"name": "Remove order from user",
+			"name": "Remove order from user (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",

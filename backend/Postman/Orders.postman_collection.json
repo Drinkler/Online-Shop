@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Create order",
+			"name": "Create order (All)",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -24,7 +24,7 @@
 			"response": []
 		},
 		{
-			"name": "Get order",
+			"name": "Get order (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -58,7 +58,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all orders",
+			"name": "Get all orders (Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -85,7 +85,7 @@
 			"response": []
 		},
 		{
-			"name": "Add product to order",
+			"name": "Add product to order (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -125,7 +125,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete order",
+			"name": "Delete order (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -159,7 +159,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete all orders",
+			"name": "Delete all orders (Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -186,7 +186,7 @@
 			"response": []
 		},
 		{
-			"name": "Remove product from order",
+			"name": "Remove product from order (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -226,7 +226,7 @@
 			"response": []
 		},
 		{
-			"name": "Remove all products from order",
+			"name": "Remove all products from order (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",

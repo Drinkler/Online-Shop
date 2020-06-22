@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Create review",
+			"name": "Create review (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -49,7 +49,7 @@
 			"response": []
 		},
 		{
-			"name": "Get review",
+			"name": "Get review (All)",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -73,7 +73,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all reviews",
+			"name": "Get all reviews (All)",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -90,7 +90,7 @@
 			"response": []
 		},
 		{
-			"name": "Update review",
+			"name": "Update review (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -133,7 +133,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete review",
+			"name": "Delete review (User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -167,7 +167,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete all reviews",
+			"name": "Delete all reviews (Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",
