@@ -33,7 +33,19 @@ exports.getOrder = async (req, res, next) => {
         return res.status(500).json({ error: "No Order found or Internal Error." });
     }
 
-    return res.status(200).json(order);
+    return res.status(200).json({
+        _id: order._id,
+        products: order.products.map((product) => {
+            return {
+                _id: product._id,
+                name: product.name,
+                price: product.price,
+                description: product.description,
+                reviews: product.reviews,
+                image: req.protocol + "://" + req.get("host") + "/rest/api/products/" + product._id + "/image",
+            };
+        }),
+    });
 };
 
 // Get all orders
@@ -48,7 +60,21 @@ exports.getAllOrders = async (req, res, next) => {
     // Return all products
     return res.status(200).json({
         amount: orders.length,
-        orders: orders,
+        orders: orders.map((order) => {
+            return {
+                _id: order._id,
+                products: order.products.map((product) => {
+                    return {
+                        _id: product._id,
+                        name: product.name,
+                        price: product.price,
+                        description: product.description,
+                        reviews: product.reviews,
+                        image: req.protocol + "://" + req.get("host") + "/rest/api/products/" + product._id + "/image",
+                    };
+                }),
+            };
+        }),
     });
 };
 
