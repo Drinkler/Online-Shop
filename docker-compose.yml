@@ -6,7 +6,7 @@ volumes:
 
 services:
   backend:
-    container_name: backend-api
+    container_name: backend
     build:
       context: ./backend
     image: drinkler/microservices-backend:latest
@@ -39,3 +39,5 @@ services:
     ports:
       - 8081:80
     restart: always
+    links:
+      - backend
