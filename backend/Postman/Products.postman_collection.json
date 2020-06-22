@@ -120,6 +120,31 @@
 			"response": []
 		},
 		{
+			"name": "Get image of product (All)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Endpoint}}/products/:productId/image",
+					"host": [
+						"{{Endpoint}}"
+					],
+					"path": [
+						"products",
+						":productId",
+						"image"
+					],
+					"variable": [
+						{
+							"key": "productId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Update product (Admin)",
 			"request": {
 				"auth": {

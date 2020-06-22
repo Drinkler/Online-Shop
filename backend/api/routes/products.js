@@ -18,6 +18,9 @@ router.get("/:productId", ProductsController.getProduct);
 // Get all products
 router.get("/", ProductsController.getAllProducts);
 
+// Get image of product
+router.get("/:productId/image", ProductsController.getImage);
+
 // Update product
 router.patch("/:productId", checkAdmin, ProductsController.updateProduct);
 

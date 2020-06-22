@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 //* --- Models ---
 const Product = require("../models/Product");
 
@@ -9,14 +11,15 @@ exports.createProduct = async (req, res, next) => {
     const description = req.body.description;
     const image = req.file;
 
-    const productImagePath = req.protocol + "://" + req.get("host") + "/" + image.path.replace("\\", "/");
-
     // Create a new Product
     const product = new Product({
         name: name,
         price: price,
         description: description,
-        productImage: productImagePath,
+        image: {
+            data: fs.readFileSync(image.path),
+            contentType: image.mimetype,
+        },
     });
 
     // Save product
@@ -29,7 +32,6 @@ exports.createProduct = async (req, res, next) => {
                 name: savedProduct.name,
                 price: savedProduct.price,
                 description: savedProduct.description,
-                productImage: productImagePath,
             },
         });
     } catch (err) {
@@ -59,15 +61,23 @@ exports.getProduct = async (req, res, next) => {
         return res.status(500).json({ error: "No Product found or Internal Error." });
     }
 
-    // Return product data
-    return res.status(200).json(product);
+    return res.status(200).json({
+        product: {
+            _id: product._id,
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            reviews: product.reviews,
+            image: req.protocol + "://" + req.get("host") + "/rest/api/products/" + product._id + "/image",
+        },
+    });
 };
 
 // Get all products
 exports.getAllProducts = async (req, res, next) => {
     // Get all products
     try {
-        var products = await Product.find()
+        var docs = await Product.find()
             .populate({
                 path: "reviews",
                 select: "-__v",
@@ -84,9 +94,37 @@ exports.getAllProducts = async (req, res, next) => {
 
     // Return all products
     return res.status(200).json({
-        amount: products.length,
-        products: products,
+        amount: docs.length,
+        products: docs.map((product) => {
+            return {
+                _id: product._id,
+                name: product.name,
+                price: product.price,
+                description: product.description,
+                reviews: product.reviews,
+                image: req.protocol + "://" + req.get("host") + "/rest/api/products/" + product._id + "/image",
+            };
+        }),
     });
+};
+
+// Get image of product
+exports.getImage = async (req, res, next) => {
+    const productId = req.params.productId;
+
+    try {
+        var result = await Product.find({ _id: productId }).select("image").exec();
+    } catch (err) {
+        return res.status(500).json({ error: "Internal Error." });
+    }
+
+    const img = Buffer.from(result[0].image.data, "base64");
+
+    res.writeHead(200, {
+        "Content-Type": result[0].image.contentType,
+        "Content-Length": result[0].image.data.length,
+    });
+    return res.end(img);
 };
 
 // Update product

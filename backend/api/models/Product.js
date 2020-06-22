@@ -39,9 +39,15 @@ const productSchema = mongoose.Schema(
             require: true,
             maxlength: 300,
         },
-        productImage: {
-            type: String,
-            require: true,
+        image: {
+            data: {
+                type: Buffer,
+                require: true,
+            },
+            contentType: {
+                type: String,
+                require: true,
+            },
         },
         reviews: [
             {
