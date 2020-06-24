@@ -166,8 +166,6 @@ exports.addReview = async (req, res, next) => {
     const productId = req.params.productId;
     const reviewId = req.params.reviewId;
 
-    // TODO: Only one review per user
-
     // Add review to product
     try {
         const result = await Product.updateOne({ _id: productId }, { $push: { reviews: reviewId } }).exec();

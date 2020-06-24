@@ -56,7 +56,6 @@ exports.signUpUser = async (req, res, next) => {
             message: "User successfully created.",
             createdUser: {
                 _id: savedUser._id,
-                // TODO: Lock up how to do virtuals (fullName)
                 email: savedUser.email,
                 name: savedUser.name.first + " " + savedUser.name.last,
                 orderId: savedUser.order,
