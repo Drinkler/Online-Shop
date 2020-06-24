@@ -88,7 +88,7 @@ items:
                 - name: DB_CONNECTION
                   value: mongodb://root:LSuFDaaenPfdVMi4S@database:27017/online-shop?authSource=admin
               image: drinkler/microservices-backend:latest
-              imagePullPolicy: ""
+              imagePullPolicy: "Always"
               name: backend
               ports:
                 - containerPort: 8080
@@ -141,7 +141,7 @@ items:
                       key: MONGO_INITDB_ROOT_USERNAME
                       name: database-database-env
               image: mongo:4.2.5
-              imagePullPolicy: ""
+              imagePullPolicy: "Always"
               name: database-mongo
               ports:
                 - containerPort: 27017
@@ -208,7 +208,7 @@ items:
         spec:
           containers:
             - image: drinkler/microservices-frontend:latest
-              imagePullPolicy: ""
+              imagePullPolicy: "Always"
               name: frontend-angular
               ports:
                 - containerPort: 80
