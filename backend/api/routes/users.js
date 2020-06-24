@@ -22,7 +22,7 @@ router.get("/:userId", checkAuth, UserController.getUser);
 router.get("/", checkAdmin, UserController.getAllUser);
 
 // Update user
-router.patch("/:userId", checkAuth, UserController.updateUser); // TODO ADD updateUserValidation
+router.patch("/:userId", checkAuth, UserController.updateUser);
 
 // Add order to user
 router.patch("/:userId/order/:orderId", checkAuth, UserController.addOrder);
