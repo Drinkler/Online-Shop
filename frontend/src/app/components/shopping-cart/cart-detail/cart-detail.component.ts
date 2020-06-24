@@ -29,6 +29,11 @@ export class CartDetailComponent implements OnInit {
   updateOrderContent() {
     this.order.getOrder().subscribe((order) => {
       this.orderContent = order['products'];
+      this.orderContent.forEach((element) => {
+        if (element.image.startsWith('http://backend:8080')) {
+          element.image = element.image.slice(19, element.image.length);
+        }
+      });
       this.updateSubtotal();
     });
   }

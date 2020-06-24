@@ -20,6 +20,10 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.product = history.state.data;
+
+    if (this.product.image.startsWith('http://backend:8080')) {
+      this.product.image.slice(19, this.product.image.length);
+    }
   }
 
   addToOrder() {

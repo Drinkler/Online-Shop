@@ -13,6 +13,7 @@ export class ProductService {
   }
 
   public getProducts(): Observable<Product[]> {
+    console.log(productsUrl);
     return this.http.get<Product[]>(productsUrl);
   }
 
@@ -31,6 +32,10 @@ export class ProductService {
 
   public deleteProduct(productId) {
     return this.http.delete(`${productsUrl}/${productId}`);
+  }
+
+  public getImage(productId) {
+    return this.http.get(`/rest/api/products/${productId}/image`);
   }
 }
 

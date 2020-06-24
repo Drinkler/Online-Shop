@@ -16,6 +16,12 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getProducts().subscribe((products) => {
       this.productList = products['products'];
+
+      this.productList.forEach((element) => {
+        if (element.image.startsWith('http://backend:8080')) {
+          element.image = element.image.slice(19, element.image.length);
+        }
+      });
     });
   }
 }
