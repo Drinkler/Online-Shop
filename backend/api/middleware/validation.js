@@ -26,7 +26,21 @@ const signUpValidation = (req, res, next) => {
     next();
 };
 
+const reviewValidation = (req, res, next) => {
+    const reviewSchema = Joi.object({
+        title: Joi.string().min(5).max(50).required(),
+        message: Joi.string().min(5).max(500).required(),
+        rating: Joi.number().integer().min(0).max(10).required(),
+    });
+
+    const { error } = reviewSchema.validate(req.body);
+    if (error) return res.status(400).json({ error: error.details[0].message });
+
+    next();
+};
+
 module.exports = {
     loginValidation,
     signUpValidation,
+    reviewValidation,
 };

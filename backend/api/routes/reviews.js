@@ -3,14 +3,14 @@ const router = express.Router();
 
 //* --- Middlewares ---
 const { checkAuth, checkAdmin, checkReview } = require("../middleware/check-auth");
+const { reviewValidation } = require("../middleware/validation");
 
 //* --- Controllers ---
 const ReviewController = require("../controllers/reviews");
 
 //* --- Routes ---
 // Create review
-// TODO : Remove reference when review is deleted
-router.post("/:userId", checkAuth, ReviewController.createReview); // TODO: add review validation
+router.post("/:userId", checkAuth, reviewValidation, ReviewController.createReview);
 
 // Get review
 router.get("/:reviewId", ReviewController.getReview);
