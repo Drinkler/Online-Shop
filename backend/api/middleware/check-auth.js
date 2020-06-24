@@ -111,8 +111,8 @@ const checkOrder = async (req, res, next) => {
 };
 
 module.exports = {
-    checkAdmin: checkAdmin,
-    checkAuth: checkAuth,
-    checkReview: checkReview,
-    checkOrder: checkOrder,
+    checkAdmin,
+    checkAuth,
+    checkReview,
+    checkOrder,
 };

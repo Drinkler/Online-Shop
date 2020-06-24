@@ -10,7 +10,7 @@ const ProductsController = require("../controllers/products");
 
 //* --- Methods ---
 // Create product
-router.post("/", checkAdmin, upload.single("productImage"), ProductsController.createProduct); //TODO: Product validation
+router.post("/", checkAdmin, upload.single("productImage"), ProductsController.createProduct);
 
 // Get product
 router.get("/:productId", ProductsController.getProduct);

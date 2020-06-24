@@ -28,7 +28,8 @@ const productSchema = mongoose.Schema(
         name: {
             type: String,
             require: true,
-            maxlength: 100,
+            minlength: 5,
+            maxlength: 200,
         },
         price: {
             type: Number,
@@ -37,7 +38,8 @@ const productSchema = mongoose.Schema(
         description: {
             type: String,
             require: true,
-            maxlength: 300,
+            minlength: 5,
+            maxlength: 500,
         },
         image: {
             data: {
