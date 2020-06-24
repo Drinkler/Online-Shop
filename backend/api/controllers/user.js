@@ -146,7 +146,7 @@ exports.updateUser = async (req, res, next) => {
     const userId = req.params.userId;
 
     const parameters = {};
-    const allowedKeys = ["email", "name", "admin"];
+    const allowedKeys = ["email", "name", "admin", "password"];
     const allowedSubKeys = ["first", "last"];
 
     // Get old user information
@@ -163,10 +163,20 @@ exports.updateUser = async (req, res, next) => {
     // Get keys
     const keys = Object.keys(parameters);
 
-    // Remove keys which are not valid
-    keys.forEach((key) => {
+    for (const key of keys) {
+        // Remove keys which are not valid
         if (!allowedKeys.includes(key)) delete parameters[key];
-    });
+
+        // Hash password
+        if (key === "password") {
+            try {
+                const salt = await bcrypt.genSalt(10);
+                parameters[key] = await bcrypt.hash(parameters[key], salt);
+            } catch (error) {
+                return res.status(500).json({ error: "Ups, something went wrong." });
+            }
+        }
+    }
 
     // Check subKeys of "name" if "name" is given
     if ("name" in parameters) {
@@ -286,5 +296,3 @@ exports.removeOrder = async (req, res, next) => {
 
     return res.status(400).json({ error: "Order not found, or couldn't update user." });
 };
-
-// TODO: Update password if user updates it
