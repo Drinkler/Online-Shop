@@ -21,6 +21,8 @@ import {ErrorInterceptor} from 'src/app/components/shared/error.interceptor';
 import {ProductDetailComponent} from './components/product-detail/product-detail.component';
 import {CartDetailComponent} from './components/shopping-cart/cart-detail/cart-detail.component';
 import {ProductComponent} from './components/product/product.component';
+import {StarReviewComponent} from './components/star-review/star-review.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -38,14 +40,16 @@ import {ProductComponent} from './components/product/product.component';
     AlertComponent,
     ProductDetailComponent,
     CartDetailComponent,
-    ProductComponent
+    ProductComponent,
+    StarReviewComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   entryComponents: [],
   providers: [
