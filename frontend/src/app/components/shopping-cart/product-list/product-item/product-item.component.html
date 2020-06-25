@@ -3,6 +3,9 @@
     <img [src]="productItem.image" alt="productImage" class="bd-placeholder-img card-img-top" height="225"
          width="100%"/>
   </div>
+  <div class="card-body" style="padding-top: 0; padding-bottom: 0">
+    <app-star-review></app-star-review>
+  </div>
   <div class="card-body">
     <h4 class="card-title">{{productItem.name}}</h4>
     <p class="card-text">
