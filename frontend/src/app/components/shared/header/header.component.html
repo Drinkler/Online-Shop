@@ -1,12 +1,14 @@
 <div>
-  <button [routerLink]="['/cart']" class="btn"><i class="fas fa-shopping-cart"></i></button>
+  <button [routerLink]="['/cart']" class="btn" style="box-shadow: none"><i class="fas fa-shopping-cart"></i></button>
   <button *ngIf=!isLoggedIn [routerLink]="['/login']" class="btn"><i class="fas fa-user"></i></button>
 
   <div *ngIf=isLoggedIn class="btn-group mx-4" mdbDropdown>
-    <mdb-icon classInside="dropdown-toggle" fas icon="user" mdbDropdownToggle></mdb-icon>
+    <button class="dropdown-toggle waves-light" mdbBtn mdbDropdownToggle mdbWavesEffect
+            style="box-shadow: none" type="button">
+      <i class="fa fa-user"></i>&nbsp;Account
+    </button>
     <div class="dropdown-menu dropdown-menu-right">
-      <a class="dropdown-item">Account</a>
-      <a class="dropdown-item">Orders</a>
+      <a [routerLink]="['/settings']" class="dropdown-item">Settings</a>
       <div class="divider dropdown-divider"></div>
       <a (click)="logout()" class="dropdown-item">Logout</a>
     </div>

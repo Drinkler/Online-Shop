@@ -23,6 +23,7 @@ import {CartDetailComponent} from './components/shopping-cart/cart-detail/cart-d
 import {ProductComponent} from './components/product/product.component';
 import {StarReviewComponent} from './components/star-review/star-review.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {SettingsComponent} from './components/shared/header/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     CartDetailComponent,
     ProductComponent,
     StarReviewComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

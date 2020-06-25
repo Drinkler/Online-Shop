@@ -8,6 +8,7 @@ import {AuthGuard} from "./components/shared/auth.guard";
 import {ProductDetailComponent} from "./components/product-detail/product-detail.component";
 import {CartDetailComponent} from './components/shopping-cart/cart-detail/cart-detail.component';
 import {ProductComponent} from 'src/app/components/product/product.component';
+import {SettingsComponent} from 'src/app/components/shared/header/settings/settings.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/shop', pathMatch: 'full'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'shop', component: ShoppingCartComponent},
   {path: 'product', component: ProductComponent},
   {path: 'cart', component: CartDetailComponent, canActivate: [AuthGuard]},
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   {path: 'shop/product/:id', component: ProductDetailComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
