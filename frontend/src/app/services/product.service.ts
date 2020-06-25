@@ -13,7 +13,6 @@ export class ProductService {
   }
 
   public getProducts(): Observable<Product[]> {
-    console.log(productsUrl);
     return this.http.get<Product[]>(productsUrl);
   }
 
@@ -21,8 +20,13 @@ export class ProductService {
     return this.http.get<Product>(`${productsUrl}/${id}`);
   }
 
-  public saveProduct(product: Product) {
-    return this.http.post(`${productsUrl}`, product);
+  public saveProduct(product) {
+    const formData: FormData = new FormData();
+    formData.append('name', product.name);
+    formData.append('description', product.description);
+    formData.append('price', product.price);
+    formData.append('productImage', product.productImage, product.productImage.name);
+    return this.http.post(`${productsUrl}`, formData);
   }
 
   public updateProduct(productId) {
