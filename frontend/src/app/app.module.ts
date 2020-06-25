@@ -9,8 +9,6 @@ import {FooterComponent} from './components/shared/footer/footer.component';
 import {ShoppingCartComponent} from './components/shopping-cart/shopping-cart.component';
 import {FiltersComponent} from './components/shopping-cart/filters/filters.component';
 import {ProductListComponent} from './components/shopping-cart/product-list/product-list.component';
-import {CartComponent} from './components/shopping-cart/cart/cart.component';
-import {CartItemComponent} from './components/shopping-cart/cart/cart-item/cart-item.component';
 import {ProductItemComponent} from './components/shopping-cart/product-list/product-item/product-item.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './components/login/login.component';
@@ -22,6 +20,7 @@ import {JwtInterceptor} from 'src/app/components/shared/jwt.interceptor';
 import {ErrorInterceptor} from 'src/app/components/shared/error.interceptor';
 import {ProductDetailComponent} from './components/product-detail/product-detail.component';
 import {CartDetailComponent} from './components/shopping-cart/cart-detail/cart-detail.component';
+import {ProductComponent} from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -32,15 +31,14 @@ import {CartDetailComponent} from './components/shopping-cart/cart-detail/cart-d
     ShoppingCartComponent,
     FiltersComponent,
     ProductListComponent,
-    CartComponent,
-    CartItemComponent,
     ProductItemComponent,
     LoginComponent,
     RegisterComponent,
     PageNotFoundComponent,
     AlertComponent,
     ProductDetailComponent,
-    CartDetailComponent
+    CartDetailComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
