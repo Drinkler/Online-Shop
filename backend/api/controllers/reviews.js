@@ -5,7 +5,6 @@ const Review = require("../models/Review");
 // Create review
 exports.createReview = async (req, res, next) => {
     const userId = req.params.userId;
-    // TODO: check if user exists
 
     const title = req.body.title;
     const message = req.body.message;

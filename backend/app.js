@@ -7,8 +7,6 @@ const mkdirp = require("mkdirp");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
-// TODO: api version
-
 // To log requests
 app.use(morgan("dev"));
 

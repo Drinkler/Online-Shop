@@ -10,12 +10,14 @@ const reviewSchema = mongoose.Schema(
         title: {
             type: String,
             require: true,
+            minlength: 5,
             maxlength: 50,
         },
         message: {
             type: String,
             require: true,
-            maxlength: 300,
+            minlength: 5,
+            maxlength: 500,
         },
         rating: {
             type: Number,
