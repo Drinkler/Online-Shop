@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {Product} from "src/app/models/product";
-import {MessengerService} from "src/app/services/messenger.service";
-import {Router} from "@angular/router";
+import {Component, OnInit, Input} from '@angular/core';
+import {Product} from 'src/app/models/product';
+import {MessengerService} from 'src/app/services/messenger.service';
+import {Router} from '@angular/router';
+import {OrderService} from 'src/app/services/order.service';
+import {AlertService} from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-product-item',
@@ -12,14 +14,22 @@ export class ProductItemComponent implements OnInit {
 
   @Input() productItem: Product;
 
-  constructor(private msg: MessengerService, private router: Router) {
+  constructor(
+    private msg: MessengerService,
+    private router: Router,
+    private orderService: OrderService,
+    private alertService: AlertService
+  ) {
   }
 
   ngOnInit(): void {
   }
 
   handleAddToCart() {
-    this.msg.sendMsg(this.productItem)
+    this.msg.sendMsg(this.productItem);
+    this.orderService.addProduct(this.productItem._id).subscribe(data => {
+      this.alertService.success(data['message']);
+    }, error => this.alertService.error(error));
   }
 
 }
