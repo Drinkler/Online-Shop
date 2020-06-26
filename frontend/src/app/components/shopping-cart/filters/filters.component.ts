@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ProductListComponent} from 'src/app/components/shopping-cart/product-list/product-list.component';
 
 @Component({
   selector: 'app-filters',
@@ -11,7 +12,9 @@ export class FiltersComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
   }
 
   // convenience getter for easy access to form fields
@@ -29,5 +32,7 @@ export class FiltersComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.loading = true;
+
+    // this.list.populateProducts(this.f.fromValue.value, this.f.toValue.value);
   }
 }

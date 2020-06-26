@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
+    // TODO: ?
     // this.accountService.logout();
     this.submitted = true;
 

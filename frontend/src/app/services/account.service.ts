@@ -61,9 +61,8 @@ export class AccountService {
     return this.http.get<User>(`${userUrl}/${id}`);
   }
 
-  // TODO: Change to patch
   update(id, params) {
-    return this.http.put(`${userUrl}/${id}`, params)
+    return this.http.patch(`${userUrl}/${id}`, params)
       .pipe(map(x => {
         // update stored user if the logged in user updated their own record
         if (id == this.userValue.id) {

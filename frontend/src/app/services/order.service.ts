@@ -39,7 +39,6 @@ export class OrderService {
   }
 
   public removeProduct(productId) {
-    console.log(`${ordersUrl}/${this.currentOrderId}/products/${productId}`);
     return this.http.delete(`${ordersUrl}/${this.currentOrderId}/products/${productId}`);
   }
 
