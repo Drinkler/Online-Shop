@@ -70,6 +70,7 @@ exports.getProduct = async (req, res, next) => {
             reviews: product.reviews,
             image: req.protocol + "://" + req.get("host") + "/rest/api/products/" + product._id + "/image",
         },
+        quantity: 1,
     });
 };
 
@@ -97,12 +98,15 @@ exports.getAllProducts = async (req, res, next) => {
         amount: docs.length,
         products: docs.map((product) => {
             return {
-                _id: product._id,
-                name: product.name,
-                price: product.price,
-                description: product.description,
-                reviews: product.reviews,
-                image: req.protocol + "://" + req.get("host") + "/rest/api/products/" + product._id + "/image",
+                product: {
+                    _id: product._id,
+                    name: product.name,
+                    price: product.price,
+                    description: product.description,
+                    reviews: product.reviews,
+                    image: req.protocol + "://" + req.get("host") + "/rest/api/products/" + product._id + "/image",
+                },
+                quantity: 1,
             };
         }),
     });
