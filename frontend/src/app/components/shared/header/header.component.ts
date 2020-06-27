@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService} from "../../../services/account.service";
+import {AccountService} from 'src/app/services/account.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.accountService.user.subscribe((user) => {
       this.isLoggedIn = !!user;
-    })
+    });
   }
 
   logout(): void {

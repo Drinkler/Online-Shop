@@ -34,8 +34,9 @@ export class ProductListComponent implements OnInit {
       this.productList = products['products'];
 
       this.productList.forEach((element) => {
-        if (element.image.startsWith('http://backend:8080')) {
-          element.image = element.image.slice(19, element.image.length);
+        console.log(element);
+        if (element['product'].image.startsWith('http://backend:8080')) {
+          element['product'].image = element['product'].image.slice(19, element['product'].image.length);
         }
       });
     });

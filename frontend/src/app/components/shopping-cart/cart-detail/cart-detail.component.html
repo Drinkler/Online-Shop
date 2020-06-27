@@ -24,7 +24,7 @@
       <td data-th="Price">{{product.price | currency: 'EUR'}}</td>
       <td data-th="Quantity">
         <input (change)="updateAmount(product)" class="form-control text-center" id="qty-{{product._id}}" type="number"
-               value="1">
+               value="{{product.qty}}">
       </td>
       <td class="text-center" data-th="Subtotal">{{product.price | currency: 'EUR'}}</td>
       <td class="actions" data-th="">
