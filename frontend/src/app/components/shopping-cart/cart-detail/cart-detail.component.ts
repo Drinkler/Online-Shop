@@ -11,7 +11,7 @@ import {AlertService} from 'src/app/services/alert.service';
 export class CartDetailComponent implements OnInit {
 
   orderContent;
-
+  qtyMap;
   subtotal: number;
 
   constructor(
@@ -20,6 +20,7 @@ export class CartDetailComponent implements OnInit {
   ) {
     this.orderContent = new Array(0);
     this.subtotal = 0;
+    this.qtyMap = [];
   }
 
   ngOnInit(): void {
@@ -28,17 +29,29 @@ export class CartDetailComponent implements OnInit {
 
   updateOrderContent() {
     this.order.getOrder().subscribe((order) => {
-      console.log(order);
       this.orderContent = order['products'];
       this.orderContent.forEach((element) => {
-        console.log(element);
-        if (element.image.startsWith('http://backend:8080')) {
-          element.image = element.image.slice(19, element.image.length);
+        if (element.product.image.startsWith('http://backend:8080')) {
+          element.product.image = element.product.image.slice(19, element.product.image.length);
         }
       });
       this.updateSubtotal();
+      this.computeQty();
     });
   }
+
+  // Sum products --> TODO: BACKEND RESPONSIBILITY
+  computeQty() {
+    this.orderContent.forEach((element) => {
+      if (this.qtyMap) {
+        element.quantity += 1;
+      } else {
+        this.qtyMap[element.product._id] = element.product._id;
+      }
+    });
+
+    console.log(this.orderContent);
+}
 
   updateAmount(source: any) {
     console.log(document.getElementById(`qty-${source._id}`));

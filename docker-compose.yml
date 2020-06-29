@@ -12,6 +12,8 @@ services:
     image: drinkler/microservices-backend:latest
     environment:
       - DB_CONNECTION=mongodb://root:LSuFDaaenPfdVMi4S@database:27017/online-shop?authSource=admin
+      - PORT=8080
+      - JWT_KEY="5AE34D147B8ADA82FB2FAA85DEC52"
     ports:
       - 8080:8080
     depends_on:
