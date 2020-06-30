@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <img [src]="product.image" alt="productImage" height="600px" width="600px">
+      <img [src]="product?.image" alt="productImage" height="600px" width="600px">
     </div>
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title">{{product.name}}</h3>
-          <h3 class="card-subtitle" style="display: inline">{{ product.price | currency: 'EUR'}}</h3> Inkl. MwSt.
+          <h3 class="card-title">{{product?.name}}</h3>
+          <h3 class="card-subtitle" style="display: inline">{{ product?.price | currency: 'EUR'}}</h3> Inkl. MwSt.
           <br>
         </div>
         <div class="card-body">
-          <p>{{product.description}}</p>
+          <p>{{product?.description}}</p>
           <button (click)="addToOrder()" gradient="aqua" mdbBtn mdbWavesEffect rounded="true" type="button">
             <mdb-icon class="mr-1" fas icon="cart-plus"></mdb-icon>
             Add to Cart

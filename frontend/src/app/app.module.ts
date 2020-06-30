@@ -24,6 +24,8 @@ import {ProductComponent} from './components/product/product.component';
 import {StarReviewComponent} from './components/star-review/star-review.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {SettingsComponent} from './components/shared/header/settings/settings.component';
+import {ProductService} from "./services/product.service";
+import {ProductResolve} from "./components/product/product-resolve";
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import {SettingsComponent} from './components/shared/header/settings/settings.co
   ],
   entryComponents: [],
   providers: [
+    ProductService,
+    ProductResolve,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

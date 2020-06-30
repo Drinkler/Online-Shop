@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Product} from '../../models/product';
 import {OrderService} from '../../services/order.service';
 import {AlertService} from '../../services/alert.service';
+import {ProductService} from '../../services/product.service';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-product-detail',
@@ -10,16 +12,21 @@ import {AlertService} from '../../services/alert.service';
 })
 export class ProductDetailComponent implements OnInit {
 
-  @Input() product: Product;
+  product: Product;
+
+  productId;
 
   constructor(
     private order: OrderService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute
   ) {
+    this.product = this.activatedRoute.snapshot.data['product'];
+    this.product = this.product['product'];
   }
 
   ngOnInit(): void {
-    this.product = history.state.data;
   }
 
   addToOrder() {
