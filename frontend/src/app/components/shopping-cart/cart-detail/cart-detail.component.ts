@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {OrderService} from 'src/app/services/order.service';
 import {Product} from 'src/app/models/product';
 import {AlertService} from 'src/app/services/alert.service';
+import {elementSelectors} from "@angular/cdk/schematics";
 
 @Component({
   selector: 'app-cart-detail',
@@ -20,7 +21,7 @@ export class CartDetailComponent implements OnInit {
   ) {
     this.orderContent = new Array(0);
     this.subtotal = 0;
-    this.qtyMap = [];
+    this.qtyMap = {};
   }
 
   ngOnInit(): void {
@@ -30,11 +31,6 @@ export class CartDetailComponent implements OnInit {
   updateOrderContent() {
     this.order.getOrder().subscribe((order) => {
       this.orderContent = order['products'];
-      this.orderContent.forEach((element) => {
-        if (element.product.image.startsWith('http://backend:8080')) {
-          element.product.image = element.product.image.slice(19, element.product.image.length);
-        }
-      });
       this.updateSubtotal();
       this.computeQty();
     });
@@ -42,12 +38,17 @@ export class CartDetailComponent implements OnInit {
 
   // Sum products --> TODO: BACKEND RESPONSIBILITY
   computeQty() {
+    const elements = [];
     this.orderContent.forEach((element) => {
-      if (this.qtyMap) {
-        element.quantity += 1;
-      } else {
-        this.qtyMap[element.product._id] = element.product._id;
+      if (element !== this.orderContent.filter(e => e.product._id === element.product._id)[0]) {
+        this.orderContent.filter(e => e.product._id === element.product._id)[0].quantity += 1;
+        elements.push(element);
       }
+    });
+
+    elements.forEach(e => {
+      const index = this.orderContent.indexOf(e, 0);
+      this.orderContent.splice(index, 1);
     });
 
     console.log(this.orderContent);
@@ -68,7 +69,7 @@ export class CartDetailComponent implements OnInit {
 
   updateSubtotal() {
     this.orderContent.forEach(product => {
-      this.subtotal += product.price;
+      this.subtotal += product.product.price;
     });
   }
 }

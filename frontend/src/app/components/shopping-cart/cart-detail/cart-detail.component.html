@@ -26,7 +26,7 @@
         <input (change)="updateAmount(product.product)" class="form-control text-center" id="qty-{{product.product._id}}" type="number"
                value="{{product.quantity}}">
       </td>
-      <td class="text-center" data-th="Subtotal">{{product.product.price | currency: 'EUR'}}</td>
+      <td class="text-center" data-th="Subtotal">{{product.product.price * product.quantity | currency: 'EUR'}}</td>
       <td class="actions" data-th="">
         <button class="btn btn-info btn-sm"><i class="fas fa-sync"></i></button>
         <button (click)="removeProductFromOrder(product.product)" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i>
