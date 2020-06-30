@@ -68,7 +68,7 @@ exports.getProduct = async (req, res, next) => {
             price: product.price,
             description: product.description,
             reviews: product.reviews,
-            image: req.protocol + "://" + req.get("host") + "/rest/api/products/" + product._id + "/image",
+            image: "/rest/api/products/" + product._id + "/image",
         },
         quantity: 1,
     });
@@ -104,7 +104,7 @@ exports.getAllProducts = async (req, res, next) => {
                     price: product.price,
                     description: product.description,
                     reviews: product.reviews,
-                    image: req.protocol + "://" + req.get("host") + "/rest/api/products/" + product._id + "/image",
+                    image: "/rest/api/products/" + product._id + "/image",
                 },
                 quantity: 1,
             };
