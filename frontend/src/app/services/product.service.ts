@@ -39,7 +39,7 @@ export class ProductService {
   }
 
   public getImage(productId) {
-    return this.http.get(`/rest/api/products/${productId}/image`);
+    return this.http.get(`${productsUrl}/${productId}/image`);
   }
 }
 
