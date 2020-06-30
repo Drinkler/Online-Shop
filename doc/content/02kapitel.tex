@@ -1,3 +1,70 @@
 %!TEX root = ../dokumentation.tex
-\chapter{Chapter2}
-Chapter2 
+\chapter{Entwicklung}\label{ch:entwicklung}
+
+\section{Toolchain}\label{sec:toolchain}
+Zur Entwicklung der Anwendung wurde die folgende Toolchain verwendet:
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{p{5cm}  p{9cm}}
+\hline
+\textbf{Softwarename} & \textbf{Zweck der Software}\\
+\hline
+PHPStorm & IDE zur Entwicklung fortgeschrittener Webanwendungen, basierend auf PHP\\
+\hline
+Visual Studio Code & Modulare IDE für Entwickler\\ 
+\hline
+DataGrip & Datenbank-IDE, die auf die speziellen Bedürfnisse professioneller SQL-Entwickler zugeschnitten ist\\
+\hline
+Travis CI & Webbasiertes CI/CD Tool\\
+\hline
+GitHub & Versionsverwaltung\\
+\hline
+Bower & Package Manager für Webanwendungen\\
+\hline
+Composer & Dependency Manager für PHP \\
+\hline
+PHPUnit & Unit-Test Framework für PHP \\ 
+\hline
+XDebug & Serverseitiges Debugging Tool für PHP \\
+\hline
+\end{tabular}
+\caption{Auflistung der verwendeten Toolchain}
+\end{table}
+
+\section{Bibliotheken/Frameworks}\label{sec:bibliotheken/frameworks}
+Als Frontend-CSS-Framework wurde Bootstrap in der Version 4.4.1 verwendet. Die Entscheidung hierfür ist durch bestehende Erfahrungen, aus Projekten der vorherigen Studienprojekte, gefallen.
+\subsection{Bower}\label{subsec:bower}
+Um einen fehlerfreien Build der CI/CD Pipeline zu gewährleisten, wurde der freie Paket Manager \emph{Bower} verwendet. Hierdurch kann der Pipeline gewährleistet werden, dass benötigte Komponenten wie Bootstrap, jQuery sowie dem Font-Awesome Package jederzeit in dem finalen Build vorhanden sind.
+\subsection{Composer}\label{subsec:composer}
+Um die Abhängigkeit des Unit-Test Frameworks PHPUnit zu gewährleisten, wird das Framework via Composer nachgeladen. Darüber hinaus wird sichergestellt, dass mindestens eine PHP Version größer gleich 7.3.0 verwendet wird.
+\subsection{PHPUnit}\label{subsec:phpunit}
+Aufgrund der Anforderung der Testbarkeit des Projekts wird das Unit-Test Framework PHPUnit verwendet. Zur Gewährleistung der Testfunktionalität wurden zwei Unit-Test Klassen erstellt. Diese werden bei jedem Build ausgeführt und testen einen minimalen Teil der Anwendung.
+\section{MVC}\label{sec:mvc}
+Als Grundgerüst der Anwendung wurde sich für das MVC Pattern entschieden. Hierbei ist die Entscheidung auf eine komplexere Variante als dem in der Vorlesung vorgestellten MVC gefallen. Grund hierfür war das persönliche Interesse an der Umsetzung einer etwas komplexeren Anwendung. Hierdurch konnte eine außerordentlich klare Struktur im Projekt sichergestellt werden.
+\subsection{Zusammenspiel .htaccess und index.php}\label{subsec:.htaccess}
+Um die Umsetzung des MVC Patterns zu realisieren ist im Projekt-Root eine .htaccess Datei angelegt worden. Diese sorgt für die korrekte Umleitung aller Anfragen auf die index.php, welche mit Hilfe der Funktion spl\_{}autoload\_{}register alle benötigten Klassen nachlädt. In der index.php wird die URL aufgebrochen und anschließend der gewollte Controller aufgerufen.
+\subsection{Model}\label{subsec:model}
+Für die Darstellung aller Datenbanktabellen wurden diese mithilfe von Models implementiert. Jedes Model erbt von ihrer Vaterklasse, der \emph{ModelBase}, eine Funktion zur Generierung einer funktionierenden PDO-Connection. Mit Hilfe einer Model Klasse können alle Datenbankspalten abgefragt werden.
+\subsection{View}\label{subsec:view}
+Um die Daten aus Modelabfragen präsentieren zu können, werden einzelne Viewtemplates verwendet. Die Views sind in den jeweils namentlich passenden Ordnern eingeordnet. Ausschlaggebend hierfür ist das aufgerufene Model. Sonderfälle bilden Models wie Issue, Vote sowie Participants, welche keine zugehörigen View Ordner besitzen. Diese werden von der index.php erkannt und es wird kein render() ausgeführt. 
+
+Um ein angemessenes Feedback der Anwendung an den User zu geben, rendert das Header Template Meldungen, sog. \emph{Flashes}. Diese Idee entstand aus dem \hyperlink{https://sachinchoolur.github.io/angular-flash/}{Angular Flash System}.
+\subsection{Controller}\label{subsec:controller}
+Alle Controller müssen den Interface \emph{Controller} implementieren, um Zugriff auf die Funktion setView zu erhalten. Darüber hinaus muss die Abstrakte Klasse \emph{ControllerBase} verwendet werden, um Zugriff auf elementare Funktionen zu erhalten. Jeder Controller besitzt Methoden, die anhand dynamischer Ermittlung der index.php aufgerufen werden können. Die zu beachtende Syntax hierbei ist, dass jede Methode den Suffix \emph{Action} beinhalten muss. Anderseits ist kein generischer Aufruf dieser Methoden möglich. 
+
+\subsection{Spezialfall Ajax in MVC}\label{subsec:ajax}
+Nach eigenem Kenntnisstand wurde zunächst versucht, Ajax Aufrufe wie gewohnt auf ein PHP Script auszuführen. Da dieses jedoch in MVC auf Grund der Umleitungen der .htaccess Datei nicht funktionieren kann, stand die Idee zunächst vor dem Aus. Nach langer Recherche und vielen Tests ist die Idee eines \emph{AjaxControllers} entstanden, der die in JavaScript entstandenen asynchronen Aufrufe verarbeiten kann. Über die PHP Funktion echo ist somit ein asynchroner Datentransfer im MVC Pattern ermöglicht worden. Dies findet unter anderem Anwendung in der Aktualisierung der Teilnehmer einer Lobby oder der korrekten Anzeige einer Story in der Spieleransicht. 
+
+\subsection{Performance}\label{subsec:performance}
+Um die Ladezeit einer Seite zu beschleunigen, wurden UglifyJS sowie CSSO verwendet, um die Größe aller Asset Dateien so gering wie möglich zu halten. Bei der Entscheidungsfindung dieser Tools war selbstverständlich bekannt, dass die Komprimierung von Dateien in solch geringen Größen einen nur marginalen Vorteilen bieten wird.
+
+\section{Funktionalität}\label{sec:funktionalität}
+
+\subsection{Login/Register}\label{subsec:login/register}
+Zur Registrierung eines Benutzer wird der Vorname, Nachname, eine E-Mail und ein Passwort benötigt. Nach erfolgreicher Registrierung muss man seine E-Mail bestätigen. In diesem Projekt wird dies mit einem automatisch generierten Link, der die E-Mail sowie einen eindeutigen String beinhaltet, gelöst. Gedacht war es, diesen Link per E-Mail an den Benutzer zu senden. \href{https://aws.amazon.com/de/ses/}{Amazon Simple Email Service} bot sich als Lösung gut an. Doch um dies umzusetzen benötigte man eine Domain, sowie das Ausfüllen eines Fragebogens mit Fragen, z.B. wie ein Kunde sich bei Problemen an uns wenden kann.\\
+Zum Anmelden wird eine E-Mail und ein Passwort benötigt.\\
+Das Passwort wird mit der \lstinline{password_hash} Funktion in der Datenbank gespeichert und ist somit für keinen Entwickler einsehbar.
+
+\subsection{Lobby}\label{subsec:lobby}
+Die Funktionalität der Lobby ist in zwei Bereiche unterteilt. Einerseits die Lobby, die von jedem Spieler eingesehen werden kann. Hier wird das gewählte Kartenset präsentiert und es sind Abstimmungen mit Maus oder Touch möglich. Darüber hinaus existiert eine Master-View, welche dem Lobby-Besitzer automatisch zur Verfügung gestellt wird. In dieser ist es dem Besitzer möglich, die aktuelle Story über eine GitHub-API aus einem bestehenden Public-Repository auszuwählen. Des weiteren wird eine Übersicht mit Mitspielern angezeigt. Im untersten Teil der Lobby wird eine live Spielstatistik angezeigt. Hier werden Durchschnittswert aller gewählten Karten angezeigt sowie die meist gespielte Karte. Bei der Erstellung der SQL-Abfrage für meist gespielte Karten ist es zu einem bisher nicht behebbaren Fehler gekommen, weshalb die Funktion bisher nicht gänzlich funktioniert. Grund hierfür ist der andere Character set der vote Spalte in der gleichnamigen Tabelle. Dies wurde geändert, damit Emojis wie der Kaffee angezeigt werden können. 

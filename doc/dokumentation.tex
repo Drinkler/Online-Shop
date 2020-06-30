@@ -49,10 +49,6 @@
 	\end{spacing}
 	\newpage
 
-	% Abkürzungsverzeichnis
-	\cleardoublepage
-	\input{ads/acronyms}
-
 	% Abbildungsverzeichnis
 	\cleardoublepage
 	\listoffigures
@@ -60,10 +56,6 @@
 	%Tabellenverzeichnis
 	\cleardoublepage
 	\listoftables
-
-	% Quellcodeverzeichnis
-	\cleardoublepage
-	\lstlistoflistings
 	\cleardoublepage
 
 	\pagenumbering{arabic}
@@ -74,7 +66,15 @@
 	\include{content/01kapitel}
 	
 	\include{content/02kapitel}
-
+	
+	\include{content/03kapitel}
+	
+	\include{content/04kapitel}
+	
+	\include{content/05kapitel}
+	
+	\include{content/06kapitel}
+	
 	\clearpage
 
 	% Literaturverzeichnis
@@ -83,11 +83,6 @@
 
 	% Glossar
 	\printglossary[style=altlist,title=\langglossar]
-	
-	% sonstiger Anhang
-	\clearpage
-	\appendix
-	\input{ads/appendix}
 	
 \end{document}
 ≥
