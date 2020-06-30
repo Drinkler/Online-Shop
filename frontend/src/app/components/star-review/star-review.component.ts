@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {StarService} from 'src/app/services/star.service';
+import {AccountService} from "../../services/account.service";
 
 @Component({
   selector: 'app-star-review',
@@ -20,7 +21,6 @@ export class StarReviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   starHandler(value) {

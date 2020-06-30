@@ -4,7 +4,7 @@
          width="100%"/>
   </div>
   <div class="card-body" style="padding-top: 0; padding-bottom: 0">
-    <app-star-review [productId]="productItem._id"></app-star-review>
+    <app-star-review [userId]="userId" [productId]="productItem._id"></app-star-review>
   </div>
   <div class="card-body">
     <h4 class="card-title">{{productItem.name}}</h4>
@@ -15,7 +15,7 @@
     <div class="d-flex justify-content-between align-items-center">
       <div class="btn-group btn-group-sm" role="group" aria-label="Cart Buttons">
         <button (click)="handleAddToCart()" class="btn btn-primary btn-sm" type="button">Add to cart</button>
-        <button [state]="{ data: productItem}" class="btn btn-outline-primary btn-sm"
+        <button [state]="{ data: productItem}"  class="btn btn-outline-primary btn-sm"
                 routerLink="product/{{productItem._id}}" type="button">Show details
         </button>
       </div>

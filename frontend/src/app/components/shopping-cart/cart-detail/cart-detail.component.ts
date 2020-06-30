@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {OrderService} from 'src/app/services/order.service';
 import {Product} from 'src/app/models/product';
 import {AlertService} from 'src/app/services/alert.service';
-import {elementSelectors} from "@angular/cdk/schematics";
 
 @Component({
   selector: 'app-cart-detail',
@@ -50,8 +49,6 @@ export class CartDetailComponent implements OnInit {
       const index = this.orderContent.indexOf(e, 0);
       this.orderContent.splice(index, 1);
     });
-
-    console.log(this.orderContent);
 }
 
   updateAmount(source: any) {

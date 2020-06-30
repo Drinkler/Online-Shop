@@ -16,6 +16,6 @@ export class StarService {
   }
 
   setStar(userId: any, productId: any, value: any) {
-
+    console.log(userId, productId, value);
   }
 }

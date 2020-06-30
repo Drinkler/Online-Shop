@@ -6,7 +6,6 @@ import {map} from 'rxjs/operators';
 import {User} from 'src/app/models/user';
 import {loginUrl, registerUrl, userUrl} from '../config/api';
 
-
 @Injectable({providedIn: 'root'})
 export class AccountService {
   private userSubject: BehaviorSubject<User>;
@@ -44,7 +43,7 @@ export class AccountService {
   }
 
   updateToAdmin(id) {
-    return this.http.patch(`${userUrl}/$id`, {
+    return this.http.patch(`${userUrl}/${id}`, {
       'admin': true
     });
   }
@@ -62,19 +61,7 @@ export class AccountService {
   }
 
   update(id, params) {
-    return this.http.patch(`${userUrl}/${id}`, params)
-      .pipe(map(x => {
-        // update stored user if the logged in user updated their own record
-        if (id == this.userValue.id) {
-          // update local storage
-          const user = {...this.userValue, ...params};
-          localStorage.setItem('user', JSON.stringify(user));
-
-          // publish updated user to subscribers
-          this.userSubject.next(user);
-        }
-        return x;
-      }));
+    return this.http.patch(`${userUrl}/${id}`, params);
   }
 
   delete(id: string) {

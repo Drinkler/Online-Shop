@@ -4,6 +4,7 @@ import {MessengerService} from 'src/app/services/messenger.service';
 import {Router} from '@angular/router';
 import {OrderService} from 'src/app/services/order.service';
 import {AlertService} from 'src/app/services/alert.service';
+import {AccountService} from "../../../../services/account.service";
 
 @Component({
   selector: 'app-product-item',
@@ -13,6 +14,8 @@ import {AlertService} from 'src/app/services/alert.service';
 export class ProductItemComponent implements OnInit {
 
   @Input() productItem: Product;
+
+  userId: string;
 
   constructor(
     private msg: MessengerService,
