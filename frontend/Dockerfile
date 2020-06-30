@@ -12,4 +12,3 @@ RUN apk add nano && apk add curl
 COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
 RUN rm -rf /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d
-EXPOSE 80

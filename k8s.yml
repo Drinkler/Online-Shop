@@ -8,7 +8,7 @@ items:
       kompose.version: 1.21.0 ()
     creationTimestamp: null
     labels:
-      app: backend
+      io.kompose.service: backend
     name: backend
   spec:
     ports:
@@ -16,7 +16,7 @@ items:
       port: 8080
       targetPort: 8080
     selector:
-      app: backend
+      io.kompose.service: backend
   status:
     loadBalancer: {}
 - apiVersion: v1
@@ -27,7 +27,7 @@ items:
       kompose.version: 1.21.0 ()
     creationTimestamp: null
     labels:
-      app: database
+      io.kompose.service: database
     name: database
   spec:
     ports:
@@ -35,7 +35,7 @@ items:
       port: 8888
       targetPort: 27017
     selector:
-      app: database
+      io.kompose.service: database
   status:
     loadBalancer: {}
 - apiVersion: v1
@@ -46,7 +46,7 @@ items:
       kompose.version: 1.21.0 ()
     creationTimestamp: null
     labels:
-      app: frontend
+      io.kompose.service: frontend
     name: frontend
   spec:
     type: LoadBalancer
@@ -55,7 +55,7 @@ items:
       port: 8081
       targetPort: 80
     selector:
-      app: frontend
+      io.kompose.service: frontend
   status:
     loadBalancer: {}
 - apiVersion: apps/v1
@@ -66,13 +66,13 @@ items:
       kompose.version: 1.21.0 ()
     creationTimestamp: null
     labels:
-      app: backend
+      io.kompose.service: backend
     name: backend
   spec:
     replicas: 1
     selector:
       matchLabels:
-        app: backend
+        io.kompose.service: backend
     strategy: {}
     template:
       metadata:
@@ -81,14 +81,14 @@ items:
           kompose.version: 1.21.0 ()
         creationTimestamp: null
         labels:
-          app: backend
+          io.kompose.service: backend
       spec:
         containers:
         - env:
           - name: DB_CONNECTION
-            value: mongodb://root:LSuFDaaenPfdVMi4S@database:27017/online-shop?authSource=admin
+            value: DB_CONNECTION=mongodb://root:LSuFDaaenPfdVMi4S@database:8888/online-shop?authSource=admin
           - name: JWT_KEY
-            value: '"5AE34D147B8ADA82FB2FAA85DEC52"'
+            value: '5AE34D147B8ADA82FB2FAA85DEC52'
           - name: PORT
             value: "8080"
           image: drinkler/microservices-backend:latest
@@ -109,13 +109,13 @@ items:
       kompose.version: 1.21.0 ()
     creationTimestamp: null
     labels:
-      app: database
+      io.kompose.service: database
     name: database
   spec:
     replicas: 1
     selector:
       matchLabels:
-        app: database
+        io.kompose.service: database
     strategy:
       type: Recreate
     template:
@@ -125,7 +125,7 @@ items:
           kompose.version: 1.21.0 ()
         creationTimestamp: null
         labels:
-          app: database
+          io.kompose.service: database
       spec:
         containers:
         - env:
@@ -169,14 +169,14 @@ items:
   metadata:
     creationTimestamp: null
     labels:
-      app: database-database-database-env
+      io.kompose.service: database-database-database-env
     name: database-database-env
 - apiVersion: v1
   kind: PersistentVolumeClaim
   metadata:
     creationTimestamp: null
     labels:
-      app: mongodata
+      io.kompose.service: mongodata
     name: mongodata
   spec:
     accessModes:
@@ -193,13 +193,13 @@ items:
       kompose.version: 1.21.0 ()
     creationTimestamp: null
     labels:
-      app: frontend
+      io.kompose.service: frontend
     name: frontend
   spec:
     replicas: 1
     selector:
       matchLabels:
-        app: frontend
+        io.kompose.service: frontend
     strategy: {}
     template:
       metadata:
@@ -208,7 +208,7 @@ items:
           kompose.version: 1.21.0 ()
         creationTimestamp: null
         labels:
-          app: frontend
+          io.kompose.service: frontend
       spec:
         containers:
         - image: drinkler/microservices-frontend:latest
