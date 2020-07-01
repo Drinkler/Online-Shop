@@ -1,13 +1,6 @@
 %!TEX root = ../dokumentation.tex
-\chapter{Hosting}\label{ch:hosting}
+\chapter{Database}\label{ch:db}
 
-\section{Anbieter}
-Zuerst wurde der Anbieter \href{https://azure.microsoft.com/de-de/}{Microsoft Azure} zum Hosten der Datenbank und des PHP Servers vorgezogen. Als Student erhält man, über das \href{https://education.github.com/pack}{Github Student Developer Pack}, ein jährliches Budget von 100\$ ohne Angabe einer Kreditkarte bzw. Bezahlmethode. Azure wurde bereits bei einem Projekt aus dem dritten Semester als Anbieter verwendet. Jedoch mit dem Studentenabonnement konnten aus unbekannten Gründen keine Server und Datenbanken in Europa erstellt werden.\\
-Aus Neugier und Interesse wurde danach der Anbieter \href{https://aws.amazon.com/de/}{Amazon Web Services (AWS)} verwendet. Ebenso erhält man, über das Github Student Developer Pack, ein Budget von 100\$ (damals 150\$).\\
-Alle in diesem Projekt verwendeten Services sind in dem 12 monatigem \href{https://aws.amazon.com/de/free/}{kostenlosem Kontigent von AWS} inbegriffen.
+\section{Zugriff}
 
-\section{PHP Server}
-Der PHP Server wird mit \href{https://aws.amazon.com/de/elasticbeanstalk/}{AWS Elastic Beanstalk} gehostet. \glqq AWS Elastic Beanstalk ist ein benutzerfreundlicher Service zum Bereitstellen und Skalieren von Webanwendungen und -Services\grqq. Anwendungen können mit Java, .NET, Node.js, Python, Ruby, Go, Docker und auch PHP bereitgestellt werden. Der Quellcode der Anwendung wird hochgeladen und Elastic Beanstalk übernimmt die automatische Bereitstellung. \cite{AWSEB}\\
-Die Planning Poker Anwendung wird auf einem AWS Elastik Beanstalk 64bit Amazon Linux/2.9.4 Server mit der PHP Version 7.3 gehostet.
-
-Damit der Elastic Beanstalk Server alle richtigen Konfigurationen durchführen kann, können \href{https://docs.aws.amazon.com/de_de/elasticbeanstalk/latest/dg/ebextensions.html}{Konfigurationsdateien} zum Quellcode hinzugefügt werden. Diese findet man in dem \href{https://github.com/Drinkler/Planning-Poker/tree/master/.ebextensions}{\lstinline{.ebextensions} Ordner}. In diesem Ordner befinden sich \lstinline{.config} Dateien. Durch die \lstinline{project.config} Datei werden alle benötigten Komponenten auf dem Server installiert.
+\section{Verwendung}
