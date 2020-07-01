@@ -26,6 +26,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {SettingsComponent} from './components/shared/header/settings/settings.component';
 import {ProductService} from "./services/product.service";
 import {ProductResolve} from "./components/product/product-resolve";
+import { CheckoutComponent } from './components/shopping-cart/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {ProductResolve} from "./components/product/product-resolve";
     ProductComponent,
     StarReviewComponent,
     SettingsComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

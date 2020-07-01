@@ -12,6 +12,7 @@ export class OrderService {
 
   currentOrderId: string;
   currentUserId: string;
+  public subtotal: number;
 
   constructor(private http: HttpClient) {
     this.currentOrderId = localStorage.getItem('orderId');

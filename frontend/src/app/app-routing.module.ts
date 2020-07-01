@@ -10,6 +10,7 @@ import {CartDetailComponent} from './components/shopping-cart/cart-detail/cart-d
 import {ProductComponent} from 'src/app/components/product/product.component';
 import {SettingsComponent} from 'src/app/components/shared/header/settings/settings.component';
 import {ProductResolve} from './components/product/product-resolve';
+import {CheckoutComponent} from './components/shopping-cart/checkout/checkout.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/shop', pathMatch: 'full'},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'shop', component: ShoppingCartComponent},
   {path: 'product', component: ProductComponent},
   {path: 'cart', component: CartDetailComponent, canActivate: [AuthGuard]},
+  {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
   {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   {
     path: 'shop/product/:id',

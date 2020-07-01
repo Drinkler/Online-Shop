@@ -49,6 +49,8 @@ export class CartDetailComponent implements OnInit {
       const index = this.orderContent.indexOf(e, 0);
       this.orderContent.splice(index, 1);
     });
+
+    this.order.subtotal = this.subtotal;
 }
 
   updateAmount(source: any) {

@@ -1,0 +1,109 @@
+<section>
+  <div class="row">
+    <div class="col-lg-8 mb-4">
+      <div class="card wish-list pb-1">
+        <div class="card-body">
+          <h5>Billing Details</h5>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="md-form md-outline mb-0 mb-lg-4">
+                <input type="text" id="firstName" class="form-control mb-0 mb-lg-2">
+                <label for="firstName">First Name</label>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="md-form md-outline mb-0 mb-lg-4">
+                <input type="text" id="lastName" class="form-control mb-0 mb-lg-2">
+                <label for="lastName">Last Name</label>
+              </div>
+            </div>
+          </div>
+          <div class="md-form md-outline my-0">
+            <input type="text" id="companyName" class="form-control mb-0">
+            <label for="companyName">Company name (optional)</label>
+          </div>
+          <div class="d-flex flex-wrap">
+            <div class="select-outline position-relative w-100">
+              <label>Country</label>
+            </div>
+          </div>
+          <div class="md-form md-outline mt-0">
+            <input type="text" id="form14" placeholder="House number and street name" class="form-control">
+            <label for="form14" class="active">Address</label>
+          </div>
+          <div class="md-form md-outline">
+            <input type="text" class="form-control" id="form15" placeholder="Apartment, suite, unit etc. (optional)">
+            <label for="form15" class="active">Address</label>
+          </div>
+          <div class="md-form md-outline">
+            <input type="text" class="form-control" id="form16">
+            <label for="form16">Postcode / ZIP</label>
+          </div>
+          <div class="md-form md-outline">
+            <input type="text" class="form-control" id="form17">
+            <label for="form17">Town / City</label>
+          </div>
+          <div class="md-form md-outline">
+            <input type="number" class="form-control" id="form18">
+            <label for="form18">Phone Number</label>
+          </div>
+          <div class="md-form md-outline">
+            <input type="email" class="form-control" id="form19">
+            <label for="form19">Email address</label>
+          </div>
+          <div class="md-form md-outline">
+            <textarea id="form76" class="md-textarea form-control" rows="4"></textarea>
+            <label for="form76">Additional Information</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="mb-3">The total amount of</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+              Temporary Amount
+              <span>{{subtotal | currency: 'EUR'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center px-0 pb-0">
+              Shipping
+              <span>Gratis</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+              <div>
+                <strong>The total amount of</strong>
+                <strong>
+                  <p class="mb-0">(including VAT)</p>
+                </strong>
+              </div>
+              <span><strong>{{subtotal | currency: 'EUR'}}</strong></span>
+            </li>
+          </ul>
+          <button [disabled]="loading" style="margin-top: 15px" type="button" (click)="onSubmit()" class="btn btn-primary btn-block waves-effect waves-light">Make purchase
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1">
+
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-body">
+          <a class="dark-grey-text d-flex justify-content-between collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseCode">Add a discount code (optional)
+            <span>
+              <i class="fas fa-chevron-down pt-1"></i>
+            </span>
+          </a>
+          <div class="collapse" id="collapseCode">
+            <div class="mt-3">
+              <div class="md-form md-outline mb-0">
+                <input type="text" placeholder="Enter discount code" class="form-control font-weight-light" id="discount-code">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
