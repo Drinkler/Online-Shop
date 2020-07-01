@@ -1,8 +1,50 @@
 %!TEX root = ../dokumentation.tex
 \chapter{Frontend}\label{ch:frontend}
-
+Das Frontend wurde unter Berücksichtigung des MEAN-Stacks mit Hilfe des Angular Frameworks in der Version 9 erstellt. Da zunächst keinerlei Vorkenntnisse in der Verwendung eines Frontend-Frameworks vorhanden waren, musste sich dies durch verschiedenste Guides selbst beigebracht werden.
 \section{Routing}
+Das Routing innerhalb der Angular Anwendung spielt eine elementare Rolle. Wird das Frontend vom Anwender auf der Basis URL http://localhost:8081 aufgerufen, wird dieser über die in der Datei app-routing.module.ts hinterlegte Routingtabelle auf den Shop weitergeleitet. Alle weiteren Routen sind der zuvor genannten Datei zu entnehmen.
 
 \section{Services}
+Jeglicher Zugriff, welcher eine Verbindung mit dem Backend herstellt, wird mittels eines passenden Services abgebildet. So wurde für die Interaktion mit dem Benutzerprofil ein Account-Service, für die Abfrage einzelner Produkte und deren Informationen ein Product-Service und für die Abfrage der Bestellinformationen ein Order-Service implementiert. Um die Möglichkeit von Benutzerreviews zu ermöglichen wurde darüberhinaus ein Star-Service implementiert, welcher Reviews zum Anwender zuordnet und diese dem Backend mitteilt. Aufgrund von zeitlichen Engpässen konnte die Funktionalität jedoch nicht gänzlich umgesetzt werden.
 
 \section{Components}
+In Anbetracht der Verwendung des Angular Frameworks wurde stets auf die Komponenten-basierte Programmierung geachtet. Es wurden daher jegliche wiederverwendbaren Frontend-Komponenten in einzelnen Angular-Components implementiert.
+
+\section{Kommunikation zwischen Frontend und Backend}
+Die Kommunikation zwischen Frontend und Backend hat sich schwieriger als zunächst gedacht herausgestellt. Während konventionelle GET-Requests das Backend problemlos erreicht haben, konnten anfänglich keine POST, PATCH oder DELETE Requests versendet werden. Nach langer Suche wurde das Problem beim Webserver Nginx festgestellt, welcher die Requests nicht weiterleiten wollte. Dies wurde mit der Verwendung einer eigens definierten Nginx-Konfiguration behoben. Hierbei wurde ein Reverse-Proxy, welcher alle REST-API Anfragen auf das Backend weiterleitet, eingesetzt.
+
+Der folgende Auszug aus der benutzerdefinierten Nginx Konfiguration zeigt dies auf:
+
+\begin{verbatim}
+	location /rest/api {
+      proxy_pass http://backend;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection 'upgrade';
+      proxy_set_header Host $host;
+      proxy_cache_bypass $http_upgrade;
+  }
+\end{verbatim}
+
+Der Ziel-Name des Backends wird hierbei über ein Nginx Upstream Modul aufgelöst.
+
+\begin{verbatim}
+	upstream backend {
+	  server backend:8080;
+	}
+\end{verbatim}
+\newpage
+Die URLs, welche für die Verwendung der REST-Anfragen verwendet werden, wurden in einer extra dafür angelegten Datei definiert. Hier wurde die Möglichkeit geschaffen, zwischen Nicht-Produktiv und Produktiv System zu unterscheiden.
+
+\begin{verbatim}
+	import {environment} from 'src/environments/environment';
+
+	export const baseUrl = environment.apiUrl;
+	export const apiUrl = `${baseUrl}/rest/api`;
+	export const userUrl = `${baseUrl}/rest/api/users`;
+	export const loginUrl = `${userUrl}/login`;
+	export const registerUrl = `${userUrl}/signup`;
+	export const productsUrl = `${apiUrl}/products`;
+	export const ordersUrl = `${apiUrl}/orders`;
+
+\end{verbatim}

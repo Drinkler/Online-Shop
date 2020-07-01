@@ -1,7 +1,7 @@
 %!TEX root = ../dokumentation.tex
 
 \chapter{Einleitung}\label{ch:einleitung}
-Erklärung Online-Shop
+Als Zielsetzung für dieses Projekts wurde die prototypische Implementierung eines auf dem MEAN-Stack basierenden Online-Shops gesetzt. Der Shop soll Basics wie Benutzerregistrierung, -login, Produktübersicht sowie eine Funktion besitzen, bestehende Produkte in den Warenkorb zu legen.
 \section{Projektteam}\label{sec:projektteam}
 Das Projektteam bestand aus folgenden Mitgliedern:
 \begin{itemize}
@@ -9,13 +9,13 @@ Das Projektteam bestand aus folgenden Mitgliedern:
 	\item Luca Stanger - 7474265 - inf18244@lehre.dhbw-stuttgart.de
 \end{itemize}
 \section{Aufgabenverteilung}\label{sec:aufgabenverteilung}
-Für die Entwicklung des Frontends war Luca Stanger zuständig. Die Pflege des Backends fiel in das Aufgabengebiet von Florian Drinkler. Die Erstellung der Docker Umgebung wurde durch gegenseitige Absprache umgesetzt.
+Für die Entwicklung des Frontends war Luca Stanger zuständig. Die Pflege des Backends fiel in das Aufgabengebiet von Florian Drinkler. Die Erstellung der Docker und Kubernetes Umgebung wurde durch gegenseitige Absprache umgesetzt.
 \newpage
 \section{Voraussetzungen}
-Um die Applikation lokal verwendbar zu machen, müssen die folgenden Schritte berücksichtigt werden:
+Um die Applikation lokal zu verwenden, müssen die folgenden Schritte berücksichtigt werden:
 
 \subsection*{Backend}
-Für das Backend muss zunächst eine .env Datei erstellt werden. 
+Für das Backend muss zunächst eine .env Datei im Backend Ordner erstellt werden. 
 
 \begin{verbatim}
 	DB_CONNECTION=
@@ -38,6 +38,8 @@ Anschließend kann der MEAN-Stack deployed werden.
 \begin{verbatim}
 	$ docker-compose up
 \end{verbatim}
+
+Anschließend kann über \hyperlink{http://localhost:8081}{http://localhost:8081} die Anwendung aufgerufen werden.
 
 Um Fehler beim Caching von Containern zu verhindern, können bei erneutem Erzeugen des Stacks zuvor alle vorhandenen images gelöscht werden
 
