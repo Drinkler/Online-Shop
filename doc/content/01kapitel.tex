@@ -8,5 +8,40 @@ Das Projektteam bestand aus folgenden Mitgliedern:
 	\item Luca Stanger - 7474265 - inf18244@lehre.dhbw-stuttgart.de
 \end{itemize}
 \section{Aufgabenverteilung}\label{sec:aufgabenverteilung}
+Für die Entwicklung des Frontends war Luca Stanger zuständig. Die Pflege des Backends fiel in das Aufgabengebiet von Florian Drinkler. Die Erstellung der Docker Umgebung wurde durch gegenseitige Absprache umgesetzt.
+\newpage
+\section{Voraussetzungen}
+Um die Applikation lokal verwendbar zu machen, müssen die folgenden Schritte berücksichtigt werden:
 
-\section{Programmablauf}\label{sec:programmablauf}
+\subsection*{Backend}
+Für das Backend muss zunächst eine .env Datei erstellt werden. 
+
+\begin{verbatim}
+	DB_CONNECTION=
+		"mongodb://root:LSuFDaaenPfdVMi4S@database:27017/online-shop?authSource=admin"
+	PORT=8080
+	JWT_KEY="5AE34D147B8ADA82FB2FAA85DEC52"
+\end{verbatim}
+
+\subsection*{Database}
+Für die Datenbank muss eine Datei namens database.env erstellt werden.
+\begin{verbatim}
+	MONGO_INITDB_DATABASE=online-shop
+	MONGO_INITDB_ROOT_USERNAME=root
+	MONGO_INITDB_ROOT_PASSWORD=LSuFDaaenPfdVMi4S
+\end{verbatim}
+
+\section{Docker-Compose}
+Anschließend kann der MEAN-Stack deployed werden.
+
+\begin{verbatim}
+	$ docker-compose up
+\end{verbatim}
+
+Um Fehler beim Caching von Containern zu verhindern, können bei erneutem Erzeugen des Stacks zuvor alle vorhandenen images gelöscht werden
+
+\begin{verbatim}
+	$ docker-compose down
+	$ docker rmi $(docker images -aq)
+	$ docker-compose up
+\end{verbatim} 

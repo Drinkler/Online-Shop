@@ -10,7 +10,7 @@ Zur Entwicklung der Anwendung wurde die folgende Toolchain verwendet:
 \hline
 \textbf{Softwarename} & \textbf{Zweck der Software}\\
 \hline
-PHPStorm & IDE zur Entwicklung fortgeschrittener Webanwendungen, basierend auf PHP\\
+IntelliJ IDEA & Modulare IDE für Entwickler \\
 \hline
 Visual Studio Code & Modulare IDE für Entwickler\\ 
 \hline
@@ -20,20 +20,24 @@ Travis CI & Webbasiertes CI/CD Tool\\
 \hline
 GitHub & Versionsverwaltung\\
 \hline
-Bower & Package Manager für Webanwendungen\\
+NPM & Paketmanager für Javascript Umgebung Node.js \\
 \hline
-Composer & Dependency Manager für PHP \\
+NGINX & Webserver Software \\ 
 \hline
-PHPUnit & Unit-Test Framework für PHP \\ 
+Angular & TypeScript-basiertes\newline Front-End-Webapplikationsframework \\
 \hline
-XDebug & Serverseitiges Debugging Tool für PHP \\
+Docker & Containervirtualisierung \\
+\hline
+Kubernetes & Containerorchestrierung \\
+\hline
+Azure & Kubernetes Host \\
 \hline
 \end{tabular}
 \caption{Auflistung der verwendeten Toolchain}
 \end{table}
 
 \section{Bibliotheken/Frameworks}\label{sec:bibliotheken/frameworks}
-Als Frontend-CSS-Framework wurde Bootstrap in der Version 4.4.1 verwendet. Die Entscheidung hierfür ist durch bestehende Erfahrungen, aus Projekten der vorherigen Studienprojekte, gefallen.
+Als Frontend-CSS-Framework wurde MDBootstrap in der Version 9.3.1 verwendet. Die Entscheidung hierfür ist durch bestehende Erfahrungen aus Projekten der vorherigen Studienprojekte gefallen.
 \subsection{Bower}\label{subsec:bower}
 Um einen fehlerfreien Build der CI/CD Pipeline zu gewährleisten, wurde der freie Paket Manager \emph{Bower} verwendet. Hierdurch kann der Pipeline gewährleistet werden, dass benötigte Komponenten wie Bootstrap, jQuery sowie dem Font-Awesome Package jederzeit in dem finalen Build vorhanden sind.
 \subsection{Composer}\label{subsec:composer}
