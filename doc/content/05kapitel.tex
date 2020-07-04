@@ -1,10 +1,25 @@
 %!TEX root = ../dokumentation.tex
 \chapter{Docker}\label{ch:hosting}
+Damit das Projekt einfach für jeden Anwender ausführbar ist, wurde die Technologie Docker verwendet. Es ist möglich jeden Service einzeln durch ein Dockerfile zu starten oder gemeinsam mithilfe einer Docker-Compose Datei.
 
 \section{Dockerfile}
+Das Backend sowie das Frontend können mit einem Dockerfile gebaut werden. Für die Datenbank wurde kein extra Dockerfile gebraucht, da es bereits mit dem Standard mongo Image verwendet werden kann. Zu jedem Dockerfile gibt es außerdem eine .dockerignore Datei. Diese hat die gleiche Funktionalität wie die .gitignore Datei nur für den Bau des Images.
+
 \subsection{Frontend}
 \subsection{Backend}
 
 \section{Docker Compose}
+Die docker-compose.yml Datei im Root Ordner des Git Projektes zu finden
+
+docker-compose extra herunterladen
+docker-compose up und down
+
+database in db connection anpassen.
+
+dachte das die images von docker hub gepullt werden
+
 
 \section{Docker Hub}
+
+images werden automatisch durch github push gebaut und werden in hub gespeichert.
+wird für kubernetes gebraucht.
