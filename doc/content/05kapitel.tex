@@ -6,6 +6,7 @@ Damit das Projekt einfach für jeden Anwender ausführbar ist, wurde die Technol
 Das Backend sowie das Frontend können mit einem Dockerfile gebaut werden. Für die Datenbank wurde kein extra Dockerfile gebraucht, da es bereits mit dem Standard mongo Image verwendet werden kann. Zu jedem Dockerfile gibt es außerdem eine .dockerignore Datei. Diese hat die gleiche Funktionalität wie die .gitignore Datei nur für den Bau des Images.
 
 \subsection{Frontend}
+Das Frontend Image wird mit Version 12.7 des Node Alpine Images gebaut. Anschließend werden alle Inhalte der package.json über den Befehl \emph{npm install} installiert. Abschließend wird das Image mit \emph{npm run build} erstellt. Da das Dockerfile als Multistage Dockerfile entworfen wurde, wird in Stage \#{}2 der Webserver Nginx aus einem Nginx-Alpine Image erstellt. Für spätere Konfigurationsmöglichkeiten werden dem Image \emph{Nano} und \emph{cURL} hinzugefügt. Im nächsten Schritt wird die in Kapitel 4 erwähnte nginx-custom.conf in den Nginx-Server injiziert, welcher daraufhin mit geänderten Parametern gestartet wird.
 
 \subsection{Backend}
 Das Backend Image besteht aus dem Standard Node.js Alpine Image. Es werden alle Dateien in das Image geladen und dann der Server gestartet. Der Port 8080 wird für externe Zugriffe geöffnet, der gleiche Port, wo auch der Server gestartet wird.
