@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderService} from '../../../services/order.service';
 import {AlertService} from '../../../services/alert.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
