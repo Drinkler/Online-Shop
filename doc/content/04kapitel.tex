@@ -48,3 +48,45 @@ Die URLs, welche für die Verwendung der REST-Anfragen verwendet werden, wurden 
 	export const ordersUrl = `${apiUrl}/orders`;
 
 \end{verbatim}
+
+\section{Homepage}
+
+Als Startseite wurde sich für eine simple Produktübersicht entschieden. Hier wird dem Benutzer die Möglichkeit gegeben, Produkte in den Warenkorb zu legen oder deren Details anzuzeigen.
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=\textwidth,height=0.6\textheight,keepaspectratio]{images/homepage.png}
+ \caption{Online-Shop Startseite}
+ \label{fig:homepage}
+\end{figure}
+
+\section{Produkt hinzufügen}
+
+Um Produkte über das Frontend hinzuzufügen, kann ein Admin-Benutzer über die in der Navigations-Bar vorhandene Schaltfläche \emph{Product} die Produkt-Details hinterlegen.
+Zu beachten hierbei ist, dass der eingegebene Preis durch einen Punkt getrennt wird und das Bild im Format jpg oder png hinterlegt wird.
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=\textwidth,height=0.6\textheight,keepaspectratio]{images/product-page.png}
+ \caption{Online-Shop Startseite}
+ \label{fig:product-page}
+\end{figure}
+\newpage
+\section{Warenkorb}
+
+Nachdem der Anwender die Produkte in den Warenkorb gelegt hat, kann dieser über die Schaltfläche \emph{Warenkorb} eine Gesamtübersicht der Produkte einsehen.
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=\textwidth,height=0.6\textheight,keepaspectratio]{images/warenkorb.png}
+ \caption{Online-Shop Startseite}
+ \label{fig:warenkorb}
+\end{figure}
+
+Abschließend kann über den Button Checkout die Bestellung vollendet werden. Hierfür muss der Anwender seine Versanddaten eingeben. Der Warenkorb wird im Anschluss gelöscht.
+
+Um die Software in Ihrer Funktionalität abzurunden könnte in naher Zukunft ein richtiger Checkout-Prozess implementiert werden. Da dies jedoch den Umfang des Projekts gesprengt hätte, wurde darauf verzichtet.
+
+
+
+
