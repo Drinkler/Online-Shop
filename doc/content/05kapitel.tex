@@ -6,20 +6,19 @@ Damit das Projekt einfach für jeden Anwender ausführbar ist, wurde die Technol
 Das Backend sowie das Frontend können mit einem Dockerfile gebaut werden. Für die Datenbank wurde kein extra Dockerfile gebraucht, da es bereits mit dem Standard mongo Image verwendet werden kann. Zu jedem Dockerfile gibt es außerdem eine .dockerignore Datei. Diese hat die gleiche Funktionalität wie die .gitignore Datei nur für den Bau des Images.
 
 \subsection{Frontend}
+
 \subsection{Backend}
+Das Backend Image besteht aus dem Standard Node.js Alpine Image. Es werden alle Dateien in das Image geladen und dann der Server gestartet. Der Port 8080 wird für externe Zugriffe geöffnet, der gleiche Port, wo auch der Server gestartet wird.
 
 \section{Docker Compose}
-Die docker-compose.yml Datei im Root Ordner des Git Projektes zu finden
-
-docker-compose extra herunterladen
-docker-compose up und down
-
-database in db connection anpassen.
-
-dachte das die images von docker hub gepullt werden
-
+Die docker-compose.yml Datei ist im Root Ordner des Git Projektes zu finden.
+In der Docker Compose wurde extra ein Volume für die Datenbank definiert, da man sonst auf Windows diese nicht starten konnte. Ein weiterer Punkt der erst später aufgefallen ist, das man bei dem DB\_CONNECTION String anstatt localhost, wie man es lokal verwendet hat, in database, dem Servicenamen der Datenbank, umändern muss.\\
+Wenn man nur die Datenbank gebraucht hat während der Entwicklung des Backends, konnte man diese mit dem Befehl docker-compose up --build database alleine starten. Um die Befehle für die Docker Compose verwenden zu können, muss man Docker Compose vorher installieren, \hyperlink{https://docs.docker.com/compose/install/}{hier}.\\
+Nun kann man mit dem Befehl docker-compose up alle Images in der angegebenen Reihenfolge erstellen und Container erstellen die ausgeführt werden. Mit docker-compose down werden die Container gestoppt.
 
 \section{Docker Hub}
-
-images werden automatisch durch github push gebaut und werden in hub gespeichert.
-wird für kubernetes gebraucht.
+Der aller erste Gedanke war, das die docker-compose.yml anhand des Image Namens, die Images vom Docker Hub pullt und diese dann startet. Erst nach weiterer recherche stellte sich heraus, dass diese jedes mal gebaut werden, solange dies gewollt ist oder die bereits vorhandenen lokalen Images verwendet werden.\\
+Trotzdem werden die Images in das Docker Hub gestellt, da Kubernetes diese verwendet und nicht lokale selber baut.\\
+Beide Images werden mit der eigenen Build Funktion von Docker Hub erstellt. Dabei kann man das zu verwendende Github Repository angeben und festlegen wo das Dockerfile liegt. Ein wichtiger Punkt, stellte sich später heraus, ist es den Build Cache auszustellen, da sonst bei der Angular Anwendung nicht die neuste Version erstellt wurde.
+Mit diesen Einstellungen werden die Images bei jedem Push auf den master neu gebaut.\\
+Zu finden ist das Backend Image \hyperlink{https://hub.docker.com/repository/docker/drinkler/microservices-backend/general}{hier} und das Frontend Image \hyperlink{https://hub.docker.com/repository/docker/drinkler/microservices-frontend}{hier}.
