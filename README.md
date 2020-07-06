@@ -10,17 +10,6 @@
 ## About
 This project emerged from the requirements of a study project. During the implementation we tried to use current best practices of software development and to get to know new ones. 
 
-## Table of Content
-
-- [Online-Shop](#online-shop)
-  - [Table of Content](#table-of-content)
-  - [Frontend](#frontend)
-  - [Backend](#backend)
-    - [:rocket: Deploy](#-deploy)
-    - [:see_no_evil: .env file](#-env-file)
-    - [:whale: Docker](#-docker)
-  - [Database](#database)
-    - [Deploy](#deploy)
 # Prerequisites 
 ## Frontend
 
