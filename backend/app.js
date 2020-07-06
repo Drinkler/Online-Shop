@@ -38,43 +38,6 @@ const api = require("./api");
 // Middlewares
 app.use("/rest/api", api);
 
-// Swagger setup
-options = {
-    swaggerDefinition: {
-        openapi: "3.0.0",
-        info: {
-            title: "Online Shop - Microservices",
-            version: "1.0.0",
-            description: "API Documentation for the backend of the Online Shop.",
-            license: {
-                name: "MIT",
-                url: "https://choosealicense.com/licenses/mit/",
-            },
-            contact: {
-                name: "Swagger",
-                url: "https://swagger.io",
-                email: "Info@SmartBear.com",
-            },
-        },
-        servers: [
-            {
-                url: "http://localhost:8080/rest/api",
-                description: "Local server",
-            },
-        ],
-    },
-    apis: ["./api/**/*.js"],
-};
-
-const specs = swaggerJsdoc(options);
-app.use("/rest/api/docs", swaggerUi.serve);
-app.get(
-    "/rest/api/docs",
-    swaggerUi.setup(specs, {
-        explorer: true,
-    })
-);
-
 // Handling errors
 app.use((req, res, next) => {
     const error = new Error("Not found");
