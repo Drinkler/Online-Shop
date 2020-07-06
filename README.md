@@ -7,6 +7,9 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat)](https://gitmoji.carloscuesta.me)
 
+## About
+This project emerged from the requirements of a study project. During the implementation we tried to use current best practices of software development and to get to know new ones. 
+
 ## Table of Content
 
 - [Online-Shop](#online-shop)
@@ -18,7 +21,7 @@
     - [:whale: Docker](#-docker)
   - [Database](#database)
     - [Deploy](#deploy)
-
+# Prerequisites 
 ## Frontend
 
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/drinkler/microservices-frontend)](https://hub.docker.com/repository/docker/drinkler/microservices-frontend)
@@ -91,3 +94,25 @@ You can also create the image with the [backend Dockerfile](https://github.com/D
 ```bash
 docker-compose up -d --build database
 ```
+
+# Built with :hammer_and_wrench:
+
+- [MongoDB](https://www.mongodb.com/de) - Database
+- [ExpressJS](https://expressjs.com/de/) - Node.js-Framework
+- [Angular](https://angular.io/) - Typescript-based Frontend Development Framework 
+- [NodeJS](https://nodejs.org/en/) - Javascript Runtime Environment
+- [Docker](https://www.docker.com/) - Container Software
+- [Kubernetes](https://kubernetes.io/de/) - Container Orchestration
+
+# Authors :busts_in_silhoutte:
+
+-   **Luca Stanger** - Frontend development & cluster orchestration - [Student @ DHBW Stuttgart](https://www.dhbw-stuttgart.de/home/)
+-   **Florian Drinkler** - Backend development, API maintenance and docker deployment - [Student @ DHBW Stuttgart](https://www.dhbw-stuttgart.de/home/)
+
+# Copyright :copyright:
+
+Copyright :copyright: 2020 Florian Drinkler, Luca Stanger
+
+# License :page_facing_up:
+
+This project is licensed under the **Apache License 2.0** - see the [LICENSE.MD](https://www.github.com/Drinkler/Online-Shop/blob/master/LICENSE) files for details
