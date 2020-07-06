@@ -104,7 +104,7 @@ docker-compose up -d --build database
 - [Docker](https://www.docker.com/) - Container Software
 - [Kubernetes](https://kubernetes.io/de/) - Container Orchestration
 
-# Authors :busts_in_silhoutte:
+# Authors :busts_in_silhouette:
 
 -   **Luca Stanger** - Frontend development & cluster orchestration - [Student @ DHBW Stuttgart](https://www.dhbw-stuttgart.de/home/)
 -   **Florian Drinkler** - Backend development, API maintenance and docker deployment - [Student @ DHBW Stuttgart](https://www.dhbw-stuttgart.de/home/)
