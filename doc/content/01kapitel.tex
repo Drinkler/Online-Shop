@@ -9,7 +9,11 @@ Das Projektteam bestand aus folgenden Mitgliedern:
 	\item Luca Stanger - 7474265 - inf18244@lehre.dhbw-stuttgart.de
 \end{itemize}
 \section{Aufgabenverteilung}\label{sec:aufgabenverteilung}
-Für die Entwicklung des Frontends war Luca Stanger zuständig. Die Pflege des Backends fiel in das Aufgabengebiet von Florian Drinkler. Die Erstellung der Docker und Kubernetes Umgebung wurde durch gegenseitige Absprache umgesetzt.
+Für die Entwicklung des Frontends war Luca Stanger zuständig. Die Pflege des Backends und der Datenbank fiel in das Aufgabengebiet von Florian Drinkler. Die Erstellung der Docker und Kubernetes Umgebung wurde durch gegenseitige Absprache umgesetzt.
+
+\section{Anmerkungen}
+Damit zu Beginn standardmäßig alle Requests ausgeführt werden können, werden jedem neuen Benutzer Adminrechte zugeteilt.
+
 \newpage
 \section{Voraussetzungen}
 Um die Applikation lokal zu verwenden, müssen die folgenden Schritte berücksichtigt werden:
@@ -19,7 +23,7 @@ Für das Backend muss zunächst eine .env Datei im Backend Ordner erstellt werde
 
 \begin{verbatim}
 	DB_CONNECTION=
-		"mongodb://root:LSuFDaaenPfdVMi4S@database:27017/online-shop?authSource=admin"
+		"mongodb://root:LSuFDaaenPfdVMi4S@localhost:27017/online-shop?authSource=admin"
 	PORT=8080
 	JWT_KEY="5AE34D147B8ADA82FB2FAA85DEC52"
 \end{verbatim}
